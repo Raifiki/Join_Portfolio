@@ -40,6 +40,7 @@ html{
 }
 body{
     margin: unset;
+    font-family: 'Inter';
 }
 h1 {
     margin: 0;

@@ -64,7 +64,7 @@ function getSignUpCardHTML(){
  */
 function getForgotPwdCardHTML(){
     return /*html*/`
-        <img class="arrow-back" src="./img/icons/arrow_left_lightblue.svg" alt="back" onclick="renderHTML('content',LoginHTML); showElementID('signUp')">
+        <img class="arrow-back" src="./img/icons/arrow_left_lightblue.svg" alt="back" onclick="renderLoginCard(getLogInCardHTML()); showElement(['signUp'])">
         <h1>I forgot my password</h1>
         <div id="underline"></div>
         <p>Don't worry! We will send you an email with the istructions to reset your password.</p>
