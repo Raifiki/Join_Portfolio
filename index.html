@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- title -->
+    <title>Join</title>
+
+    <!-- icon -->
+    <link class="flavicon" rel="icon" href="./img/icons/logo_blak.svg">
+
+    <!-- include fonts -->
+    <link rel="stylesheet" href="">
+
+    <!-- add UTF-8 Code -->
+    <meta charset="utf-8">
+
+    <!-- handle resolution with viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- include style -->
+    <link rel="stylesheet" href="style/common.css">
+    <link rel="stylesheet" href="style/login.css">
+
+    <!-- include script -->
+    <script src="script/snippetsHTML.js"></script>
+    <script src="script/common.js"></script>
+    <script src="script/login.js"></script>
+
+</head>
+
+<body onload="initLogin()">
+    <header>
+        <div id="signUp">
+            <p>Not a Join user?</p>
+            <button class="but-dark" onclick="renderLoginCard(getSignUpCardHTML());hideElement(['signUp'])">Sign up</button>
+        </div>
+    </header>
+    <img class="logo" src="./img/icons/logo_black.svg" alt="Join Logo">
+    <main>
+        <div id="loginCard"></div>
+        <div id="signedUpSuccessfully">
+            <span>You Signed Up successfully</span>
+        </div>
+    </main>
+    <footer>
+        <!-- footer content -->
+    </footer>
+</body>
+
+</html>

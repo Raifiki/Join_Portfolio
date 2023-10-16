@@ -1,0 +1,217 @@
+
+/*===================================== header =====================================*/
+header {
+    display: flex;
+    justify-content: end;
+    margin: 60px 60px 120px 60px;
+    height: 50px;
+    animation-name: bgOpacity;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+}
+
+header div {
+    display: flex;
+    gap: 32px;
+}
+
+.logo {
+    position: absolute;
+    animation-name: zoomOut;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    height: 120px;
+    left: 60px;
+    top: 60px;
+    z-index: 2;
+}
+
+main {
+    animation-name: bgOpacity;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    width: 100%;
+}
+
+/*===================================== common login =====================================*/
+a {
+    color: var(--acccolor);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.arrow-back {
+    position: absolute;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.arrow-back:hover{
+    background-color: var(--bg-color);
+}
+
+/*===================================== card =====================================*/
+
+#loginCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    margin-inline: auto;
+    margin-top: 52px;
+    filter: var(--drop-shadow);
+    padding: 48px 115px 48px 115px;
+    gap: 24px;
+    border-radius: 30px;
+    height: auto;
+    width: fit-content;
+}
+
+#loginCard p {
+    text-align: center;
+}
+
+
+#underline {
+    height: 2px;
+    width: 25%;
+    background-color: var(--acccolor);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 26px;
+    margin-bottom: 26px;
+}
+
+form span {
+    margin-top: -26px;
+    margin-bottom: -26px;
+    padding-left: 8px;
+    height: 26px;
+    width: 100%;
+    color: red;
+}
+
+#name {
+    background-image: url("../img/icons/user_line.svg");
+}
+
+
+#email {
+    background-image: url("../img/icons/mail.svg");
+}
+
+#pwd,
+#pwdCon {
+    background-image: url("../img/icons/lock.svg");
+}
+
+#pwd:focus {
+    background-image: url("../img/icons/visibility_off.svg");
+    background-size: 28px;
+}
+
+.pwd-ext {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.pwd-ext a {
+    margin-left: 8px;
+}
+
+#saveLogin {
+    width: 25px;
+}
+
+.but-area {
+    display: flex;
+    gap: 24px;
+}
+
+.border-wrg {
+    border-color: red;
+}
+
+
+#privacyPolicy{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#privacyPolicy span{
+    color: black;
+}
+
+#privacyPolicy a:hover{
+    text-decoration: underline;
+}
+
+
+#signedUpSuccessfully{
+    position: absolute;
+    left: calc(50% - 143.5px);
+    bottom: -200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    height: 74px;
+    width: fit-content;
+    padding: 0px 25px 0px 25px;
+    background-color: var(--primcolor);
+    color: white;
+    font-size: var(--fntsize20);
+    z-index: 2;
+}
+
+#signedUpSuccessfully.addAnimtaion{
+    animation: showInformation 2s linear 0s 1 normal;
+}
+
+
+/*===================================== animations =====================================*/
+
+@keyframes zoomOut {
+
+    0% {
+        height: 50vh;
+        width: 50vw;
+        left: 25vw;
+        top: 25vh;
+    }
+
+    50% {
+        height: 50vh;
+        width: 50vw;
+        left: 25vw;
+        top: 25vh;
+    }
+
+    100% {
+        height: 120px;
+        width: 98px;
+        left: 60px;
+        top: 60px;
+    }
+}
+
+@keyframes bgOpacity {
+    0% {opacity: 0;}
+    50% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+@keyframes showInformation {
+    0% {bottom: -200px;}
+    20% {bottom: calc(50% - 37px);}
+    100% {bottom: calc(50% - 37px);}
+}
