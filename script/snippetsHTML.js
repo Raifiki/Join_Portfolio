@@ -13,7 +13,7 @@ function getLogInCardHTML(email){
                 <input type="password" id="pwd" name="Password" onclick="togglePwdVisbile(event)" placeholder="Password" required>
                 <span id="errMsgPwd"></span>
                 <div class="pwd-ext">
-                    <input type="checkbox" name="Remember" id="saveLogin">
+                    <input type="checkbox" name="Remember" id="iptSaveLoginData">
                     <label for="saveLogin">Remember me</label>
                     <a onclick="renderLoginCard(getForgotPwdCardHTML());hideElement(['signUp'])">Forgot my password</a>
                 </div>

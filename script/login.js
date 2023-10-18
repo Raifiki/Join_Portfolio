@@ -6,7 +6,7 @@ let pwdIptFocused = false;
 async function initLogin() {
     renderLoginCard(getLogInCardHTML());
     //contactListSorted = await getItem('contacts');
-    //loadLogin();
+    await loadLoginDatafromLS()
     //checkState();
 }
 
@@ -26,7 +26,7 @@ function renderLoginCard(HTMLCardContent){
 async function checkLoginData() {
     let [email,pwd] = getLoginData();
     if (await isLoginDataCorrect(email,pwd)) {
-        //safeLogin(JSON.stringify(user)); ---------------------------------------------------------------
+        saveLoginDataInLS(email);
         console.log('login ok');
         //window.location.href = 'pages/summary.html'+'?user='+user.id; --------------------------------------
     }
@@ -198,7 +198,39 @@ function showPassword(){
  */
 function hidePassword(){
     let iptElement = document.getElementById('pwd');
-    iptElement.classList.remove('showPwd');
-    iptElement.type = 'password';
-    pwdIptFocused = false;
+    if (iptElement) {
+        iptElement.classList.remove('showPwd');
+        iptElement.type = 'password';
+        pwdIptFocused = false;
+    }
+}
+
+
+/**
+ * This function saves the email adress of the user in the local storage if wanted
+ * 
+ * @param {string} email - email adress of the login form as a string
+ */
+function saveLoginDataInLS(email){
+    let saveLoginData = document.getElementById('iptSaveLoginData');
+    if (saveLoginData.checked) {
+        localStorage.setItem('userEmail',JSON.stringify(email));
+    } else {
+        localStorage.removeItem('userEmail');
+    }
+}
+
+
+/**
+ * This funtion loads the stored login data to the login form if wanted
+ */
+async function loadLoginDatafromLS(){
+    let email = JSON.parse(localStorage.getItem('userEmail'));
+    if (email) {
+        let users = await getItem('users');
+        let user = users.find(u => u.email == email);
+        document.getElementById('email').value = user['email'];
+        document.getElementById('pwd').value = user['pwd'];
+        document.getElementById('iptSaveLoginData').checked = true;
+    }
 }
