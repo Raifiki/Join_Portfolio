@@ -10,7 +10,7 @@ function getLogInCardHTML(email){
             <div id="underline"></div>
             <form onsubmit="checkLoginData(); return false">
                 <input type="email" id="email" name="Email" placeholder="Email" required>
-                <input type="password" id="pwd" name="Password" placeholder="Password" required>
+                <input type="password" id="pwd" name="Password" onclick="togglePwdVisbile(event)" placeholder="Password" required>
                 <span id="errMsgPwd"></span>
                 <div class="pwd-ext">
                     <input type="checkbox" name="Remember" id="saveLogin">
@@ -41,7 +41,7 @@ function getSignUpCardHTML(){
             <span id="msgName"></span>
             <input type="email" id="email" name="Email" placeholder="Email" required>
             <span id="msgEmail"></span>
-            <input type="password" id="pwd" name="Password" placeholder="Password" minlength="8" required>
+            <input type="password" id="pwd" name="Password" placeholder="Password" minlength="8" onclick="togglePwdVisbile(event)" required>
             <input type="password" id="pwdCon" name="Password" placeholder="Confirm Password" minlength="8" required>
             <span id="msgPwd"></span>
             <div id="privacyPolicy">

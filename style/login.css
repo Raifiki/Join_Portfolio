@@ -117,6 +117,11 @@ form span {
     background-size: 28px;
 }
 
+#pwd.showPwd {
+    background-image: url("../img/icons/visibility_on.svg");
+    background-size: 28px;
+}
+
 .pwd-ext {
     display: flex;
     align-items: center;

@@ -1,3 +1,5 @@
+let pwdIptFocused = false;
+
 /**
  * This funtion initialize the login page
  */
@@ -165,4 +167,38 @@ async function addUser(name,email,pwd){
 function showSignUpInformation(){
     document.getElementById('signedUpSuccessfully').classList.add("addAnimtaion");
     setTimeout(function(){document.getElementById('signedUpSuccessfully').classList.remove("addAnimtaion")},2000);
+}
+
+
+/**
+ * This function toggles the passwort between visible and not visible
+ * 
+ * @param {event} event - DOM event
+ */
+function togglePwdVisbile(event){
+    event.stopPropagation();
+    let iptElement = document.getElementById('pwd');
+    if (pwdIptFocused) (iptElement.classList.contains('showPwd'))?hidePassword():showPassword();
+    pwdIptFocused = true;
+}
+
+
+/**
+ * This function show the password at the password input element
+ */
+function showPassword(){
+    let iptElement = document.getElementById('pwd');
+    iptElement.classList.add('showPwd');
+    iptElement.type = 'text';
+}
+
+
+/**
+ * This function hides the password at the password input element
+ */
+function hidePassword(){
+    let iptElement = document.getElementById('pwd');
+    iptElement.classList.remove('showPwd');
+    iptElement.type = 'password';
+    pwdIptFocused = false;
 }
