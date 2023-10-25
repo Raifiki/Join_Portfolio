@@ -6,7 +6,7 @@ let pwdIptFocused = false;
 async function initLogin() {
     renderLoginCard(getLogInCardHTML());
     //contactListSorted = await getItem('contacts');
-    await loadLoginDatafromLS()
+    await loadLoginDatafromLS();
     //checkState();
 }
 
@@ -88,7 +88,7 @@ function styleInputWrong(inputHtmlId){
 /**
  * This function checks if the input data to sign in are valid
  */
-async function checkSignUpData(){
+async function checkSignUpData(form){
     if (isPwdMatching()) {
         let[name,email,pwd] = getSignUpData();
         if (await isUserRegisterd(email)) {
@@ -97,15 +97,48 @@ async function checkSignUpData(){
         } else{
             console.log('user added - email muss noch gesendet werden!!!!');
             await addUser(name,email,pwd);
-            showSignUpInformation();
-            renderLoginCard(getLogInCardHTML());
-            showElement(['signUp']);
+            await showPopup('You Signed Up successfully');
+            form.submit();
         }
     } else{
         showErrIptMsg('msgPwd','Password confirmation is wrong!');
         styleInputWrong('pwdCon');
         styleInputWrong('pwd');
     }
+}
+
+
+/**
+ * This function updates the password if all conditions (pwd matching + user is registered) are correct
+ */
+async function changePassword(){
+    if (isPwdMatching()) {
+        let email = URL_PARAMS.get('email');
+        let popuptext = 'failed: Email address does not exist';
+        if(await isUserRegisterd(email)){
+            popuptext = 'You changed your password successfully';
+            await replacePwd(email);
+        }
+        await showPopup(popuptext);
+        window.location.replace('https://leonard-weiss.developerakademie.net/Projekte/M12_JoinPortfolio/index.html');
+    } else{
+        showErrIptMsg('msgPwd','Password confirmation is wrong!');
+        styleInputWrong('pwdCon');
+        styleInputWrong('pwd');
+    } 
+}
+
+
+/**
+ * This function replace the existing password with the new password
+ * 
+ * @param {string} email - email of the user to change the password
+ */
+async function replacePwd(email){
+    let users = await getItem('users');
+    let idxUser = users.findIndex(u => u.email == email);
+    users[idxUser].pwd = document.getElementById('pwd').value;
+    setItem('users',users);
 }
 
 
@@ -163,10 +196,13 @@ async function addUser(name,email,pwd){
 
 /**
  * This function shows the information that the sign up was successfully
+ * 
+ * @param {string} popupText - text which will be shown in popup
  */
-function showSignUpInformation(){
-    document.getElementById('signedUpSuccessfully').classList.add("addAnimtaion");
-    setTimeout(function(){document.getElementById('signedUpSuccessfully').classList.remove("addAnimtaion")},2000);
+async function showPopup(popupText){
+    document.getElementById('popupText').innerHTML = popupText;
+    document.getElementById('popupWrapper').classList.add("addAnimtaion");
+    await wait(1800).then(() => {document.getElementById('popupWrapper').classList.remove("addAnimtaion")});
 }
 
 
@@ -233,4 +269,41 @@ async function loadLoginDatafromLS(){
         document.getElementById('pwd').value = user['pwd'];
         document.getElementById('iptSaveLoginData').checked = true;
     }
+}
+
+
+/**
+ * This function send an email to change the user password if the conditions (email adress is registered) are fullfilled
+ * 
+ * @param {HTMLform} form - form from which the function is triggered
+ */
+async function sendEmailForgotPwd(form){
+    let email =  document.getElementById('email').value;
+    if (await isUserRegisterd(email)) {
+        await showPopup('An E-Mail has been sent to you');
+        form.submit();
+    } else {
+        showErrIptMsg('msgMail','Email not exist!');
+        styleInputWrong('email');
+    }
+}
+
+
+/**
+ * This function renders the login page with the login card and the signUp header
+ */
+function showLoginPage(){
+    renderLoginCard(getLogInCardHTML());
+    showElement(['signUp']);
+}
+
+
+/**
+ * This function pause the SW by a time
+ * 
+ * @param {number} time - time in ms to pause
+ * @returns {Promise} - promise which will be fullfilled after the time parameter
+ */
+function wait(time){
+    return new Promise(resolve => setTimeout(resolve,time));
 }

@@ -161,9 +161,10 @@ form span {
 }
 
 
-#signedUpSuccessfully{
+#popupWrapper{
     position: absolute;
-    left: calc(50% - 143.5px);
+    left: 50%;
+    transform: translate(-50%, -50%);
     bottom: -200px;
     display: flex;
     align-items: center;
@@ -178,7 +179,7 @@ form span {
     z-index: 2;
 }
 
-#signedUpSuccessfully.addAnimtaion{
+#popupWrapper.addAnimtaion{
     animation: showInformation 2s linear 0s 1 normal;
 }
 
