@@ -201,8 +201,9 @@ async function addUser(name,email,pwd){
  */
 async function showPopup(popupText){
     document.getElementById('popupText').innerHTML = popupText;
-    document.getElementById('popupWrapper').classList.add("addAnimtaion");
-    await wait(1800).then(() => {document.getElementById('popupWrapper').classList.remove("addAnimtaion")});
+    document.getElementById('popupWrapper').classList.add("showPopup");
+    document.getElementById('popupText').classList.add("addAnimtaion");
+    await wait(1500);
 }
 
 

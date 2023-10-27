@@ -41,6 +41,8 @@ html{
 body{
     margin: unset;
     font-family: 'Inter';
+    height: 100vh;
+    overflow: hidden;
 }
 h1 {
     margin: 0;
