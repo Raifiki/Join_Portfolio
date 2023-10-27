@@ -18,8 +18,8 @@ function getLogInCardHTML(email){
                     <a onclick="renderLoginCard(getForgotPwdCardHTML());hideElement(['signUp'])">Forgot my password</a>
                 </div>
                 <div class="but-area">
-                    <button class="but-dark">Log in</button>
-                    <button class="but-light" onclick="loginGuest()">Guest Log in</button>
+                    <button class="but-dark" onclick="">Log in</button>
+                    <button class="but-light" onclick="">Guest Log in</button>
                 </div>
             </form>
     `
@@ -33,7 +33,7 @@ function getLogInCardHTML(email){
  */
 function getSignUpCardHTML(){
     return /*html*/`
-        <img class="arrow-back" src="./img/icons/arrow_left_lightblue.svg" alt="back" onclick="renderLoginCard(getLogInCardHTML()); showElement(['signUp'])">
+        <img class="arrow-back" src="./img/icons/login/arrow_left_lightblue.svg" alt="back" onclick="renderLoginCard(getLogInCardHTML()); showElement(['signUp'])">
         <h1>Sign up</h1>
         <div id="underline"></div>
         <form onsubmit="checkSignUpData(this); return false" action="https://leonard-weiss.developerakademie.net/Projekte/M12_JoinPortfolio/php/send_mail_addUser.php" method="POST">
@@ -64,7 +64,7 @@ function getSignUpCardHTML(){
  */
 function getForgotPwdCardHTML(){
     return /*html*/`
-        <img class="arrow-back" src="./img/icons/arrow_left_lightblue.svg" alt="back" onclick="renderLoginCard(getLogInCardHTML()); showElement(['signUp'])">
+        <img class="arrow-back" src="./img/icons/login/arrow_left_lightblue.svg" alt="back" onclick="renderLoginCard(getLogInCardHTML()); showElement(['signUp'])">
         <h1>I forgot my password</h1>
         <div id="underline"></div>
         <p>Don't worry! We will send you an email with the istructions to reset your password.</p>

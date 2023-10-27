@@ -4,6 +4,28 @@ const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 const URL_PARAMS = new URLSearchParams(window.location.search);
 const USER = URL_PARAMS.get('user');
 
+let activeTab;
+//let contactListSorted = [];------------------------------------------------- delete or use later
+//let tasks = []; ------------------------------------------------- delete or use later
+//let groups = [];------------------------------------------------- delete or use later
+
+/**
+ * This function initialize all common parts of the webside
+ * 
+ * @param {string} tabID - HTML ID of the active tab as string
+ */
+async function init(tabID) {
+    await includeHTMLasync();
+    //contactListSorted = await getItem('contacts');
+    //tasks = await getItem('tasks');
+    //groups =  await getItem('groups');
+    setActiveMenuTab(tabID);
+    activeTab = tabID;
+    await setHeaderUserData();
+    setTabLink(USER);//getURLparam());
+}
+
+
 // common used funcitons
 /**
  * This function hide HTML elements
@@ -24,6 +46,67 @@ function hideElement(ID) {
 function showElement(ID, event) {
     if(event){event.stopPropagation()};
     ID.forEach(id => document.getElementById(id).classList.remove('display-none'));
+}
+
+/**
+ * This function seperates the initials of the user name. User name has to be in this form: 'Name Lastname'
+ * 
+ * @param {string} name - user name in this form 'Name Lastname'
+ * @returns {string} - Initials of the user
+ */
+function getContactInitials(name){
+    let separatedName = name.split(" ");
+    return separatedName[0][0] + separatedName[1][0];
+}
+
+
+
+// menu related functions
+/**
+ * This function set the active style for the active navbar tab
+ * 
+ * @param {string} tabID - HTML-ID for the navbar tab which shall be active
+ */
+function setActiveMenuTab(tabID) {
+    let tabIDs = ['tabsummary', 'tabboard', 'tabaddtask', 'tabcontacts', 'tabPrivacyPolicy','tabimpressum'];
+    for (let i = 0; i < tabIDs.length; i++) document.getElementById(tabIDs[i]).classList.remove('active');
+    if (tabID) document.getElementById(tabID).classList.add('active');
+}
+
+
+/**
+ * This function sets the hyperlink for the navbar tabs with dependencies on the user which is signed in
+ * 
+ * @param {number} userID - ID of the active user
+ */
+function setTabLink(userID){
+    if (userID) {
+        document.getElementById('tabsummary').setAttribute('href',`../pages/summary.html?user=${userID}`);
+        document.getElementById('tabboard').setAttribute('href',`../pages/board.html?user=${userID}`);
+        document.getElementById('tabaddtask').setAttribute('href',`../pages/addtask.html?user=${userID}`);
+        document.getElementById('tabcontacts').setAttribute('href',`../pages/contacts.html?user=${userID}`);
+    }
+}
+
+
+// header related functions
+/**
+ * This function sets the users header data 
+ */
+async function setHeaderUserData(){
+    let userID = USER;
+    if (userID) {
+        let users = await getItem('users');
+        let user = users.filter(u=>u['id']==userID);
+        if (user.length != 0 ){
+            let initials = getContactInitials(user[0]['name']);
+            document.getElementById('headerInitials').innerHTML = initials;
+        }else{
+            console.warn('userID not found');
+        }
+    } else {
+        document.getElementById('headerInitials').innerHTML = 'Guest';
+    }
 }
 
 

@@ -25,13 +25,12 @@ function renderLoginCard(HTMLCardContent){
  */
 async function checkLoginData() {
     let [email,pwd] = getLoginData();
-    if (await isLoginDataCorrect(email,pwd)) {
-        saveLoginDataInLS(email);
-        console.log('login ok');
-        //window.location.href = 'pages/summary.html'+'?user='+user.id; --------------------------------------
+    let user = await isLoginDataCorrect(email,pwd);
+    if (user) {
+        saveLoginDataInLS(user.email);
+        window.location.href = 'pages/contacts.html'+'?user='+user.id;
     }
     else {
-        console.log('wrong password')
         showErrIptMsg('errMsgPwd','Ups, wrong password! Try again.');
         styleInputWrong('pwd');
     }

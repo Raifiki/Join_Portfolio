@@ -1,0 +1,29 @@
+<div id="wrapperMenu">
+    <img id="menulogo" src="../img/icons/navbar/logo_white.svg" alt="Join Logo">
+    <div id="menulinks">
+        <a id="tabsummary" class="menulink" href="../pages/summary.html">
+            <img class="menuicon" src="../img/icons/navbar/summary.svg" alt="Icon">
+            <span>Summary</span>
+        </a>
+        <a id="tabboard" class="menulink" href="../pages/board.html">
+            <img class="menuicon" src="../img/icons/navbar/board.svg" alt="Icon">
+            <span>Board</span>
+        </a>
+        <a id="tabaddtask" class="menulink"  href="../pages/addtask.html">
+            <img class="menuicon" src="../img/icons/navbar/addtask.svg" alt="Icon">
+            <span>Add Task</span>
+        </a>
+        <a id="tabcontacts" class="menulink" href="../pages/contacts.html">
+            <img class="menuicon" src="../img/icons/navbar/contacts.svg" alt="Icon">
+            <span>Contacts</span>
+        </a>
+    </div>
+</div>
+<div id="wrapperPolicy">
+    <button id="tabPrivacyPolicy" class="" onclick="showElement(['contentPrivacyPolicy'],event), hideElement(['contentImpressum', 'content']), setActiveMenuTab('tabPrivacyPolicy')">
+        <span>Privacy Policy</span>
+    </button>
+    <button id="tabimpressum" class="" onclick="showElement(['contentImpressum'],event), hideElement(['contentPrivacyPolicy', 'content']), setActiveMenuTab('tabimpressum')">
+        <span>Legal notice</span>
+    </button>
+</div>

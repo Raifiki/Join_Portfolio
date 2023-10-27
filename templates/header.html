@@ -1,0 +1,17 @@
+<span id="headline">Kanban Project Management Tool</span>
+<img id="headerlogo" src="../img/icons/header/logo_black.svg" alt="">
+<div id="headermenu">
+    <button id="ahelp" onclick="showElement(['contentHelp'],event), hideElement(['content','contentImpressum','contentPrivacyPolicy']), setActiveMenuTab()">
+        <img src="../img/icons/header/help.svg" alt="Help">
+    </button>
+    <div id="wrapperuser">
+        <button id="btnuser" onclick="showElement(['wrapperDropDownHeader'],event)">
+            <span id="headerInitials"></span>
+        </button>
+        <div id="wrapperDropDownHeader" class="display-none">
+            <a class="dropDownLink" onclick="showElement(['contentImpressum'],event), hideElement(['contentPrivacyPolicy', 'content']), setActiveMenuTab('tabimpressum'), hideElement(['wrapperDropDownHeader'])">Legal Notice</a>
+            <a class="dropDownLink" onclick="showElement(['contentPrivacyPolicy'],event), hideElement(['contentImpressum', 'content']), setActiveMenuTab('tabPrivacyPolicy'), hideElement(['wrapperDropDownHeader'])">Privacy Policy</a>
+            <a class="dropDownLink" id="alogout"  onclick="" href="../index.html">Log out</a>
+        </div>
+    </div>
+</div>

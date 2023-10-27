@@ -1,3 +1,11 @@
+body{
+    display: block;
+    background-color: var(--bg-color);
+}
+
+main{
+    min-height: unset;
+}
 
 /*===================================== header =====================================*/
 header {
@@ -99,26 +107,26 @@ form span {
 }
 
 #name {
-    background-image: url("../img/icons/user_line.svg");
+    background-image: url("../img/icons/login/user_line.svg");
 }
 
 
 #email {
-    background-image: url("../img/icons/mail.svg");
+    background-image: url("../img/icons/login/mail.svg");
 }
 
 #pwd,
 #pwdCon {
-    background-image: url("../img/icons/lock.svg");
+    background-image: url("../img/icons/login/lock.svg");
 }
 
 #pwd:focus {
-    background-image: url("../img/icons/visibility_off.svg");
+    background-image: url("../img/icons/login/visibility_off.svg");
     background-size: 28px;
 }
 
 #pwd.showPwd {
-    background-image: url("../img/icons/visibility_on.svg");
+    background-image: url("../img/icons/login/visibility_on.svg");
     background-size: 28px;
 }
 
@@ -213,7 +221,7 @@ footer a{
     align-items: center;
     justify-content: center;
     font-size: var(--fntsizebase);
-    color: #A8A8A8;
+    color: var(--fntcolor);
     transition: all var(--transtime) ease-in-out;
     width: 120px;
 }
