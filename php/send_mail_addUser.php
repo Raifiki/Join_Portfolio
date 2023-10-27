@@ -39,15 +39,23 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case ("POST"): //Send the email;
         header("Access-Control-Allow-Origin: *");
 
-        $subject = "Reset Your Password";
-        $headers = "From:  noreply@developerakademie.com";
+        $subject = "Welcom to Join - You Signed Up Successfully";
+        $subject = '=?UTF-8?B?'.base64_encode($subject).'?=';
+        $headers = array(
+            "MIME-Version" => "1.0",
+            "Content-type" => "text/plain; charset=UTF-8",
+            "From" => "noreply@developerakademie.com",
+        );
+        $text = $_POST['message']  ."\n\n" . "eMail Adresse: " . $_POST['email'];
+        $text = "Dear ".$_POST['Name'].", \n\n 
+        Welcome to Join! We are delighted to have you as a new member of our community.\n\n 
+        Your account has been successfully created and is now ready to use. You can log in and start using our Kanban tool right away.\n\n 
+        Thank you once again for placing your trust in Join. We are confident that you will find our tool to be a valuable asset to your productivity.\n\n 
+        Best regards,\n
+        Your Join Team";
 
-        $message = "Click on the link below to change your password! \n https://leonard-weiss.developerakademie.net/Projekte/M12_JoinPortfolio/pages/SetPassword.html?email=".$_POST['Email'];
-        // mail($recipient, $subject, $_POST['message'], $headers);
-
-        mail($recipient, $subject, $message, $headers);
-        // header("Location: " . $redirect); 
-        header("Location:".$redirect); 
+        mail($recipient, $subject, $text, $headers);
+        header("Location: " . $redirect); 
 
         break;
     default: //Reject any non POST or OPTIONS requests.

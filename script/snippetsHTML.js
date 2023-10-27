@@ -36,7 +36,7 @@ function getSignUpCardHTML(){
         <img class="arrow-back" src="./img/icons/arrow_left_lightblue.svg" alt="back" onclick="renderLoginCard(getLogInCardHTML()); showElement(['signUp'])">
         <h1>Sign up</h1>
         <div id="underline"></div>
-        <form onsubmit="checkSignUpData(this); return false" action="https://leonard-weiss.developerakademie.net/Projekte/M12_JoinPortfolio/php/send_mail_add_user.php" method="POST">
+        <form onsubmit="checkSignUpData(this); return false" action="https://leonard-weiss.developerakademie.net/Projekte/M12_JoinPortfolio/php/send_mail_addUser.php" method="POST">
             <input type="name" id="name" name="Name" placeholder="Name Lastname" pattern="[A-ZÄÖÜ][a-zäöüß]{1,} [A-ZÄÖÜ][a-zäöüß]{1,}" title="Name Lastname" required>
             <span id="msgName"></span>
             <input type="email" id="email" name="Email" placeholder="Email" required>
