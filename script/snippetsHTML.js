@@ -1,10 +1,10 @@
-
+//login page related ------------------------------------
 /**
  * This function generates the LogIn card HTML on the login page
  * 
  * @returns {string} - string with HTML code for Log In Card
  */
-function getLogInCardHTML(email){  
+function getLogInCardHTML(email) {
     return /*html*/`
             <h1>Log in</h1>
             <div id="underline"></div>
@@ -31,7 +31,7 @@ function getLogInCardHTML(email){
  * 
  * @returns {string} - string with HTML code for sign up Card
  */
-function getSignUpCardHTML(){
+function getSignUpCardHTML() {
     return /*html*/`
         <img class="arrow-back" src="./img/icons/login/arrow_left_lightblue.svg" alt="back" onclick="renderLoginCard(getLogInCardHTML()); showElement(['signUp'])">
         <h1>Sign up</h1>
@@ -62,7 +62,7 @@ function getSignUpCardHTML(){
  * 
  * @returns {string} - string with HTML code for forgot password Card
  */
-function getForgotPwdCardHTML(){
+function getForgotPwdCardHTML() {
     return /*html*/`
         <img class="arrow-back" src="./img/icons/login/arrow_left_lightblue.svg" alt="back" onclick="renderLoginCard(getLogInCardHTML()); showElement(['signUp'])">
         <h1>I forgot my password</h1>
@@ -74,4 +74,164 @@ function getForgotPwdCardHTML(){
             <button class="but-dark">Send me the email</button>
         </form>
 `;
+}
+
+
+//contact page related ------------------------------------
+/**
+ * This function generates the HTML code for the overlay to add a new contact
+ * 
+ * @returns {string} - HTML code as string
+ */
+function getOvlyCardNewContactHTML() {
+    return /*html*/`
+        <div id="ovlyCardHeader">
+            <img src="../img/icons/navbar/logo_white.svg" alt="logo">
+            <span id="ovlyCardHL">Add contact</span>
+            <span id="ovlyCardST">Tasks are better with a team!</span>
+            <div id="ovlyCardLine"></div>
+        </div>
+        <form id="wrapperCardDetails" onsubmit="return false">
+            <div id="ovlUserIC">
+                <img src="../img/icons/contact/user_line-white.svg" alt="">
+            </div>
+            <div id="wrapperFormOvlyContact">
+                <div id="ovlyCardForm">
+                    <div>
+                        <input id="formContactName" type="text" placeholder="Name"
+                        pattern="[A-ZÄÖÜ][a-zäöüß]{1,} [A-ZÄÖÜ][a-zäöüß]{1,}"
+                        title="Name Lastname" required>
+                        <img src="../img/icons/contact/user_line.svg" alt="user">
+                    </div>
+                    <div>
+                        <input id="formContactEmail" type="email" placeholder="Email" 
+                        required>
+                        <img src="../img/icons/contact/mail.svg" alt="letter">
+                    </div>
+                    <div>
+                        <input id="formContactPhone" type="text" placeholder="Phone" 
+                        pattern="[0-9+ ]{1,}"
+                        title="only numbers and + sign"
+                        required>
+                        <img src="../img/icons/contact/phone.svg" alt="phone">
+                    </div>
+                </div>
+                <div id="ovlywrapperBtn">
+                    <button id="ovlyBtnSecondary" class="but-light" type="submit" formnovalidate onclick="hideOvlyCard()">
+                        <span>Cancel</span>
+                        <img src="../img/icons/contact/close.svg" alt="cross">
+                    </button>
+                    <button id="ovlyBtnPrimary" class="but-dark" type="submit" onclick="createContact()">
+                        <span>Create contact</span>
+                        <img src="../img/icons/contact/check.svg" alt="check">
+                    </button>
+                </div>
+            </div>
+            <button id="ovlyBtnClose" formnovalidate onclick="hideOvlyCard()"></button>
+        </form>
+    `
+}
+
+
+/**
+ * This function generates the HTML code for an letter field within the contact List
+ * 
+ * @param {string} letter - letter which will be shown
+ * @returns {string} - HTML code as string
+ */
+function getContactListLetterHTML(letter) {
+    return /*html*/`
+        <div class="ContactlistelementLetter">
+            <span class="listLetter">${letter}</span>
+            <div class="line"></div>
+        </div>
+    `
+}
+
+/**
+ * This function generates the HTML code for an contact field wthin the contact List
+ * 
+ * @param {number} idx - index of the contact in the sorted contact list
+ * @param {JSON} contactData - JSON array with the contact data, JSON filds: color, email,initials, name, phone
+ * @returns {string} - HTML code as string
+ */
+function getContactListContactHTML(idx, contactData) {
+    return /*html*/`
+        <div id="contact${idx}" class="Contactlistelement" onclick="showContactDetails(event,'${idx}')">
+            <span id="contactinitialsList${idx}" class="contactinitialsList">${contactData['initials']}</span>
+            <div class="wrapperContact">
+                <span id="contactNameList${idx}" class="contactnameList">${contactData['name']}</span>
+                <span id="contactemailList${idx}" class="contactemailList">${contactData['email']}</span>
+            </div>
+        </div>
+    `
+}
+
+
+/**
+ * This function generates the HTML for a empty contact List
+ * 
+ * @returns {string} - HTML code as string
+ */
+function getEmptyContactListHTML() {
+    return /*html*/`
+            <div id="wrapperNoContacts">
+                <span>Your contact list is empty</span>
+            </div>
+        `;
+}
+
+
+/**
+ * This function generates the overlay card HTML for edit contact
+ * 
+ * @param {number} idx - index of the contact in the sorted contact list
+ * @returns {string} - HTML code as string
+ */
+function getOvlyCardEditContactHTML(idx) {
+    let contactData = contactListSorted[idx];
+    return /*html*/`
+        <div id="ovlyCardHeader">
+                    <img src="../img/icons/navbar/logo_white.svg" alt="logo">
+                    <span id="ovlyCardHL">Edit contact</span>
+                    <div id="ovlyCardLine"></div>
+                </div>
+                <form id="wrapperCardDetails" onsubmit="return false">
+                    <div id="ovlUserIC" style="background-color: ${contactData['color']}">
+                        <span>${contactData['initials']}</span>
+                    </div>
+                    <div id="wrapperFormOvlyContact">
+                        <div id="ovlyCardForm">
+                            <div>
+                                <input id="formContactName" type="text" placeholder="Name" value="${contactData['name']}"
+                                pattern="[A-ZÄÖÜ][a-zäöüß]{1,} [A-ZÄÖÜ][a-zäöüß]{1,}"
+                                title="Name Lastname" required>
+                                <img src="../img/icons/contact/user_line.svg" alt="user">
+                            </div>
+                            <div>
+                                <input id="formContactEmail" type="email" placeholder="Email" value="${contactData['email']}" 
+                                required>
+                                <img src="../img/icons/contact/mail.svg" alt="letter">
+                            </div>
+                            <div>
+                                <input id="formContactPhone" type="text" placeholder="Phone" value="${contactData['phone']}"
+                                pattern="[0-9+ ]{1,}"
+                                title="only numbers and + sign"
+                                required>
+                                <img src="../img/icons/contact/phone.svg" alt="phone">
+                            </div>
+                        </div>
+                        <div id="ovlywrapperBtn">
+                            <button id="ovlyBtnSecondary" class="but-light" type="submit" formnovalidate onclick="deleteContact(${idx})">
+                                <span>Delete</span>
+                            </button>
+                            <button id="ovlyBtnPrimary" class="but-dark" type="submit" onclick="saveContact(${idx})">
+                                <span>Save</span>
+                                <img src="../img/icons/contact/check.svg" alt="check">
+                            </button>
+                        </div>
+                    </div>
+                    <button id="ovlyBtnClose" formnovalidate onclick="hideOvlyCard()"></button>
+                </form>
+    `
 }

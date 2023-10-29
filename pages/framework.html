@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- title -->
+    <title>Join Contacts</title>
+
+    <!-- icon -->
+    <link rel="icon" type="image/png" href="../img/icons/login/logo_black.svg">
+
+    <!-- include fonts -->
+    <link rel="stylesheet" href="">
+
+    <!-- add UTF-8 Code -->
+    <meta charset="utf-8">
+
+    <!-- handle resolution with viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- include style -->
+    <link rel="stylesheet" href="../style/common.css">
+    <link rel="stylesheet" href="../style/temp_menu.css">
+    <link rel="stylesheet" href="../style/temp_header.css">
+    <link rel="stylesheet" href="../style/temp_impressum.css">
+    <link rel="stylesheet" href="../style/temp_privacypolicy.css">
+    <link rel="stylesheet" href="../style/temp_help.css">
+
+
+    <!-- include script -->
+    <script src="../script/helpers.js"></script>
+    <script src="../script/common.js"></script>
+    <script src="../script/snippetsHTML.js"></script>
+
+</head>
+
+<body onload="" onclick="hideElement(['wrapperDropDownHeader'])">
+    <nav w3-include-html="../templates/menu.html"></nav>
+    <main>
+        <div id="header" w3-include-html="../templates/header.html"></div>
+         <div id="content">
+            
+        </div>
+        <div id="contentImpressum" class="display-none" w3-include-html="../templates/Impressum.html"></div>
+        <div id="contentPrivacyPolicy" class="display-none" w3-include-html="../templates/PrivacyPolicy.html"></div>
+        <div id="contentHelp" class="display-none" w3-include-html="../templates/help.html"></div>
+    </main>
+
+    <div id="ovly" onclick="hideOvlyCard()">
+        <div id="ovlyCard" onclick="stopHideElement(event)">
+
+        </div>
+    </div>
+</body>
+
+</html>

@@ -5,7 +5,7 @@ const URL_PARAMS = new URLSearchParams(window.location.search);
 const USER = URL_PARAMS.get('user');
 
 let activeTab;
-//let contactListSorted = [];------------------------------------------------- delete or use later
+let contactListSorted = [];
 //let tasks = []; ------------------------------------------------- delete or use later
 //let groups = [];------------------------------------------------- delete or use later
 
@@ -16,13 +16,13 @@ let activeTab;
  */
 async function init(tabID) {
     await includeHTMLasync();
-    //contactListSorted = await getItem('contacts');
+    contactListSorted = await getItem('contacts');
     //tasks = await getItem('tasks');
     //groups =  await getItem('groups');
     setActiveMenuTab(tabID);
     activeTab = tabID;
     await setHeaderUserData();
-    setTabLink(USER);//getURLparam());
+    setTabLink(USER);
 }
 
 
@@ -47,6 +47,40 @@ function showElement(ID, event) {
     if(event){event.stopPropagation()};
     ID.forEach(id => document.getElementById(id).classList.remove('display-none'));
 }
+
+
+/**
+ * This function shows the overlay card
+ * 
+ * @param {string} cardHTML - HTML code for overlay card as string
+ */
+function showOvlyCard(cardHTML) {
+    document.getElementById('ovlyCard').classList.add('showovlyCard');
+    document.getElementById('ovly').classList.add('showovly');
+    document.getElementById('ovlyCard').innerHTML = cardHTML;
+}
+
+
+/**
+ * This function hides the overlay card
+ */
+function hideOvlyCard() {
+    if (document.getElementById('ovlyCard')) {
+        document.getElementById('ovlyCard').classList.remove('showovlyCard');
+        document.getElementById('ovly').classList.remove('showovly');
+    }
+}
+
+
+/**
+ * This function stops to hide an element
+ * 
+ * @param {event} event - DOM event
+ */
+function stopHideElement(event) {
+    event.stopPropagation();
+}
+
 
 /**
  * This function seperates the initials of the user name. User name has to be in this form: 'Name Lastname'
