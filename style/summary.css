@@ -1,0 +1,223 @@
+#content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 150px 100px;
+    box-sizing: border-box;
+    gap: 30px;
+}
+
+#headline{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+#headlineText{
+    font-size: var(--fntsize61);
+    font-weight: bold;
+}
+
+#lineVertivalBlue{
+    background-color: var(--acccolor);
+    width: 3px;
+    height: 100%;
+}
+
+#headlinePhrase{
+    font-size: var(--fntsize27);
+    color: var(--primcolor);
+}
+
+#wrapperSummary{
+    display: flex;
+    gap: 50px;
+}
+
+#summary{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    /* background-color: aquamarine; */
+}
+
+
+#overviewTasks,
+#infoCard,
+#overviewBoard{
+    display: flex;
+    gap: 32px;
+}
+
+#overviewTasksToDoCard,
+#overviewTasksDoneCard{
+    width: 264px;
+    height: 168px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    background-color: white;
+    border-radius: 30px;
+    padding: 38px 19px;
+    box-sizing: border-box;
+}
+
+.imgCircle{
+    width: 69px;
+    height: 69px;
+    background-color: var(--primcolor);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+#imgToDo{
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    mask-repeat: no-repeat;
+    mask-position: 50%;
+    mask-image: url(../img/icons/summary/edit.svg);
+    -webkit-mask-image: url(../img/icons/summary/edit.svg);
+}
+
+#imgDone{
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    mask-repeat: no-repeat;
+    mask-position: 50%;
+    mask-image: url(../img/icons/summary/check.svg);
+    -webkit-mask-image: url(../img/icons/summary/check.svg);
+}
+
+
+.wrapperCardDetails{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: var(--fntsize20);
+}
+
+.cardDetailsNumber{
+    font-size: var(--fntsize61);
+    font-weight: bold;
+}
+
+
+#infoCard{
+    width: 560px;
+    height: 168px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 61px;
+    background-color: white;
+    border-radius: 30px;
+    padding: 28px 48px;
+    box-sizing: border-box;
+}
+
+#wrapperUrgentTasks{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    background-color: white;
+}
+
+#imgCircleUrgent{
+    background-color: #ff3d00;
+}
+
+#imgCircleUrgent div{
+    width: 32px;
+    height: 32px;
+    background-color: white;
+    mask-repeat: no-repeat;
+    mask-position: 50%;
+    mask-image: url(../img/icons/summary/urgent.svg);
+    -webkit-mask-image: url(../img/icons/summary/urgent.svg);
+}
+
+#lineVerticalGrey{
+    width: 3px;
+    height: 100%;
+    background-color: #d1d1d1;
+}
+
+#wrapperDate{
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+}
+
+#date{
+    color: var(--primcolor);
+    font-size: var(--fntsize21);
+    font-weight: bold;
+}
+
+
+#overviewBoard .wrapperCardDetails{
+    width: 168px;
+    height: 168px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+    background-color: white;
+    border-radius: 30px;
+    padding: 25px 15px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+
+#overviewTasksToDoCard:hover,
+#overviewTasksDoneCard:hover,
+#infoCard:hover,
+#boardTasks:hover,
+#boardTasksProgress:hover,
+#boardTasksFeedback:hover{
+    background-color: var(--primcolor);
+    color: white;
+    transition: all var(--transtime) ease-in-out;
+}
+
+#infoCard:hover #date{
+    color: white;
+    transition: all var(--transtime) ease-in-out;
+}
+
+#overviewTasksToDoCard:hover .imgCircle,
+#overviewTasksDoneCard:hover .imgCircle{
+    background-color: white;
+    transition: all var(--transtime) ease-in-out;
+}
+
+#overviewTasksToDoCard:hover #imgToDo,
+#overviewTasksDoneCard:hover #imgDone,
+#infoCard:hover #wrapperUrgentTasks{
+    background-color: var(--primcolor);
+    transition: all var(--transtime) ease-in-out;
+}
+
+
+
+#greeting{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#greetingText{
+    font-size: var(--fntsize47);
+}
+
+#greetingName{
+    color: var(--acccolor);
+    font-size: var(--fntsize61);
+}

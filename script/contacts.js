@@ -8,7 +8,6 @@
 async function initContact(tabID){
     await init(tabID);
     renderContactList();
-    //await getAddTaskHTML();
 }
 
 

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- title -->
+    <title>Join Contacts</title>
+
+    <!-- icon -->
+    <link rel="icon" type="image/png" href="../img/icons/login/logo_black.svg">
+
+    <!-- include fonts -->
+    <link rel="stylesheet" href="">
+
+    <!-- add UTF-8 Code -->
+    <meta charset="utf-8">
+
+    <!-- handle resolution with viewport-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- include style -->
+    <link rel="stylesheet" href="../style/common.css">
+    <link rel="stylesheet" href="../style/temp_menu.css">
+    <link rel="stylesheet" href="../style/temp_header.css">
+    <link rel="stylesheet" href="../style/temp_impressum.css">
+    <link rel="stylesheet" href="../style/temp_privacypolicy.css">
+    <link rel="stylesheet" href="../style/temp_help.css">
+    <link rel="stylesheet" href="../style/summary.css">
+
+
+    <!-- include script -->
+    <script src="../script/helpers.js"></script>
+    <script src="../script/common.js"></script>
+    <script src="../script/summary.js"></script>
+</head>
+
+<body onload="initSummary('tabsummary')" onclick="hideElement(['wrapperDropDownHeader'])">
+    <nav w3-include-html="../templates/menu.html"></nav>
+    <main>
+        <div id="header" w3-include-html="../templates/header.html"></div>
+         <div id="content">
+            <div id="headline">
+                <span id="headlineText">Join 360</span>
+                <div id="lineVertivalBlue"></div>
+                <span id="headlinePhrase">Key Metrics at a Glance</span>
+            </div>
+            <div id="wrapperSummary">
+                <div id="summary">
+                    <div id="overviewTasks">
+                        <div id="overviewTasksToDoCard">
+                            <div class="imgCircle">
+                                <div id="imgToDo"></div>
+                            </div>
+                            <div class="wrapperCardDetails">
+                                <div class="cardDetailsNumber" id="tasksToDoNumber">1</div>
+                                <div>To-do</div>
+                            </div>
+                        </div>
+                        <div id="overviewTasksDoneCard">
+                            <div class="imgCircle">
+                                <div id="imgDone"></div>
+                            </div>
+                            <div class="wrapperCardDetails">
+                                <div class="cardDetailsNumber" id="tasksDoneNumber">1</div>
+                                <div>Done</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="infoCard">
+                        <div id="wrapperUrgentTasks">
+                            <div id="imgCircleUrgent" class="imgCircle">
+                                <div id="imgUrgent"></div>
+                            </div>
+                            <div class="wrapperCardDetails">
+                                <div class="cardDetailsNumber" id="urgentTasksNumber">1</div>
+                                <div>Urgent</div>
+                            </div>
+                        </div>
+                        <div id="lineVerticalGrey"></div>
+                        <div id="wrapperDate">
+                            <div id="date">October 16, 2022</div>
+                            <div>Upcoming Deadline</div>
+                        </div>
+                    </div>
+                    <div id="overviewBoard">
+                        <div class="wrapperCardDetails" id="boardTasks">
+                            <div class="cardDetailsNumber" id="tasksBoardNumber">1</div>
+                            <div>Tasks in Board</div>
+                        </div>
+                        <div class="wrapperCardDetails" id="boardTasksProgress">
+                            <div class="cardDetailsNumber" id="tasksProgressNumber">1</div>
+                            <div>Tasks in Progress</div>
+                        </div>
+                        <div class="wrapperCardDetails" id="boardTasksFeedback">
+                            <div class="cardDetailsNumber" id="tasksFeedbackNumber">1</div>
+                            <div> Awaiting Feedback</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="greeting">
+                    <div id="greetingText">Good morning,</div>
+                    <div id="greetingName">Leonard Weiß</div>
+                </div>
+            </div>
+        </div>
+        <div id="contentImpressum" class="display-none" w3-include-html="../templates/Impressum.html"></div>
+        <div id="contentPrivacyPolicy" class="display-none" w3-include-html="../templates/PrivacyPolicy.html"></div>
+        <div id="contentHelp" class="display-none" w3-include-html="../templates/help.html"></div>
+    </main>
+
+    <div id="ovly" onclick="hideOvlyCard()">
+        <div id="ovlyCard" onclick="stopHideElement(event)">
+
+        </div>
+    </div>
+</body>
+
+</html>

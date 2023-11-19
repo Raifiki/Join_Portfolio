@@ -28,7 +28,7 @@ async function checkLoginData() {
     let user = await isLoginDataCorrect(email,pwd);
     if (user) {
         saveLoginDataInLS(user.email);
-        window.location.href = 'pages/contacts.html'+'?user='+user.id;
+        window.location.href = 'pages/summary.html'+'?user='+user.id;
     }
     else {
         showErrIptMsg('errMsgPwd','Ups, wrong password! Try again.');
