@@ -6,7 +6,7 @@ const USER = URL_PARAMS.get('user');
 
 let activeTab;
 let contactListSorted = [];
-//let tasks = []; ------------------------------------------------- delete or use later
+let tasks = [];
 //let groups = [];------------------------------------------------- delete or use later
 
 /**
@@ -17,7 +17,7 @@ let contactListSorted = [];
 async function init(tabID) {
     await includeHTMLasync();
     contactListSorted = await getItem('contacts');
-    //tasks = await getItem('tasks');
+    tasks = await getItem('tasks');
     //groups =  await getItem('groups');
     setActiveMenuTab(tabID);
     activeTab = tabID;
