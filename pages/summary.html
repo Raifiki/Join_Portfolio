@@ -46,7 +46,7 @@
             <div id="wrapperSummary">
                 <div id="summary">
                     <div id="overviewTasks">
-                        <div id="overviewTasksToDoCard">
+                        <div id="overviewTasksToDoCard" onclick="forwardToBoardPage()">
                             <div class="imgCircle">
                                 <div id="imgToDo"></div>
                             </div>
@@ -55,7 +55,7 @@
                                 <div>To-do</div>
                             </div>
                         </div>
-                        <div id="overviewTasksDoneCard">
+                        <div id="overviewTasksDoneCard" onclick="forwardToBoardPage()">
                             <div class="imgCircle">
                                 <div id="imgDone"></div>
                             </div>
@@ -65,7 +65,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="infoCard">
+                    <div id="infoCard" onclick="forwardToBoardPage()">
                         <div id="wrapperUrgentTasks">
                             <div id="imgCircleUrgent" class="imgCircle">
                                 <div id="imgUrgent"></div>
@@ -82,15 +82,15 @@
                         </div>
                     </div>
                     <div id="overviewBoard">
-                        <div class="wrapperCardDetails" id="boardTasks">
+                        <div class="wrapperCardDetails" id="boardTasks" onclick="forwardToBoardPage()">
                             <div class="cardDetailsNumber" id="tasksBoardNumber"></div>
                             <div>Tasks in Board</div>
                         </div>
-                        <div class="wrapperCardDetails" id="boardTasksProgress">
+                        <div class="wrapperCardDetails" id="boardTasksProgress" onclick="forwardToBoardPage()">
                             <div class="cardDetailsNumber" id="tasksProgressNumber"></div>
                             <div>Tasks in Progress</div>
                         </div>
-                        <div class="wrapperCardDetails" id="boardTasksFeedback">
+                        <div class="wrapperCardDetails" id="boardTasksFeedback" onclick="forwardToBoardPage()">
                             <div class="cardDetailsNumber" id="tasksFeedbackNumber">1</div>
                             <div> Awaiting Feedback</div>
                         </div>

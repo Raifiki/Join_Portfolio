@@ -128,3 +128,11 @@ function getGreedingText(){
     if(USER > 0) greeding += ',';
     return greeding;
 }
+
+
+/**
+ * This function opens the board page
+ */
+function forwardToBoardPage(){
+    window.location.href = 'board.html'+'?user='+ USER;
+}
