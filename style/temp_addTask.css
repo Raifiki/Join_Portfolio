@@ -1,0 +1,234 @@
+#content {
+    display: flex;
+    flex-direction: column;
+    padding: 100px;
+}
+
+#headlineAddTask{
+    font-size: var(--fntsize61);
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+form{
+    display: flex;
+    gap: 20px;
+}
+
+.requiredStar{
+    color: #ff8190;
+}
+
+#verticalLine{
+    height: 100%;
+    width: 3px;
+    background-color: #D1D1D1;
+    border-radius: 3px;
+}
+
+.wrapperInputElement{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 440px;
+}
+
+input{
+    width: unset;
+}
+
+textarea{
+    font-size: var(--fntsize20);
+    font-family: 'Inter';
+    font-weight: 400;
+    text-align: left;
+    box-sizing: border-box;
+    padding: 13px 21px;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    outline: none;
+    resize: none;
+}
+
+#formLeftSide{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+#wrapperAssignedToHL {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+}
+
+#wrapperAssignedToHL input{
+    width: 100%;
+    border: none;
+}
+
+#wrapperAssignedToHL.styleOpen {
+    border-bottom: none;
+    border-bottom-left-radius: unset;
+    border-bottom-right-radius: unset;
+}
+
+#wrapperAssignedToHLImg{
+    position: absolute;
+    right: 21px;
+    top: 50%;
+    cursor: pointer;
+    transition: all var(--transtime) ease-in;
+    width: 15px;
+}
+
+#wrapperAssignedToHLImg.styleOpen{
+    transform: rotate(180deg);
+    transition: all var(--transtime) ease-in;
+}
+
+#wrapperMemberList {
+    position: absolute;
+    overflow: auto;
+    height: 150px;
+    scrollbar-width: thin;
+    border: 1px solid #D1D1D1;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top: none;
+    background-color: #FFFFFF;
+    padding: 0px 21px;
+    box-sizing: border-box;
+    width: 440px;
+}
+
+#wrapperMemberListElement{
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    padding-right: 21px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#wrapperMemberListElement:hover{
+    background-color: #d3cfcf;
+    transition: all var(--transtime) ease-in;
+}
+
+#wrapperMemberListElement label{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.memberInitials{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--fntsize12);
+    color: #FFFFFF;
+    border-radius: 50%;
+    width: 30px;
+    aspect-ratio: 1;
+}
+
+#wrapperAssignedToActual{
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+
+#formRightSide{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+
+#wrapperPrio {
+    display: flex;
+    gap: 16px;
+    justify-content: space-between;
+}
+
+#wrapperPrio label {
+    width: 33% ;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+#wrapperPrio label:hover {
+    box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+#wrapperPrio input {
+    display: none;
+}
+
+.prioImg {
+    width: 20px;
+    height: 15px;
+}
+
+#prioImgUrgent {
+    -webkit-mask-image: url(../img/icons/addTask/prioUrgent.svg);
+    mask-image: url(../img/icons/addTask/prioUrgent.svg);
+    background-color: #FF3D00;
+}
+
+#prioUrgent:checked~label #prioImgUrgent {
+    background-color: #FFFFFF;
+}
+
+#prioImgMedium {
+    -webkit-mask-image: url(../img/icons/addTask/prioMedium.svg);
+    mask-image: url(../img/icons/addTask/prioMedium.svg);
+    background-color: #FFA800;
+}
+
+#prioMedium:checked~label #prioImgMedium {
+    background-color: #FFFFFF;
+}
+
+#prioImgLow {
+    -webkit-mask-image: url(../img/icons/addTask/prioLow.svg);
+    mask-image: url(../img/icons/addTask/prioLow.svg);
+    background-color: #7AE229;
+}
+
+#prioLow:checked~label #prioImgLow {
+    background-color: #FFFFFF;
+}
+
+#prioUrgent:checked~#prioUrgentlabel {
+    background-color: #FF3D00;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+#prioMedium:checked~#prioMediumlabel {
+    background-color: #FFA800;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+#prioLow:checked~#prioLowlabel {
+    background-color: #7AE229;
+    color: #FFFFFF;
+    font-weight: bold;
+}
+

@@ -235,3 +235,49 @@ function getOvlyCardEditContactHTML(idx) {
                 </form>
     `
 }
+
+
+//addTask page related ------------------------------------
+/**
+ * This function generates the HTML code snippet for the assigned members to the task
+ * 
+ * @param {Array} members - Array with the email adress of each member as a string
+ * @param {boolean} includeName - flag if the name shall be shown as well
+ * @returns {string} - HTML code as string
+ */
+function getAssignedToHTML(members,includeName){
+    let HTML='';
+    members.forEach(m => {
+        let member = contactListSorted.filter(c => c['email'] == m)[0]; // email is unique
+        HTML += (includeName)? getAssignedToInitialsAndNameHTML(member):getAssignedToInitialsHTML(member);
+    });
+    return HTML;
+}
+
+
+/**
+ * This function generates the HTML code of the initials of an assigned member 
+ * 
+ * @param {JSON} member - JSON object with the member details
+ * @returns {string} - HTML code as string
+ */
+function getAssignedToInitialsHTML(member){
+    return /*html*/`<div class="memberInitials" style="background-color: ${member['color']};">${member['initials']}</div>`
+}
+
+
+/**
+ * This function generates the HTML code of the initials and the name of an assigned member 
+ * 
+ * @param {JSON} member - JSON object with the member details
+ * @returns {string} - HTML code as string
+ */
+function getAssignedToInitialsAndNameHTML(member){
+    return /*html*/`
+            <div class="assignedToElement">
+                <span class="memberInitials" style="background-color: ${member['color']};">${member['initials']}</span>
+                <span>${member['name']}</span>
+            </div>
+        `
+}
+

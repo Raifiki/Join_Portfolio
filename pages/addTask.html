@@ -3,7 +3,7 @@
 
 <head>
     <!-- title -->
-    <title>Join - Board</title>
+    <title>Join - AddTask</title>
 
     <!-- icon -->
     <link rel="icon" type="image/png" href="../img/icons/login/logo_black.svg">
@@ -24,20 +24,22 @@
     <link rel="stylesheet" href="../style/temp_impressum.css">
     <link rel="stylesheet" href="../style/temp_privacypolicy.css">
     <link rel="stylesheet" href="../style/temp_help.css">
+    <link rel="stylesheet" href="../style/temp_addTask.css">
 
 
     <!-- include script -->
     <script src="../script/helpers.js"></script>
     <script src="../script/common.js"></script>
     <script src="../script/snippetsHTML.js"></script>
+    <script src="../script/addTask.js"></script>
 
 </head>
 
-<body onload="" onclick="hideElement(['wrapperDropDownHeader'])">
+<body onload="initAddTask('tabaddtask')" onclick="hideElement(['wrapperDropDownHeader'])">
     <nav w3-include-html="../templates/menu.html"></nav>
     <main>
         <div id="header" w3-include-html="../templates/header.html"></div>
-         <div id="content">
+         <div id="content" w3-include-html="../templates/addTask.html">
             
         </div>
         <div id="contentImpressum" class="display-none" w3-include-html="../templates/Impressum.html"></div>

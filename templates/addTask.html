@@ -1,0 +1,76 @@
+<div id="headlineAddTask">
+    Add Task
+</div>
+<form action="">
+    <div id="formLeftSide">
+        <div class="wrapperInputElement">
+            <label for="taskTitle">
+                <span>Title</span>
+                <span class="requiredStar">*</span>
+            </label>
+            <input id="taskTitle" type="text" placeholder="Enter a title" required>
+        </div>
+        <div class="wrapperInputElement">
+            <label for="teskDescription">
+                <span>Description</span>
+            </label>
+            <textarea id="teskDescription" placeholder="Enter a Description"></textarea>
+        </div>
+        <div class="wrapperInputElement" id="wrapperAssignedTo">
+            <span>Assigned to</span>
+            <div>
+                <div class="" id="wrapperAssignedToHL">
+                    <input id="inputSearchAssignedTo" type="text" placeholder="Select contacts to assign" disabled onkeyup="generateMemberListHTML()">    
+                    <img class="" id="wrapperAssignedToHLImg" src="../img/icons/addTask/arrow_drop_down.svg" alt="" onclick="openDropdownMemberList(['wrapperMemberList'])"> 
+                </div>
+                <div class="display-none" id="wrapperMemberList"></div>
+            </div>
+            <div id="wrapperAssignedToActual"></div>
+        </div>
+    </div>
+    <div id="verticalLine"></div>
+    <div id="formRightSide">
+        <div class="wrapperInputElement">
+            <label for="taskDueDate">
+                <span>Due date</span>
+                <span class="requiredStar">*</span>
+            </label>
+            <input id="taskDueDate" type="date" required>
+        </div>
+        <div class="wrapperInputElement">
+            <span>Prio</span>
+            <div id="wrapperPrio">
+                <input id="prioUrgent" type="radio" name="prio" ${checked[2]} required value=2>
+                <label id="prioUrgentlabel" for="prioUrgent">
+                    <span>Urgent</span>
+                    <div class="prioImg" id="prioImgUrgent"></div>
+                </label>
+                <input id="prioMedium" type="radio" name="prio" ${checked[1]} value=1>
+                <label id="prioMediumlabel" for="prioMedium">
+                    <span>Medium</span>
+                    <div class="prioImg" id="prioImgMedium"></div>
+                </label>
+                <input id="prioLow" type="radio" name="prio" ${checked[0]} value=0>
+                <label id="prioLowlabel" for="prioLow">
+                    <span>Low</span>
+                    <div class="prioImg" id="prioImgLow"></div>
+                </label>
+            </div>
+        </div>
+        <div class="wrapperInputElement" id="wrapperCategory">
+            <div>
+                <span>Category</span>
+                <span class="requiredStar">*</span>
+            </div>
+            <div>
+                <div class="" id="wrapperCategoryHL">
+                    <span>Select task category</span>
+                    <img class="" id="wrapperCategoryHLImg" src="../img/icons/addTask/arrow_drop_down.svg" alt="" onclick="openDropdownCategoryList(['wrapperCategoryList'])"> 
+                </div>
+                <div class="display-none" id="wrapperCategoryList"></div>
+            </div>
+        </div>
+
+    </div>
+
+</form>
