@@ -21,14 +21,16 @@
             <div>
                 <div class="" id="wrapperAssignedToHL">
                     <input id="inputSearchAssignedTo" type="text" placeholder="Select contacts to assign" disabled onkeyup="generateMemberListHTML()">    
-                    <img class="" id="wrapperAssignedToHLImg" src="../img/icons/addTask/arrow_drop_down.svg" alt="" onclick="openDropdownMemberList(['wrapperMemberList'])"> 
+                    <div class="wrapperDropDownArrow">
+                        <img class="" id="wrapperAssignedToHLImg" src="../img/icons/addTask/arrow_drop_down.svg" alt="" onclick="openDropdownMemberList(['wrapperMemberList'])"> 
+                    </div>
                 </div>
                 <div class="display-none" id="wrapperMemberList"></div>
             </div>
             <div id="wrapperAssignedToActual"></div>
         </div>
     </div>
-    <div id="verticalLine"></div>
+    <div class="verticalLine"></div>
     <div id="formRightSide">
         <div class="wrapperInputElement">
             <label for="taskDueDate">
@@ -64,8 +66,10 @@
             </div>
             <div>
                 <div class="" id="wrapperCategoryHL">
-                    <span>Select task category</span>
-                    <img class="" id="wrapperCategoryHLImg" src="../img/icons/addTask/arrow_drop_down.svg" alt="" onclick="openDropdownCategoryList(['wrapperCategoryList'])"> 
+                    <input id="inputNewCategory" type="text" placeholder="Select task category" disabled >
+                    <div class="wrapperDropDownArrow">
+                        <img class="" id="wrapperCategoryHLImg" src="../img/icons/addTask/arrow_drop_down.svg" alt="" onclick="openDropdownCategoryList(['wrapperCategoryList'])"> 
+                    </div>
                 </div>
                 <div class="display-none" id="wrapperCategoryList"></div>
             </div>

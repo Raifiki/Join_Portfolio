@@ -1,5 +1,27 @@
 let selectedUsers = [];
 
+// remove at the end -------------
+let categories = [
+    {
+        color: '#ffc701',
+        name: 'Testing'
+    },
+    {
+        color: '#ff7a00',
+        name: 'Frontend'
+    },
+    {
+        color: '#0038ff',
+        name: 'Backend'
+    },
+    {
+        color: '#fc71ff',
+        name: 'Design'
+    },
+]
+// remove at the end -------------
+
+
 /**
  * This function initialize the addTask page
  * 
@@ -70,7 +92,7 @@ function openDropdownMemberList(ID){
 function getMemberHTML(contact,i){
     let checked = (selectedUsers.includes(contact.email))?'checked':'';
     return /*html*/`
-        <div id="wrapperMemberListElement">
+        <div class="wrapperMemberListElement">
             <label for="member${i}">
                 <div class="memberInitials" id="memberInitials${i}">${contact['initials']}</div>
                 ${contact['name']}
@@ -109,4 +131,117 @@ function getSelectedMembers(){
     let search = document.getElementById('inputSearchAssignedTo').value.toLowerCase();
     let filteredList = contactListSorted.filter(c => c.name.toLowerCase().includes(search))
     return filteredList;
+  }
+
+
+  /**
+ * This function open the drop down menu for categories
+ * 
+ * @param {string} ID - ID of the hidden elment
+ */
+function openDropdownCategoryList(ID){
+    showElement(ID, '');
+    document.getElementById('wrapperCategoryHL').classList.add('styleOpen');
+    document.getElementById('wrapperCategoryHLImg').classList.add('styleOpen');
+    document.getElementById('wrapperCategoryHLImg').setAttribute('onclick','closeDropdownCategoryList(["wrapperCategoryList"])');
+    generateCategoryListHTML();
+  }
+  
+
+  /**
+   * This function close the drop down menu for the categories
+   * 
+ * @param {string} ID - ID of the hidden elment
+   */
+  function closeDropdownCategoryList(ID) {
+    hideElement(ID,'');
+    document.getElementById('wrapperCategoryHL').classList.remove('styleOpen');
+    document.getElementById('wrapperCategoryHLImg').classList.remove('styleOpen');
+    document.getElementById('wrapperCategoryHLImg').setAttribute('onclick','openDropdownCategoryList(["wrapperCategoryList"])');
+  }
+
+
+  /**
+   * This function generates the category list HTML for the dropdown menu
+   */
+  function generateCategoryListHTML(){
+    let dropdownHTML = document.getElementById('wrapperCategoryList');
+    dropdownHTML.innerHTML = /*html*/`
+            <div class="wrapperCategoryListElement" onclick="addNewCategory(event)">
+                Add new categroy
+            </div>
+        `;
+    categories.forEach(category => {
+        dropdownHTML.innerHTML += getCategoryHTML(category);
+    });
+  }
+
+
+  /**
+   * This function generates the HTML for one category of the dropdown in the category list
+   * 
+   * @param {JSON} category - JSON array with the category details from the category list
+   * @returns {string} - HTML code as string
+   */
+  function getCategoryHTML(category){
+    return /*html*/`
+            <div class="wrapperCategoryListElement" onclick="setCategory('${category.name}')">
+                <div class="wrapperCategoryDetails">
+                    <div class="categoryColor" style="background-color: ${category.color};"></div>
+                    <span class="categoryName">${category.name}</span>
+                </div>
+                <div class="wrapperCategoryOtions">
+                    <div class="categoryOptionEdit" onclick="editCategory('${category.name}',event)"></div>
+                    <div class="verticalLine"></div>
+                    <div class="categoryOptionDelete" onclick="deleteCategory('${category.name}',event)"></div>
+                </div>
+            </div>
+        `
+  }
+
+
+  /**
+   * This functions sets the category in the input field
+   * 
+   * @param {string} name - name of the category
+   */
+  function setCategory(name){
+    document.getElementById('inputNewCategory').value = name;
+    closeDropdownCategoryList(["wrapperCategoryList"]);
+  }
+
+
+  /**
+   * This function enables the input HTML element to edit the category
+   * 
+   * @param {string} name - Name of the category to edit
+   * @param {event} event - dom event of oncklick the category elemnt
+   */
+  function editCategory(name,event){
+    event.stopPropagation();
+    let inputElement = document.getElementById('inputNewCategory');
+    inputElement.disabled = false;
+    inputElement.value = name;
+    inputElement.focus();
+    closeDropdownCategoryList(["wrapperCategoryList"]);
+  }
+
+
+  /**
+   * This function deletes a category from the category list 
+   * 
+   * @param {string} name - Name of the category which will be deleted
+   * @param {event} event - dom event of oncklick the category elemnt
+   */
+  function deleteCategory(name,event){
+    event.stopPropagation();
+    let idx = categories.findIndex(c => c.name == name);
+    categories.splice(idx,1);
+    generateCategoryListHTML();
+  }
+
+
+  function addNewCategory(event){
+    document.getElementById('inputNewCategory').setAttribute('placeholder','Add new category name');
+    editCategory('',event);
   }

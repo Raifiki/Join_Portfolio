@@ -19,7 +19,7 @@ form{
     color: #ff8190;
 }
 
-#verticalLine{
+.verticalLine{
     height: 100%;
     width: 3px;
     background-color: #D1D1D1;
@@ -56,41 +56,61 @@ textarea{
     gap: 24px;
 }
 
-#wrapperAssignedToHL {
+#wrapperAssignedToHL,
+#wrapperCategoryHL{
     position: relative;
-    display: flex;
-    justify-content: space-between;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
     background-color: #FFFFFF;
 }
 
-#wrapperAssignedToHL input{
+#wrapperAssignedToHL input,
+#wrapperCategoryHL input
+{
     width: 100%;
     border: none;
 }
 
-#wrapperAssignedToHL.styleOpen {
+#wrapperAssignedToHL.styleOpen,
+#wrapperCategoryHL.styleOpen {
     border-bottom: none;
     border-bottom-left-radius: unset;
     border-bottom-right-radius: unset;
 }
 
-#wrapperAssignedToHLImg{
+#wrapperAssignedToHLImg,
+#wrapperCategoryHLImg{
+    transition: all var(--transtime) ease-in;
+    width: 15px;
+    aspect-ratio: 1;
+}
+
+.wrapperDropDownArrow{
     position: absolute;
     right: 21px;
     top: 50%;
+    transform: translate(0%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    transition: all var(--transtime) ease-in;
-    width: 15px;
+    padding: 5px;
+    border-radius: 50%;
 }
 
-#wrapperAssignedToHLImg.styleOpen{
+.wrapperDropDownArrow:hover{
+    background-color: #D1D1D1;
+    transition: all var(--transtime) ease-in;
+}
+
+#wrapperAssignedToHLImg.styleOpen,
+#wrapperCategoryHLImg.styleOpen{
     transform: rotate(180deg);
     transition: all var(--transtime) ease-in;
 }
 
-#wrapperMemberList {
+#wrapperMemberList,
+#wrapperCategoryList {
     position: absolute;
     overflow: auto;
     height: 150px;
@@ -105,7 +125,7 @@ textarea{
     width: 440px;
 }
 
-#wrapperMemberListElement{
+.wrapperMemberListElement{
     display: flex;
     flex-direction: row !important;
     justify-content: space-between;
@@ -116,12 +136,12 @@ textarea{
     border-radius: 5px;
 }
 
-#wrapperMemberListElement:hover{
-    background-color: #d3cfcf;
+.wrapperMemberListElement:hover{
+    background-color: var(--bg-color);
     transition: all var(--transtime) ease-in;
 }
 
-#wrapperMemberListElement label{
+.wrapperMemberListElement label{
     display: flex;
     align-items: center;
     gap: 5px;
@@ -232,3 +252,67 @@ textarea{
     font-weight: bold;
 }
 
+
+.wrapperCategoryListElement{
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    padding-right: 21px;
+    cursor: pointer;
+    border-radius: 5px;
+    
+}
+
+.wrapperCategoryListElement:hover{
+    background-color: var(--bg-color);
+    transition: all var(--transtime) ease-in;
+}
+
+.wrapperCategoryDetails{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 20px;
+}
+
+.categoryColor{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.wrapperCategoryOtions{
+    display: none;
+    align-items: center;
+    gap: 8px;
+    height: 20px;
+}
+
+.wrapperCategoryListElement:hover .wrapperCategoryOtions{
+    display: flex;
+}
+
+.categoryOptionEdit{
+    width: 20px;
+    height: 20px;
+    mask-image: url(../img/icons/addTask/edit.svg);
+    mask-position: 50%;
+    mask-repeat: no-repeat;
+    background-color: var(--primcolor);
+}
+
+.categoryOptionDelete{
+    width: 20px;
+    height: 20px;
+    mask-image: url(../img/icons/addTask/delete.svg);
+    mask-position: 50%;
+    mask-repeat: no-repeat;
+    background-color: var(--primcolor);
+}
+
+.categoryOptionEdit:hover,
+.categoryOptionDelete:hover{
+    background-color: var(--acccolor);
+}
