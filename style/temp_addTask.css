@@ -85,6 +85,7 @@ textarea{
     aspect-ratio: 1;
 }
 
+
 .wrapperDropDownArrow{
     position: absolute;
     right: 21px;
@@ -315,4 +316,73 @@ textarea{
 .categoryOptionEdit:hover,
 .categoryOptionDelete:hover{
     background-color: var(--acccolor);
+}
+
+
+.wrapperEditBtns{
+    position: absolute;
+    right: 21px;
+    top: 50%;
+    transform: translate(0%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 5px;
+    height: 20px;
+}
+
+.wrapperEditBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+.wrapperEditBtn:hover{
+    background-color: #D1D1D1;
+    transition: all var(--transtime) ease-in;
+}
+
+#wrapperCategoryColor{
+    display: flex;
+    justify-content: space-around;
+    padding-top: 8px;
+}
+
+#wrapperCategoryColor input{
+    display: none;
+}
+
+#wrapperCategoryColor label{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    transition: all var(--transtime) ease-in;
+}
+
+#wrapperCategoryColor label:hover{
+    background-color: #D1D1D1;
+    transition: all var(--transtime) ease-in;
+}
+
+.colorDot{
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+#categoryColorYellow:checked ~ #categoryColorYellowlabel,
+#categoryColorOrange:checked ~ #categoryColorOrangelabel,
+#categoryColorPink:checked ~ #categoryColorPinklabel,
+#categoryColorBlue:checked ~ #categoryColorBluelabel,
+#categoryColorLightblue:checked ~ #categoryColorLightbluelabel{
+    background-color: #D1D1D1;
 }

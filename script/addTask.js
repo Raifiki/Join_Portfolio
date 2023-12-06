@@ -3,19 +3,19 @@ let selectedUsers = [];
 // remove at the end -------------
 let categories = [
     {
-        color: '#ffc701',
+        color: '#FFC701',
         name: 'Testing'
     },
     {
-        color: '#ff7a00',
+        color: '#FF7A00',
         name: 'Frontend'
     },
     {
-        color: '#0038ff',
+        color: '#0038FF',
         name: 'Backend'
     },
     {
-        color: '#fc71ff',
+        color: '#FC71FF',
         name: 'Design'
     },
 ]
@@ -167,7 +167,7 @@ function openDropdownCategoryList(ID){
   function generateCategoryListHTML(){
     let dropdownHTML = document.getElementById('wrapperCategoryList');
     dropdownHTML.innerHTML = /*html*/`
-            <div class="wrapperCategoryListElement" onclick="addNewCategory(event)">
+            <div class="wrapperCategoryListElement" onclick="setInputCategoryNewSettings(event)">
                 Add new categroy
             </div>
         `;
@@ -214,15 +214,12 @@ function openDropdownCategoryList(ID){
   /**
    * This function enables the input HTML element to edit the category
    * 
-   * @param {string} name - Name of the category to edit
+   * @param {string} name - name of the category
    * @param {event} event - dom event of oncklick the category elemnt
    */
   function editCategory(name,event){
     event.stopPropagation();
-    let inputElement = document.getElementById('inputNewCategory');
-    inputElement.disabled = false;
-    inputElement.value = name;
-    inputElement.focus();
+    setInputCategoryEditSettings(name);
     closeDropdownCategoryList(["wrapperCategoryList"]);
   }
 
@@ -241,7 +238,109 @@ function openDropdownCategoryList(ID){
   }
 
 
-  function addNewCategory(event){
+  /**
+   * This function sets the HTML element input settings if category can be edited
+   * 
+   * @param {string} name - name of the category
+   */
+  function setInputCategoryEditSettings(name){
+    let inputElement = document.getElementById('inputNewCategory');
+    inputElement.disabled = false;
+    inputElement.value = name;
+    inputElement.focus();
+    hideElement(['wrapperDropDownArrowCategory']);
+    showElement(['categoryEditBtns']);
+    showCategoryColorSelection(name);
+    document.getElementById('btnSaveCategoryChanges').setAttribute('onclick',`saveCategory('${name}')`)
+  }
+
+
+  /**
+   * This function set the category input field to choose settings
+   */
+  function setInputCategoryChooseSettings(){
+    let inputElement = document.getElementById('inputNewCategory');
+    inputElement.setAttribute('placeholder','Select task category');
+    inputElement.disabled = true;
+    inputElement.value = '';
+    showElement(['wrapperDropDownArrowCategory']);
+    hideElement(['categoryEditBtns','wrapperCategoryColor']);
+  }
+
+
+  /**
+   * This function saves the category changes
+   * 
+   * @param {string} oldName - name which are still valid in the categories array
+   */
+  function saveCategoryChanges(oldName){
+    let idx =categories.findIndex(c => c.name == oldName);
+    categories[idx].name = document.getElementById('inputNewCategory').value;
+    categories[idx].color = getCheckedCategoryColor();
+  }
+
+
+  /**
+   * This function sets the input HTML elemnt to new category settings
+   * 
+   * @param {event} event - dom event of oncklick the category elemnt
+   */
+  function setInputCategoryNewSettings(event){
     document.getElementById('inputNewCategory').setAttribute('placeholder','Add new category name');
     editCategory('',event);
+  }
+
+
+  /**
+   * This function saves the category settings in the input field
+   * 
+   * @param {string} oldName - name which are still valid in the categories array, '' for new category
+   */
+  function saveCategory(oldName){
+    (oldName == '')? saveNewCategory():saveCategoryChanges(oldName);
+    setInputCategoryChooseSettings();
+  }
+
+
+  /**
+   * This functions add a new category to the categories array
+   */
+  function saveNewCategory(){
+    let name = document.getElementById('inputNewCategory').value;
+    let color = getCheckedCategoryColor();
+    if(name != '')categories.push({name, color});
+  }
+
+
+  /**
+   * This function shows the color selection on the HTML page
+   * 
+   * @param {string} name - name of the category,'' for new category
+   */
+  function showCategoryColorSelection(name){
+    showElement(['wrapperCategoryColor']);
+    if(name)setColorInSelection(categories[0].color);
+  }
+
+
+  /**
+   * This function sets the actual color in the selection
+   * 
+   * @param {string} oldName - name which are still valid in the categories array
+   */
+  function setColorInSelection(oldColor){
+    let colors = Array.from(document.querySelectorAll('#wrapperCategoryColor input[type="radio"]'));
+    let color = colors.find(c => c.value == oldColor);
+    color.checked = true;
+  }
+
+
+  /**
+   * This function checks which color is selected
+   * 
+   * @returns {string} - string with the selected color code in hex
+   */
+  function getCheckedCategoryColor(){
+    let color = document.querySelector('#wrapperCategoryColor input[type="radio"]:checked').value;
+    return color;
   }
