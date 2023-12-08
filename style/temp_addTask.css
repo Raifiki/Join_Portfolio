@@ -11,8 +11,15 @@
 }
 
 form{
+    max-width: 1000px;
+}
+
+#formContent{
     display: flex;
+    justify-content: space-between;
     gap: 20px;
+    margin-bottom: 60px;
+    height: 480px;
 }
 
 .requiredStar{
@@ -21,8 +28,8 @@ form{
 
 .verticalLine{
     height: 100%;
-    width: 3px;
-    background-color: #D1D1D1;
+    width: 1px;
+    background-color: var(--primcolor);
     border-radius: 3px;
 }
 
@@ -57,7 +64,9 @@ textarea{
 }
 
 #wrapperAssignedToHL,
-#wrapperCategoryHL{
+#wrapperCategoryHL,
+#wrapperSubtaskHL
+{
     position: relative;
     border: 1px solid #D1D1D1;
     border-radius: 10px;
@@ -65,7 +74,8 @@ textarea{
 }
 
 #wrapperAssignedToHL input,
-#wrapperCategoryHL input
+#wrapperCategoryHL input,
+#wrapperSubtaskHL input
 {
     width: 100%;
     border: none;
@@ -124,6 +134,7 @@ textarea{
     padding: 0px 21px;
     box-sizing: border-box;
     width: 440px;
+    z-index: 2;
 }
 
 .wrapperMemberListElement{
@@ -138,7 +149,7 @@ textarea{
 }
 
 .wrapperMemberListElement:hover{
-    background-color: var(--bg-color);
+    background-color: #D1D1D1;
     transition: all var(--transtime) ease-in;
 }
 
@@ -267,7 +278,7 @@ textarea{
 }
 
 .wrapperCategoryListElement:hover{
-    background-color: var(--bg-color);
+    background-color: #D1D1D1;
     transition: all var(--transtime) ease-in;
 }
 
@@ -295,7 +306,9 @@ textarea{
     display: flex;
 }
 
-.categoryOptionEdit{
+.categoryOptionEdit,
+.subtaskOptionEdit{
+    cursor: pointer;
     width: 20px;
     height: 20px;
     mask-image: url(../img/icons/addTask/edit.svg);
@@ -304,7 +317,9 @@ textarea{
     background-color: var(--primcolor);
 }
 
-.categoryOptionDelete{
+.categoryOptionDelete,
+.subtaskOptionDelete{
+    cursor: pointer;
     width: 20px;
     height: 20px;
     mask-image: url(../img/icons/addTask/delete.svg);
@@ -313,8 +328,21 @@ textarea{
     background-color: var(--primcolor);
 }
 
+.subtaskOptionCheck{
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    mask-image: url(../img/icons/addTask/check.svg);
+    mask-position: 50%;
+    mask-repeat: no-repeat;
+    background-color: var(--primcolor);
+}
+
 .categoryOptionEdit:hover,
-.categoryOptionDelete:hover{
+.categoryOptionDelete:hover,
+.subtaskOptionEdit:hover,
+.subtaskOptionDelete:hover,
+.subtaskOptionCheck:hover{
     background-color: var(--acccolor);
 }
 
@@ -362,8 +390,8 @@ textarea{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 35px;
-    height: 35px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     transition: all var(--transtime) ease-in;
 }
@@ -374,8 +402,8 @@ textarea{
 }
 
 .colorDot{
-    width: 20px;
-    height: 20px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
 }
 
@@ -385,4 +413,111 @@ textarea{
 #categoryColorBlue:checked ~ #categoryColorBluelabel,
 #categoryColorLightblue:checked ~ #categoryColorLightbluelabel{
     background-color: #D1D1D1;
+}
+
+
+
+
+#wrapperSubtaskList{
+    height: 120px;
+    overflow: auto;
+    scrollbar-width: thin;
+}
+
+.wrapperSubtaskListElement{
+    position: relative;
+}
+
+.subtaskListPoint{
+    position: absolute;
+    left: 21px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--primcolor);
+}
+
+.subtaskIptElement{
+    height: 35px;
+    width: 100%;
+    padding-left: 40px;
+    cursor: pointer;
+    margin: 2px 0;
+    border-radius: 5px;
+    padding: 0 40px;
+}
+
+.subtaskIptElement:disabled{
+    background-color: var(--bg-color);
+    border: none;
+}
+
+.subtaskIptElement:disabled:hover{
+    background-color: #D1D1D1;
+}
+
+.subtaskIptElement:enabled{
+    border-radius: 0px;
+    border-bottom: 2px var(--acccolor) solid;
+}
+
+.subtaskIptElement:hover ~ .wrapperSubtaskOtions{
+    display: flex;
+}
+
+.subtaskIptElement:enabled ~ .wrapperSubtaskOtions{
+    display: flex;
+}
+
+
+.wrapperSubtaskOtions{
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    align-items: center;
+    gap: 8px;
+    height: 20px;
+}
+
+#formFooter{
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+
+#wrapperFormBtn{
+    display: flex;
+    gap: 16px;
+}
+
+.fromBtn{
+    display: flex;
+    gap: 8px;
+}
+
+#formBtnCreateImg{
+    width: 15px;
+    height: 15px;
+    mask-image: url(../img/icons/addTask/check.svg);
+    mask-position: 50%;
+    mask-repeat: no-repeat;
+    background-color: white;
+}
+
+#formBtnClearImg{
+    width: 15px;
+    height: 15px;
+    mask-image: url(../img/icons/addTask/cross.svg);
+    mask-position: 50%;
+    mask-repeat: no-repeat;
+    background-color: var(--primcolor);
+}
+
+#test:hover  #formBtnClearImg{
+    background-color: var(--acccolor);
+    transition: all var(--transtime) ease-in;
 }

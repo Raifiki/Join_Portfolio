@@ -1,135 +1,157 @@
 <div id="headlineAddTask">
     Add Task
 </div>
-<form action="">
-    <div id="formLeftSide">
-        <div class="wrapperInputElement">
-            <label for="taskTitle">
-                <span>Title</span>
-                <span class="requiredStar">*</span>
-            </label>
-            <input id="taskTitle" type="text" placeholder="Enter a title" required>
-        </div>
-        <div class="wrapperInputElement">
-            <label for="teskDescription">
-                <span>Description</span>
-            </label>
-            <textarea id="teskDescription" placeholder="Enter a Description"></textarea>
-        </div>
-        <div class="wrapperInputElement" id="wrapperAssignedTo">
-            <span>Assigned to</span>
-            <div>
-                <div class="" id="wrapperAssignedToHL">
-                    <input id="inputSearchAssignedTo" type="text" placeholder="Select contacts to assign" disabled onkeyup="generateMemberListHTML()">    
-                    <div class="wrapperDropDownArrow">
-                        <img class="" id="wrapperAssignedToHLImg" src="../img/icons/addTask/arrow_drop_down.svg" alt="" onclick="openDropdownMemberList(['wrapperMemberList'])"> 
-                    </div>
-                </div>
-                <div class="display-none" id="wrapperMemberList"></div>
+<form action="" onsubmit="addNewTaskToTasklist();return false">
+    <div id="formContent">
+        <div id="formLeftSide">
+            <div class="wrapperInputElement">
+                <label for="taskTitle">
+                    <span>Title</span>
+                    <span class="requiredStar">*</span>
+                </label>
+                <input id="taskTitle" type="text" placeholder="Enter a title" required>
             </div>
-            <div id="wrapperAssignedToActual"></div>
+            <div class="wrapperInputElement">
+                <label for="taskDescription">
+                    <span>Description</span>
+                </label>
+                <textarea id="taskDescription" placeholder="Enter a Description"></textarea>
+            </div>
+            <div class="wrapperInputElement" id="wrapperAssignedTo">
+                <span>Assigned to</span>
+                <div>
+                    <div class="" id="wrapperAssignedToHL">
+                        <input id="inputSearchAssignedTo" type="text" placeholder="Select contacts to assign" disabled onkeyup="generateMemberListHTML()">    
+                        <div class="wrapperDropDownArrow">
+                            <img class="" id="wrapperAssignedToHLImg" src="../img/icons/addTask/arrow_drop_down.svg" alt="" onclick="openDropdownMemberList(['wrapperMemberList'])"> 
+                        </div>
+                    </div>
+                    <div class="display-none" id="wrapperMemberList"></div>
+                </div>
+                <div id="wrapperAssignedToActual"></div>
+            </div>
+        </div>
+        <div class="verticalLine"></div>
+        <div id="formRightSide">
+            <div class="wrapperInputElement">
+                <label for="taskDueDate">
+                    <span>Due date</span>
+                    <span class="requiredStar">*</span>
+                </label>
+                <input id="taskDueDate" type="date" required>
+            </div>
+            <div class="wrapperInputElement">
+                <span>Prio</span>
+                <div id="wrapperPrio">
+                    <input id="prioUrgent" type="radio" name="prio" value=2>
+                    <label id="prioUrgentlabel" for="prioUrgent">
+                        <span>Urgent</span>
+                        <div class="prioImg" id="prioImgUrgent"></div>
+                    </label>
+                    <input id="prioMedium" type="radio" name="prio" value=1>
+                    <label id="prioMediumlabel" for="prioMedium">
+                        <span>Medium</span>
+                        <div class="prioImg" id="prioImgMedium"></div>
+                    </label>
+                    <input id="prioLow" type="radio" name="prio" value=0>
+                    <label id="prioLowlabel" for="prioLow">
+                        <span>Low</span>
+                        <div class="prioImg" id="prioImgLow"></div>
+                    </label>
+                </div>
+            </div>
+            <div class="wrapperInputElement" id="wrapperCategory">
+                <div>
+                    <span>Category</span>
+                    <span class="requiredStar">*</span>
+                </div>
+                <div>
+                    <div class="" id="wrapperCategoryHL">
+                        <input id="inputNewCategory" type="text" placeholder="Select task category" disabled>
+                        <div class="wrapperDropDownArrow" id="wrapperDropDownArrowCategory">
+                            <img class="" id="wrapperCategoryHLImg" src="../img/icons/addTask/arrow_drop_down.svg" alt="" onclick="openDropdownCategoryList(['wrapperCategoryList'])"> 
+                        </div>
+                        <div id="categoryEditBtns" class="wrapperEditBtns display-none">
+                            <div class="wrapperEditBtn" onclick="setInputCategoryChooseSettings()">
+                                <img src="../img/icons/addTask/cross.svg" alt="discard">
+                            </div>
+                            <div class="verticalLine"></div>
+                            <div class="wrapperEditBtn" id="btnSaveCategoryChanges">
+                                <img src="../img/icons/addTask/check.svg" alt="check">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="wrapperCategoryColor" class="display-none">
+                        <input id="categoryColorYellow" type="radio" name="color" value="#FFC701">
+                        <label id="categoryColorYellowlabel" for="categoryColorYellow">
+                            <div class="colorDot" style="background-color: #FFC701;"></div>          
+                        </label>
+                        <input id="categoryColorOrange" type="radio" name="color" value="#FF7A00">
+                        <label id="categoryColorOrangelabel" for="categoryColorOrange">
+                            <div class="colorDot" style="background-color: #FF7A00;"></div>
+                        </label>
+                        <input id="categoryColorPink" type="radio" name="color" value="#FF71FF">
+                        <label id="categoryColorPinklabel" for="categoryColorPink">
+                            <div class="colorDot" style="background-color: #FF71FF;"></div>
+                        </label>
+                        <input id="categoryColorBlue" type="radio" name="color" value="#0038FF">
+                        <label id="categoryColorBluelabel" for="categoryColorBlue">
+                            <div class="colorDot" style="background-color: #0038FF;"></div>
+                        </label>
+                        <input id="categoryColorLightblue" type="radio" name="color" value="#1FD7C1">
+                        <label id="categoryColorLightbluelabel" for="categoryColorLightblue">
+                            <div class="colorDot" style="background-color: #1FD7C1;"></div>
+                        </label>
+                    </div>
+                    <div class="display-none" id="wrapperCategoryList"></div>
+                </div>
+            </div>
+            <div class="wrapperInputElement" id="wrapperSubtask">
+                <div>
+                    <span>Subtasks</span>
+                </div>
+                <div>
+                    <div class="" id="wrapperSubtaskHL">
+                        <input id="inputNewSubtask" type="text" placeholder="Add new subtask" disabled>
+                        <div class="wrapperDropDownArrow" id="wrapperBtnAddSubtask" onclick="setInputNewSubtaskEditSettings()">
+                            <img class="" id="addSubtaskHLImg" src="../img/icons/addTask/add.svg" alt=""> 
+                        </div>
+                        <div id="subtaskEditBtn" class="wrapperEditBtns display-none">
+                            <div class="wrapperEditBtn" onclick="setInputNewSubtaskSettingsDefault()">
+                                <img src="../img/icons/addTask/cross.svg" alt="discard">
+                            </div>
+                            <div class="verticalLine"></div>
+                            <div class="wrapperEditBtn" id="btnSaveSubtask" onclick="addSubtask()">
+                                <img src="../img/icons/addTask/check.svg" alt="check">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="" id="wrapperSubtaskList"></div>
+                    
+                </div>
+                
+            </div>
+
         </div>
     </div>
-    <div class="verticalLine"></div>
-    <div id="formRightSide">
-        <div class="wrapperInputElement">
-            <label for="taskDueDate">
-                <span>Due date</span>
-                <span class="requiredStar">*</span>
-            </label>
-            <input id="taskDueDate" type="date" required>
+    <div id="formFooter">
+        <div>
+            <span class="requiredStar">*</span>
+            <span>This field is required</span>
         </div>
-        <div class="wrapperInputElement">
-            <span>Prio</span>
-            <div id="wrapperPrio">
-                <input id="prioUrgent" type="radio" name="prio" required value=2>
-                <label id="prioUrgentlabel" for="prioUrgent">
-                    <span>Urgent</span>
-                    <div class="prioImg" id="prioImgUrgent"></div>
-                </label>
-                <input id="prioMedium" type="radio" name="prio" value=1>
-                <label id="prioMediumlabel" for="prioMedium">
-                    <span>Medium</span>
-                    <div class="prioImg" id="prioImgMedium"></div>
-                </label>
-                <input id="prioLow" type="radio" name="prio" value=0>
-                <label id="prioLowlabel" for="prioLow">
-                    <span>Low</span>
-                    <div class="prioImg" id="prioImgLow"></div>
-                </label>
-            </div>
+        <div id="wrapperFormBtn">
+            <button id="test" class="but-light fromBtn" type="button" onclick="clearFormAddTask()">
+                <span>Clear</span>
+                <div id="formBtnClearImg"></div>
+            </button>
+            <button class="but-dark fromBtn">
+                <span>Create Task</span>
+                <div id="formBtnCreateImg"></div>
+            </button>
         </div>
-        <div class="wrapperInputElement" id="wrapperCategory">
-            <div>
-                <span>Category</span>
-                <span class="requiredStar">*</span>
-            </div>
-            <div>
-                <div class="" id="wrapperCategoryHL">
-                    <input id="inputNewCategory" type="text" placeholder="Select task category" disabled >
-                    <div class="wrapperDropDownArrow" id="wrapperDropDownArrowCategory">
-                        <img class="" id="wrapperCategoryHLImg" src="../img/icons/addTask/arrow_drop_down.svg" alt="" onclick="openDropdownCategoryList(['wrapperCategoryList'])"> 
-                    </div>
-                    <div id="categoryEditBtns" class="wrapperEditBtns display-none">
-                        <div class="wrapperEditBtn" onclick="setInputCategoryChooseSettings()">
-                            <img src="../img/icons/addTask/cross.svg" alt="discard">
-                        </div>
-                        <div class="verticalLine"></div>
-                        <div class="wrapperEditBtn" id="btnSaveCategoryChanges">
-                            <img src="../img/icons/addTask/check.svg" alt="check">
-                        </div>
-                    </div>
-                </div>
-                <div id="wrapperCategoryColor" class="display-none">
-                    <input id="categoryColorYellow" type="radio" name="color" value="#FFC701">
-                    <label id="categoryColorYellowlabel" for="categoryColorYellow">
-                        <div class="colorDot" style="background-color: #FFC701;"></div>          
-                    </label>
-                    <input id="categoryColorOrange" type="radio" name="color" value="#FF7A00">
-                    <label id="categoryColorOrangelabel" for="categoryColorOrange">
-                        <div class="colorDot" style="background-color: #FF7A00;"></div>
-                    </label>
-                    <input id="categoryColorPink" type="radio" name="color" value="#FF71FF">
-                    <label id="categoryColorPinklabel" for="categoryColorPink">
-                        <div class="colorDot" style="background-color: #FF71FF;"></div>
-                    </label>
-                    <input id="categoryColorBlue" type="radio" name="color" value="#0038FF">
-                    <label id="categoryColorBluelabel" for="categoryColorBlue">
-                        <div class="colorDot" style="background-color: #0038FF;"></div>
-                    </label>
-                    <input id="categoryColorLightblue" type="radio" name="color" value="#1FD7C1">
-                    <label id="categoryColorLightbluelabel" for="categoryColorLightblue">
-                        <div class="colorDot" style="background-color: #1FD7C1;"></div>
-                    </label>
-                </div>
-                <div class="display-none" id="wrapperCategoryList"></div>
-            </div>
-        </div>
-        <div class="wrapperInputElement" id="wrapperSubtask">
-            <div>
-                <span>Subtasks</span>
-            </div>
-            <div>
-                <div class="" id="wrapperSubtaskHL">
-                    <input id="inputNewSubtask" type="text" placeholder="Add new subtask">
-                    <div class="wrapperDropDownArrow" id="wrapperBtnAddSubtask">
-                        <img class="" id="addSubtaskHLImg" src="../img/icons/addTask/arrow_drop_down.svg" alt="" onclick=""> 
-                    </div>
-                    <div id="subtaskEditBtn" class="wrapperEditBtns display-none">
-                        <div class="wrapperEditBtn" onclick="">
-                            <img src="../img/icons/addTask/cross.svg" alt="discard">
-                        </div>
-                        <div class="verticalLine"></div>
-                        <div class="wrapperEditBtn" id="btnSaveSubtask">
-                            <img src="../img/icons/addTask/check.svg" alt="check">
-                        </div>
-                    </div>
-                </div>
-                <div class="" id="wrapperSubtaskList">Test</div>
-            </div>
-            
-        </div>
-
     </div>
-
 </form>
+<div id="ovlyPopup">
+    <span>Task added to board</span>
+    <img src="../img/icons/addTask/board.svg" alt="">
+</div>

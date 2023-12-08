@@ -442,33 +442,6 @@
     gap: 30px;
 }
 
-#ovlyContactSuccCreated{
-    position: absolute;
-    bottom: -200px;
-    left: calc(50% - 163px);
-    width: 326px;
-    border-radius: 20px;
-    background-color: var(--seccolor);
-    color: #FFFFFF;
-    font-size: var(--fntsize20);
-    text-align: center;
-    padding: 25px 0px;
-    z-index: 2;
-}
-
-#ovlyContactSuccCreated.addAnimtaion{
-    animation: showInformation 2s linear 0s 1 normal;
-}
-
-@keyframes showInformation {
-    0% {bottom: -200px;}
-    10% {bottom: 200px;}
-    90% {bottom: 200px;}
-    100%{bottom: -200px;}
-}
-
-
-
 
 /*------------------ set responsive design ------------------*/
 @media (max-width: 1350px){

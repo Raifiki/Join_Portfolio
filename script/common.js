@@ -7,7 +7,7 @@ const USER = URL_PARAMS.get('user');
 let activeTab;
 let contactListSorted = [];
 let tasks = [];
-//let groups = [];------------------------------------------------- delete or use later
+let categories = [];
 
 /**
  * This function initialize all common parts of the webside
@@ -18,7 +18,7 @@ async function init(tabID) {
     await includeHTMLasync();
     contactListSorted = await getItem('contacts');
     tasks = await getItem('tasks');
-    //groups =  await getItem('groups');
+    categories =  await getItem('categories');
     setActiveMenuTab(tabID);
     activeTab = tabID;
     await setHeaderUserData();
@@ -93,6 +93,14 @@ function getContactInitials(name){
     return separatedName[0][0] + separatedName[1][0];
 }
 
+
+/**
+ * This function shows the popup element
+ */
+function showPopup(){
+    document.getElementById('ovlyPopup').classList.add("addAnimtaion");
+    setTimeout(function(){document.getElementById('ovlyPopup').classList.remove("addAnimtaion")},2000);
+}
 
 
 // menu related functions

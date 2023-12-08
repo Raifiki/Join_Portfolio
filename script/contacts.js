@@ -185,8 +185,7 @@ async function createContact(){
         renderContactList();
         showContactDetails('',idx);
         hideOvlyCard();
-        document.getElementById('ovlyContactSuccCreated').classList.add("addAnimtaion");
-        setTimeout(function(){document.getElementById('ovlyContactSuccCreated').classList.remove("addAnimtaion")},2000);
+        showPopup();
     }
 }
 
