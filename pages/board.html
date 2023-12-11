@@ -24,21 +24,67 @@
     <link rel="stylesheet" href="../style/temp_impressum.css">
     <link rel="stylesheet" href="../style/temp_privacypolicy.css">
     <link rel="stylesheet" href="../style/temp_help.css">
+    <link rel="stylesheet" href="../style/board.css">
 
 
     <!-- include script -->
     <script src="../script/helpers.js"></script>
     <script src="../script/common.js"></script>
     <script src="../script/snippetsHTML.js"></script>
+    <script src="../script/board.js"></script>
 
 </head>
 
-<body onload="" onclick="hideElement(['wrapperDropDownHeader'])">
+<body onload="initBoard('tabboard')" onclick="hideElement(['wrapperDropDownHeader'])">
     <nav w3-include-html="../templates/menu.html"></nav>
     <main>
         <div id="header" w3-include-html="../templates/header.html"></div>
          <div id="content">
-            
+            <div id="wrapperBoardHeader">
+                <h1>Board</h1>
+                <div id="wrapperBoardBtnGroup">
+                    <div id="wrapperBoardSearchIpt">
+                        <input id="searchInput" type="text" placeholder="Find task" onkeyup="filterTasks()">
+                        <div id="wrapperBoardSearchBtn">
+                            <div id="boardSearchIptVerticalLine"></div>
+                            <img src="../img/icons/board/search.svg" alt="" onclick="filterTasks()">
+                        </div>
+                    </div>
+                    <button id="btnAddTask" class="but-dark">
+                        <span>Add task</span>
+                        <img src="../img/icons/board/add.svg" alt="add">
+                    </button>
+                </div>
+            </div>
+            <div id="wrapperBoardTaskContent">
+                <div class="boardTaskColoumn">
+                    <div class="boardTaskColoumnWrapperHL">
+                        <span class="boardTaskColoumnHLText">To do</span>
+                        <div class="boardTaskColoumnHLImg"></div>
+                    </div>
+                    <div id="boardClassificationToDo" class="boardTaskColoumnWrapperTasks"></div>
+                </div>
+                <div class="boardTaskColoumn">
+                    <div class="boardTaskColoumnWrapperHL">
+                        <span class="boardTaskColoumnHLText">In progress</span>
+                        <div class="boardTaskColoumnHLImg"></div>
+                    </div>
+                    <div id="boardClassificationInProgress" class="boardTaskColoumnWrapperTasks"></div>
+                </div>
+                <div class="boardTaskColoumn">
+                    <div class="boardTaskColoumnWrapperHL">
+                        <span class="boardTaskColoumnHLText">Await feedback</span>
+                        <div class="boardTaskColoumnHLImg"></div>
+                    </div>
+                    <div id="boardClassificationAwaitingFeedback" class="boardTaskColoumnWrapperTasks"></div>
+                </div>
+                <div class="boardTaskColoumn">
+                    <div class="boardTaskColoumnWrapperHL">
+                        <span class="boardTaskColoumnHLText">Done</span>
+                    </div>
+                    <div id="boardClassificationDone" class="boardTaskColoumnWrapperTasks"></div>
+                </div>
+            </div>
         </div>
         <div id="contentImpressum" class="display-none" w3-include-html="../templates/Impressum.html"></div>
         <div id="contentPrivacyPolicy" class="display-none" w3-include-html="../templates/PrivacyPolicy.html"></div>
@@ -51,5 +97,4 @@
         </div>
     </div>
 </body>
-
 </html>

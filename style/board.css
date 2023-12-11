@@ -1,0 +1,245 @@
+#content{
+    box-sizing: border-box;
+    flex-direction: column;
+    gap: 50px;
+    padding: 80px 64px;
+    max-width: 1300px;
+}
+
+
+/* Content Header */
+#wrapperBoardHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#wrapperBoardBtnGroup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+}
+
+#wrapperBoardSearchIpt{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background-color: white;
+    border: 1px #A8A8A8 solid;
+    border-radius: 10px;
+    padding-right: 16px;
+}
+
+#wrapperBoardSearchIpt input{
+    width: 312px;
+    border: unset;
+}
+
+#wrapperBoardSearchBtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+#boardSearchIptVerticalLine{
+    width: 1px;
+    height: 30px;
+    background-color: #D1D1D1;
+}
+
+#wrapperBoardSearchBtn img{
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 5px;
+}
+
+#wrapperBoardSearchBtn img:hover{
+    background-color: #D1D1D1;
+    transition: all var(--transtime) ease-in;
+}
+
+#btnAddTask{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+/* Task Content */
+
+#wrapperBoardTaskContent{
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 26px;
+}
+
+.boardTaskColoumn{
+    width: 244px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+}
+
+.boardTaskColoumnWrapperHL{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.boardTaskColoumnWrapperHL span{
+    font-weight: bold;
+    color: var(--primcolor);
+}
+
+.boardTaskColoumnHLImg{
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    mask-image: url(../img/icons/board/addButton.svg);
+    background-color: var(--primcolor);
+}
+
+.boardTaskColoumnHLImg:hover{
+    background-color: var(--acccolor);
+    transition: all var(--transtime) ease-in;
+}
+
+
+/* board classification */
+.boardTaskColoumnWrapperTasks{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+/* task */
+.cardTask{
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    background-color: white;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 16px;
+    border-radius: 24px;
+}
+
+.cardNoTasks{
+    text-align: center;
+    border-radius: 10px;
+    color: #A8A8A8;
+    width: 100%;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    background-color: #E7E7E7;
+    border: 1px #A8A8A8 dashed;
+}
+
+.task-category{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 16px;
+    border-radius: 8px;
+    width: fit-content;
+    color: white;
+}
+
+.wrapperTaskText{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.task-title{
+    font-size: var(--fntsizebase);
+    color: var(--primcolor);
+    font-weight: bold;
+}
+
+.task-description{
+    color: #A8A8A8;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.wrapperSubtasks{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.wrapperSubtasks span{
+    font-size: var(--fntsize12);
+}
+
+
+.subtasksProgress{
+    flex-grow:1;
+    height: 8px;
+    border-radius: 8px;
+    background-color: #A8A8A8;
+}
+
+.subtasksProgressBar{
+    height: 100%;
+    background-color: #4589FF;
+    border-radius: 8px;
+}
+
+.wrapperCardTaskFooter{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wrapperUsers{
+    display: flex;
+    gap: 0px;
+}
+
+.initials{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 2px white solid;
+    border-radius: 50%;
+    margin-right: -8px;
+    color: white;
+    font-size: var(--fntsize12);
+}
+
+.task-prio{
+    width: 32px;
+    height: 32px;
+    mask-repeat: no-repeat;
+    mask-position: 50%;
+}
+
+.task-prio-low{
+    mask-image: url(../img/icons/board/prioLow.svg);
+    background-color: #7AE229;
+}
+
+.task-prio-medium{
+    mask-image: url(../img/icons/board/prioMedium.svg);
+    background-color: #FFA800;
+}
+
+.task-prio-urgent{
+    mask-image: url(../img/icons/board/prioUrgent.svg);
+    background-color: #FF3D00;
+}

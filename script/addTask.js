@@ -1,27 +1,6 @@
 let selectedUsers = [];
 let subTasks = [];
 
-// remove at the end -------------
-/*let categories = [
-    {
-        color: '#FFC701',
-        name: 'Testing'
-    },
-    {
-        color: '#FF7A00',
-        name: 'Frontend'
-    },
-    {
-        color: '#0038FF',
-        name: 'Backend'
-    },
-    {
-        color: '#FC71FF',
-        name: 'Design'
-    },
-]*/
-// remove at the end -------------
-
 
 /**
  * This function initialize the addTask page
@@ -519,14 +498,14 @@ function openDropdownCategoryList(ID){
     let prio = getPrio();
     let category = getCategory();
     let subtasks = getSubtasks();
-    let condition = 0;
+    let condition = 'ToDo';
     return {title,description,users,deadline,prio,category,subtasks,condition}
   }
 
   /**
    * This function gets the choosen prio of the task
    * 
-   * @returns {number} - number ot the prio, 0:low;1:medium;2:high
+   * @returns {number} - number of the prio, 0:low;1:medium;2:high
    */
   function getPrio(){
     let prio = document.querySelector('#wrapperPrio input:checked');
@@ -564,6 +543,6 @@ function openDropdownCategoryList(ID){
         tasks.push(newTask);
         //await setItem('tasks',tasks); 
         showPopup();
-        setTimeout(function(){window.location.href = 'board.html'+'?user='+ USER},3000);
+        //setTimeout(function(){window.location.href = 'board.html'+'?user='+ USER},3000);
     };
   }
