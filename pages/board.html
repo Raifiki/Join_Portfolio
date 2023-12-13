@@ -62,27 +62,27 @@
                         <span class="boardTaskColoumnHLText">To do</span>
                         <div class="boardTaskColoumnHLImg"></div>
                     </div>
-                    <div id="boardClassificationToDo" class="boardTaskColoumnWrapperTasks"></div>
+                    <div id="boardClassificationToDo" class="boardTaskColoumnWrapperTasks" ondrop="dropHandler(event,'ToDo')" ondragover="dragOverHandler(event,this)" ondragleave="hideDummyCard(this)"></div>
                 </div>
                 <div class="boardTaskColoumn">
                     <div class="boardTaskColoumnWrapperHL">
                         <span class="boardTaskColoumnHLText">In progress</span>
                         <div class="boardTaskColoumnHLImg"></div>
                     </div>
-                    <div id="boardClassificationInProgress" class="boardTaskColoumnWrapperTasks"></div>
+                    <div id="boardClassificationInProgress" class="boardTaskColoumnWrapperTasks" ondrop="dropHandler(event,'InProgress')" ondragover="dragOverHandler(event,this)" ondragleave="hideDummyCard(this)"></div>
                 </div>
                 <div class="boardTaskColoumn">
                     <div class="boardTaskColoumnWrapperHL">
                         <span class="boardTaskColoumnHLText">Await feedback</span>
                         <div class="boardTaskColoumnHLImg"></div>
                     </div>
-                    <div id="boardClassificationAwaitingFeedback" class="boardTaskColoumnWrapperTasks"></div>
+                    <div id="boardClassificationAwaitingFeedback" class="boardTaskColoumnWrapperTasks" ondrop="dropHandler(event,'AwaitFeedback')" ondragover="dragOverHandler(event,this)" ondragleave="hideDummyCard(this)"></div>
                 </div>
                 <div class="boardTaskColoumn">
                     <div class="boardTaskColoumnWrapperHL">
                         <span class="boardTaskColoumnHLText">Done</span>
                     </div>
-                    <div id="boardClassificationDone" class="boardTaskColoumnWrapperTasks"></div>
+                    <div id="boardClassificationDone" class="boardTaskColoumnWrapperTasks" ondrop="dropHandler(event,'Done')" ondragover="dragOverHandler(event,this)" ondragleave="hideDummyCard(this)"></div>
                 </div>
             </div>
         </div>

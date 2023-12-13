@@ -1,9 +1,9 @@
-
+// delete at the end ------------------------------------------- start
 let dummyTasks = [
     {
         title: "Leos Tasks0", 
         category: "Backend",
-        condition: 'ToDo',
+        classification: 'ToDo',
         deadline: "2023-12-10",
         description: "Beschreibung",
         prio: "0",
@@ -18,11 +18,12 @@ let dummyTasks = [
             }
         ],
         users: [ "daniel.schmidt@yahoo.de", "sarahw@gmail.com", "simon.huber@gmail.com" ],
+        id: 0,
     },
     {
         title: "Leos Tasks1", 
         category: "Frontend",
-        condition: 'InProgress',
+        classification: 'InProgress',
         deadline: "2023-12-10",
         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore quis veniam officiis maxime consequuntur deleniti molestias necessitatibus, magni dolor, consequatur hic ea blanditiis at! Necessitatibus pariatur laboriosam quod accusamus at!",
         prio: "1",
@@ -37,11 +38,12 @@ let dummyTasks = [
             }
         ],
         users: [ "daniel.schmidt@yahoo.de", "sarahw@gmail.com", "simon.huber@gmail.com" ],
+        id: 1,
     },
     {
         title: "Leos Tasks2", 
         category: "Design",
-        condition: 'AwaitFeedback',
+        classification: 'AwaitFeedback',
         deadline: "2023-12-10",
         description: "Beschreibung",
         prio: "2",
@@ -56,11 +58,12 @@ let dummyTasks = [
             }
         ],
         users: [ "daniel.schmidt@yahoo.de", "sarahw@gmail.com", "simon.huber@gmail.com" ],
+        id: 2,
     },
     {
         title: "Leos Tasks3", 
         category: "Testing",
-        condition: 'ToDo',
+        classification: 'ToDo',
         deadline: "2023-12-10",
         description: "Beschreibung",
         prio: "2",
@@ -75,11 +78,12 @@ let dummyTasks = [
             }
         ],
         users: [ "daniel.schmidt@yahoo.de", "sarahw@gmail.com", "simon.huber@gmail.com" ],
+        id: 3,
     },
     {
         title: "Leos Tasks4", 
         category: "Testing",
-        condition: 'ToDo',
+        classification: 'Done',
         deadline: "2023-12-10",
         description: "Beschreibung",
         prio: "2",
@@ -91,12 +95,25 @@ let dummyTasks = [
             {
                 description: "Test2",
                 state: 1
+            },
+            {
+                description: "Test2",
+                state: 1
+            },
+            {
+                description: "Test2",
+                state: 0
+            },
+            {
+                description: "Test2",
+                state: 1
             }
         ],
         users: [ "daniel.schmidt@yahoo.de", "sarahw@gmail.com", "simon.huber@gmail.com" ],
+        id: 4,
     },
 ]
-
+// delete at the end ------------------------------------------- end
 
 /**
  * This function initialize the board page
@@ -105,7 +122,6 @@ let dummyTasks = [
  */
 async function initBoard(tabID){
     await init(tabID);
-    tasks = dummyTasks; // ---------------------------------------> delete this line at the end
     renderBoard(tasks);
 }
 
@@ -141,7 +157,8 @@ function renderClassification(className,tasks){
  */
 function getClassificationHTML(tasks){
     let HTML = '';
-    tasks.forEach(task => HTML += getTaskHTML(task));
+    tasks.forEach((task,idx) => HTML += getTaskHTML(task));
+    HTML += `<div class="cardDummyDragOver"></div>`;
     return HTML;
 }
 
@@ -155,6 +172,7 @@ function getClassificationHTML(tasks){
 function getNoTasksClassificationHTML(className){
     return /*html*/`
         <div class="cardNoTasks">No tasks ${className}</div>
+        <div class="cardDummyDragOver"></div>
     `
 }
 
@@ -170,7 +188,7 @@ function getTaskHTML(task){
     let usersHTML = getTaskUsersHTML(task);
     let prio = setTaskPrioOnCard(task);
     return /*html*/`
-        <div class="cardTask">
+        <div id="task${task.id}" class="cardTask" draggable="true" ondragstart="setDragData(event,this)" ondragend="setDragEndStyyle(this)">
             <div class="task-category" style="background-color: ${category.color}">${category.name}</div>
             <div class="wrapperTaskText">
                 <div class="task-title">${task.title}</div>
@@ -192,16 +210,16 @@ function getTaskHTML(task){
 
 
 /**
- * This function classifies the tasks according the actual condition of the task
+ * This function classifies the tasks according the actual classification of the task
  * 
  * @param {tasks} - array with the tasks to classify
  * @returns {JSON} - JSON array with classified tasks, classification: Done,InProgress,AwaitingFeedback,Done
  */
 function classifyTasks(tasks){
-    let ToDo = tasks.filter(t => t.condition == 'ToDo');
-    let InProgress = tasks.filter(t => t.condition == 'InProgress');
-    let AwaitingFeedback = tasks.filter(t => t.condition == 'AwaitFeedback');
-    let Done = tasks.filter(t => t.condition == 'Done');
+    let ToDo = tasks.filter(t => t.classification == 'ToDo');
+    let InProgress = tasks.filter(t => t.classification == 'InProgress');
+    let AwaitingFeedback = tasks.filter(t => t.classification == 'AwaitFeedback');
+    let Done = tasks.filter(t => t.classification == 'Done');
     return {ToDo,InProgress,AwaitingFeedback,Done};
 }
 
@@ -299,4 +317,117 @@ function filterTasks(){
     let search = document.getElementById('searchInput').value.toLowerCase();
     let tasksFiltered = tasks.filter(task => task.title.toLowerCase().includes(search));
     renderBoard(tasksFiltered);
+}
+
+
+/**
+ * This function sets the drag data
+ * 
+ * @param {event} event - DOM event when drag starts
+ * @param {HTMLElement} card - card HTML element which is dragged 
+ */
+function setDragData(event,card){
+    event.dataTransfer.setData("text",event.target.id);
+    card.style.transform = 'rotateZ(5deg)'; 
+}
+
+
+/**
+ * This function sets the card style to default at drag end
+ * 
+ * @param {HTMLElement} card - card HTML element which is dragged
+ */
+function setDragEndStyyle(card){
+    card.style.transform = 'rotateZ(0deg)'; 
+}
+
+
+/**
+ * This function allow to drop a dragged element into this element
+ * 
+ * @param {event} event - DOM event when dragged element is over the element
+ * @param {HTMLElement} element - HTMLelement from the classification
+ */
+function dragOverHandler(event,element){
+    if(!isDraggedElementPartOfClassification(event,element)){
+        event.preventDefault();
+        event.dataTransfer.dropEffect = "move";
+        showDummyCard(element);
+    }
+}
+
+
+/**
+ * This function shows the dummy card if the dragged card is over the classifictaion
+ * 
+ * @param {HTMLElement} classification - HTMLelement from the classification
+ */
+function showDummyCard(classification){
+    let dummyCard = classification.lastElementChild;
+    dummyCard.style.display = 'flex';
+    dummyCard.scrollIntoView({ block: "end" });
+}
+
+
+/**
+ * This function hides the dummy card if the dragged card is leaving the classifictaion
+ * 
+ * @param {HTMLElement} classification - HTMLelement from the classification
+ */
+function hideDummyCard(classification){
+    classification.lastElementChild.style.display = 'none';
+    console.log('leave Dropzone')
+}
+
+
+/**
+ * This function checks if the card is already in the classification
+ * 
+ * @param {event} event - DOM event when dragged element is over the element
+ * @param {HTMLElement} classification - HTMLelement from the classification
+ * @returns {HTMLElement} - true: dragged element is part of classification, false: dragged element is not part of classification
+ */
+function isDraggedElementPartOfClassification(event,classification){
+    let dragElementHTMLID = event.dataTransfer.getData("text");
+    return Boolean(Array.from(classification.children).find(element => element.id == dragElementHTMLID));
+}
+
+
+/**
+ * This function handles the drop event
+ * 
+ * @param {event} event - DOM event when drag starts
+ * @param {string} classification - Classification where the dragged element is dropped, 'ToDo','InProgress','AwaitingFeedback','Done'
+ */
+async function dropHandler(event,classification){
+    event.preventDefault();
+    let dragElementHTMLID = event.dataTransfer.getData("text");
+    let taskID = getTaskIDFromHTMLcardID(dragElementHTMLID);
+    await setTaskClassification(taskID,classification);
+    filterTasks();
+    document.getElementById(dragElementHTMLID).scrollIntoView({ block: "end" });
+}
+
+
+/**
+ * This function sets the classification of the task
+ * 
+ * @param {number} taskID - task ID as number
+ * @param {string} newClassification - new Classification, 'ToDo','InProgress','AwaitingFeedback','Done'
+ */
+async function setTaskClassification(taskID,newClassification){
+    let idx = tasks.findIndex(task => task.id == taskID);
+    tasks[idx].classification = newClassification;
+    await setItem('tasks',tasks);
+}
+
+
+/**
+ * This function gets the task ID from the HTML cardID of an task
+ * 
+ * @param {string} elementID - HTML cardID
+ * @returns {number} - task ID as number
+ */
+function getTaskIDFromHTMLcardID(elementID){
+    return +elementID.replace(/^\D+/g, '');
 }
