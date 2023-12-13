@@ -263,3 +263,133 @@
     padding: 125px 20px;
 }
 
+/* overlay related css */
+
+#ovlyCard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    border-radius: 30px;
+    padding: 64px 74px;
+}
+
+#wrapperOvlyCardTask{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+    max-width: 525px;
+    font-size: var(--fntsize20);
+}
+
+#ovlyTaskTitle{
+    font-size: var(--fntsize61);
+    font-weight: bold;
+}
+
+#wrapperOvlyTaskDetails{
+    display: flex;
+    gap: 25px;
+}
+
+.wrapperOvlyTaskDetailsColumn{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+#ovlyTaskPrio{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#wrapperOvlyTaskAssignedTo{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#wrapperOvlyTaskUserList{
+    overflow: auto;
+    max-height: 220px;
+    scrollbar-width: thin;
+}
+
+.wrapperOvlyTaskUser{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 7px 16px;
+}
+
+.ovlyTaskUserInitials{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+}
+
+#wrapperOvlyTaskSubtaskList{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow: auto;
+    max-height: 120px;
+    scrollbar-width: thin;
+}
+
+.wrapperOvlyTaskSubtaskElement{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 6px 16px;
+    font-size: var(--fntsizebase);
+}
+
+
+#wrapperOvlyTaskBtnGroup{
+    align-self: flex-end;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 24px;
+}
+
+.ovlyTaskBtn{
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.ovlyTaskBtn:hover{
+    color: var(--acccolor);
+}
+
+.ovlyTaskBtn:hover #ovlyTaskBtnImgDelete,
+.ovlyTaskBtn:hover #ovlyTaskBtnImgEdit{
+    background-color: var(--acccolor);
+}
+
+#ovlyTaskBtnImgDelete,
+#ovlyTaskBtnImgEdit{
+    width: 24px;
+    height: 24px;
+    background-color: var(--primcolor);
+    mask-position: 50%;
+    mask-repeat: no-repeat;
+}
+
+#ovlyTaskBtnImgDelete{
+    mask-image: url(../img/icons/board/delete.svg);
+}
+
+#ovlyTaskBtnImgEdit{
+    mask-image: url(../img/icons/board/edit.svg);
+}

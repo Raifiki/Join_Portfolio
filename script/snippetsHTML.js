@@ -281,3 +281,117 @@ function getAssignedToInitialsAndNameHTML(member){
         `
 }
 
+
+let ovlyAddTaskHTML;
+async function getOvlyAddTaskHTML(){
+    let response = await fetch('../templates/addTask.html');
+    ovlyAddTaskHTML = await response.text();
+    ovlyAddTaskHTML += /*html*/`
+        <button id="ovlyBtnClose" onclick="hideOvlyCard(),filterTasks()">
+            <img src="../img/icons/board/close.svg" alt="">
+        </button>
+    `;
+}
+
+
+function getOvlyTaskHTML(idx){
+    let task = tasks[idx];
+    let category = getCategoryDetails(task.category);
+    let prioHTML = getPriorityHTML(task.prio);
+    let usersHTML = getOvlyTaskAssignedToHTML(task.users);
+    let subtasksHTML = getOvlyTaskSubtaskHTML(task.subtasks);
+    return /*html*/`
+        <div id="wrapperOvlyCardTask">
+            <div class="task-category" style="background-color: ${category.color}">${category.name}</div>
+            <div id="ovlyTaskTitle">${task.title}</div>
+            <div id="ovlyTaskDescription">${task.description}</div>
+            <div id="wrapperOvlyTaskDetails">
+                <div class="wrapperOvlyTaskDetailsColumn">
+                    <span>Due date:</span>
+                    <span>Priority:</span>
+                </div>
+                <div class="wrapperOvlyTaskDetailsColumn">
+                    <span>${task.deadline}</span>
+                    <span>${prioHTML}</span>
+                </div>
+            </div>
+            <div id="wrapperOvlyTaskAssignedTo">
+                <span>Assigned To:</span>
+                <div id="wrapperOvlyTaskUserList">${usersHTML}</div>
+            </div>
+            <div id="wrapperOvlyTaskSubtask">
+                <span>Subtasks</span>
+                <div id="wrapperOvlyTaskSubtaskList">${subtasksHTML}</div>
+            </div>
+            <div id="wrapperOvlyTaskBtnGroup">
+            <button class="ovlyTaskBtn">
+                <span id="ovlyTaskBtnImgDelete"></span>
+                <span>Delete</span>
+            </button>
+            <div class="verticalLine"></div>
+            <button class="ovlyTaskBtn">
+                <span id="ovlyTaskBtnImgEdit"></span>
+                <span>Edit</span>
+            </button>
+        </div>
+        </div>
+        <button id="ovlyBtnClose" onclick="hideOvlyCard(),filterTasks()">
+            <img src="../img/icons/board/close.svg" alt="">
+        </button>
+
+    `
+}
+
+
+function getPriorityHTML(prio){
+    let prioName, prioImg;
+    if (prio == 2) {
+        prioName = 'Urgent';
+        prioImg = '../img/icons/board/prioUrgent copy.svg';
+    } else if(prio == 1){
+        prioName = 'Medium';
+        prioImg = '../img/icons/board/prioMedium copy.svg';
+    } else {
+        prioName = 'Low';
+        prioImg = '../img/icons/board/prioLow copy.svg';
+    }
+    return /*html*/`
+        <div id="ovlyTaskPrio" >
+            <span>${prioName}</span>
+            <img src="${prioImg}" alt="">
+        </div>
+    `
+}
+
+
+function getOvlyTaskAssignedToHTML(emailList){
+    let HTML='';
+    emailList.forEach(user => {
+        let member = contactListSorted.find(contact => contact.email == user)
+        HTML += /*html*/`
+            <div class="wrapperOvlyTaskUser">
+                <span class="ovlyTaskUserInitials" style="background-color: ${member.color}">${member.initials}</span>
+                <span class="ovlyTaskUserName">${member.name}</span>
+            </div>
+        `
+    });
+    return HTML;
+}
+
+
+function getOvlyTaskSubtaskHTML(subtaskList){
+    let HTML = '';
+    subtaskList.forEach(task => {
+        let checked = (task.state == 1)? "checked":"";
+        HTML += /*html*/`
+            <div class="wrapperOvlyTaskSubtaskElement">
+                <input type="checkbox" ${checked}>
+                <span class="ovlyTaskSubtaskDescription">${task.description}</span>
+            </div>
+        `
+    })
+    return HTML
+}
+
+
+

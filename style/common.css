@@ -209,13 +209,33 @@ main {
     transition: left var(--transtime) ease-in-out;
 }
 
+#ovlyBtnClose{
+    position: absolute;
+    right: 32px;
+    top: 64px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: unset;
+    background-color: transparent;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+#ovlyBtnClose:hover{
+    background-color: #D1D1D1;
+    transition: all var(--transtime) ease-in-out;
+}
+
 #ovlyPopup{
     position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 20px;
-    bottom: -200px;
+    bottom: -400px;
     left: calc(50% - 163px);
     width: 326px;
     border-radius: 20px;

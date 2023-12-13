@@ -123,6 +123,7 @@ let dummyTasks = [
 async function initBoard(tabID){
     await init(tabID);
     renderBoard(tasks);
+    await getOvlyAddTaskHTML();
 }
 
 
@@ -188,7 +189,7 @@ function getTaskHTML(task){
     let usersHTML = getTaskUsersHTML(task);
     let prio = setTaskPrioOnCard(task);
     return /*html*/`
-        <div id="task${task.id}" class="cardTask" draggable="true" ondragstart="setDragData(event,this)" ondragend="setDragEndStyyle(this)">
+        <div id="task${task.id}" class="cardTask" draggable="true" ondragstart="setDragData(event,this)" ondragend="setDragEndStyyle(this)" onclick="showOvlyCard(getOvlyTaskHTML(${task.id}))">
             <div class="task-category" style="background-color: ${category.color}">${category.name}</div>
             <div class="wrapperTaskText">
                 <div class="task-title">${task.title}</div>
@@ -248,7 +249,8 @@ function classifyTasks(tasks){
  * @returns {JSON} - JSON array with category details, {color; name}
  */
 function getCategoryDetails(categoryName){
-    return categories.find(c => c.name == categoryName);
+    let categoryDetails = categories.find(c => c.name == categoryName);
+    return (categoryDetails)?categoryDetails:{name: 'not assigned',color:'#A8A8A8'};
 }
 
 
@@ -447,3 +449,6 @@ async function setTaskClassification(taskID,newClassification){
 function getTaskIDFromHTMLcardID(elementID){
     return +elementID.replace(/^\D+/g, '');
 }
+
+
+/* Overlay related functions */

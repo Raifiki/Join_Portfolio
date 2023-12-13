@@ -131,7 +131,7 @@ textarea{
     border-bottom-right-radius: 10px;
     border-top: none;
     background-color: #FFFFFF;
-    padding: 0px 21px;
+    padding: 0px 21px 8px 21px;
     box-sizing: border-box;
     width: 440px;
     z-index: 2;

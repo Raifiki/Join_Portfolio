@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="../style/temp_privacypolicy.css">
     <link rel="stylesheet" href="../style/temp_help.css">
     <link rel="stylesheet" href="../style/board.css">
+    <link rel="stylesheet" href="../style/temp_addTask.css">
 
 
     <!-- include script -->
@@ -32,6 +33,8 @@
     <script src="../script/common.js"></script>
     <script src="../script/snippetsHTML.js"></script>
     <script src="../script/board.js"></script>
+    <script src="../script/addTask.js"></script>
+
 
 </head>
 
@@ -50,7 +53,7 @@
                             <img src="../img/icons/board/search.svg" alt="" onclick="filterTasks()">
                         </div>
                     </div>
-                    <button id="btnAddTask" class="but-dark">
+                    <button id="btnAddTask" class="but-dark" onclick="showOvlyCard(ovlyAddTaskHTML),taskClassification = 'ToDo'">
                         <span>Add task</span>
                         <img src="../img/icons/board/add.svg" alt="add">
                     </button>
@@ -60,21 +63,21 @@
                 <div class="boardTaskColoumn">
                     <div class="boardTaskColoumnWrapperHL">
                         <span class="boardTaskColoumnHLText">To do</span>
-                        <div class="boardTaskColoumnHLImg"></div>
+                        <div class="boardTaskColoumnHLImg" onclick="showOvlyCard(ovlyAddTaskHTML),taskClassification = 'ToDo'"></div>
                     </div>
                     <div id="boardClassificationToDo" class="boardTaskColoumnWrapperTasks" ondrop="dropHandler(event,'ToDo')" ondragover="dragOverHandler(event,this)" ondragleave="hideDummyCard(this)"></div>
                 </div>
                 <div class="boardTaskColoumn">
                     <div class="boardTaskColoumnWrapperHL">
                         <span class="boardTaskColoumnHLText">In progress</span>
-                        <div class="boardTaskColoumnHLImg"></div>
+                        <div class="boardTaskColoumnHLImg" onclick="showOvlyCard(ovlyAddTaskHTML),taskClassification = 'InProgress'"></div>
                     </div>
                     <div id="boardClassificationInProgress" class="boardTaskColoumnWrapperTasks" ondrop="dropHandler(event,'InProgress')" ondragover="dragOverHandler(event,this)" ondragleave="hideDummyCard(this)"></div>
                 </div>
                 <div class="boardTaskColoumn">
                     <div class="boardTaskColoumnWrapperHL">
                         <span class="boardTaskColoumnHLText">Await feedback</span>
-                        <div class="boardTaskColoumnHLImg"></div>
+                        <div class="boardTaskColoumnHLImg" onclick="showOvlyCard(ovlyAddTaskHTML),taskClassification = 'AwaitFeedback'"></div>
                     </div>
                     <div id="boardClassificationAwaitingFeedback" class="boardTaskColoumnWrapperTasks" ondrop="dropHandler(event,'AwaitFeedback')" ondragover="dragOverHandler(event,this)" ondragleave="hideDummyCard(this)"></div>
                 </div>
