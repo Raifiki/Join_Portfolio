@@ -184,7 +184,7 @@ function getNoTasksClassificationHTML(className){
  */
 function getTaskHTML(task){
     let category = getCategoryDetails(task.category);
-    let [progress,subtasksDone] = getTaskProgress(task);
+    let subtaskHTML = getSubtaskHTML(task);
     let usersHTML = getTaskUsersHTML(task);
     let prio = setTaskPrioOnCard(task);
     return /*html*/`
@@ -194,18 +194,35 @@ function getTaskHTML(task){
                 <div class="task-title">${task.title}</div>
                 <div class="task-description">${task.description}</div>
             </div>
-            <div class="wrapperSubtasks">
-                <div class="subtasksProgress">
-                    <div class="subtasksProgressBar" style="width: ${progress}"></div>
-                </div>
-                <span> ${subtasksDone}/${task.subtasks.length} Subtasks</span>
-            </div>
+            ${subtaskHTML}
             <div class="wrapperCardTaskFooter">
                 <div class="wrapperUsers">${usersHTML}</div>
                 <div class="task-prio ${prio}"></div>
             </div>
         </div>
     `
+}
+
+
+/**
+ * This function generates the subtask HTML for the task card
+ * 
+ * @param {JSON} task - JSIN object of the task
+ * @returns {string} - string with HTML code
+ */
+function getSubtaskHTML(task){
+    let HTML = '';
+    if (task.subtasks.length > 0){
+        let [progress,subtasksDone] = getTaskProgress(task);
+        HTML = /*html*/`
+                <div class="wrapperSubtasks">
+                    <div class="subtasksProgress">
+                        <div class="subtasksProgressBar" style="width: ${progress}"></div>
+                    </div>
+                    <span> ${subtasksDone}/${task.subtasks.length} Subtasks</span>
+                </div>
+    `}
+    return HTML;
 }
 
 
@@ -376,7 +393,6 @@ function showDummyCard(classification){
  */
 function hideDummyCard(classification){
     classification.lastElementChild.style.display = 'none';
-    console.log('leave Dropzone')
 }
 
 

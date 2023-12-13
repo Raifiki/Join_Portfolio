@@ -498,8 +498,9 @@ function openDropdownCategoryList(ID){
     let prio = getPrio();
     let category = getCategory();
     let subtasks = getSubtasks();
-    let condition = 'ToDo';
-    return {title,description,users,deadline,prio,category,subtasks,condition}
+    let classification = 'ToDo';
+    let id = getNewTaskID();
+    return {title,description,users,deadline,prio,category,subtasks,classification,id}
   }
 
   /**
@@ -537,11 +538,23 @@ function openDropdownCategoryList(ID){
   }
 
 
+  /**
+   * This function calculates the ID for a new task with respect to the existing tasks
+   * 
+   * @returns {number} - task ID for a new task
+   */
+  function getNewTaskID(){
+    let lastID = -1;
+    tasks.forEach(task => lastID = Math.max(task.id,lastID));
+    return ++lastID;
+  }
+
+
   async function addNewTaskToTasklist(){
     let newTask = generateNewTask();
     if(newTask.category){
         tasks.push(newTask);
-        //await setItem('tasks',tasks); 
+        await setItem('tasks',tasks); 
         showPopup();
         //setTimeout(function(){window.location.href = 'board.html'+'?user='+ USER},3000);
     };
