@@ -282,6 +282,9 @@ function getAssignedToInitialsAndNameHTML(member){
 }
 
 
+/**
+ * This function generates the HTML code for the addTask overlay on the board page
+ */
 let ovlyAddTaskHTML;
 async function getOvlyAddTaskHTML(){
     let response = await fetch('../templates/addTask.html');
@@ -294,6 +297,12 @@ async function getOvlyAddTaskHTML(){
 }
 
 
+/**
+ * This function generates the HTML code for the task overlay
+ * 
+ * @param {number} idx - index of the task within the tasks array
+ * @returns {string} - HTML code as string
+ */
 function getOvlyTaskHTML(idx){
     let task = tasks[idx];
     let category = getCategoryDetails(task.category);
@@ -324,18 +333,18 @@ function getOvlyTaskHTML(idx){
                 <div id="wrapperOvlyTaskSubtaskList">${subtasksHTML}</div>
             </div>
             <div id="wrapperOvlyTaskBtnGroup">
-            <button class="ovlyTaskBtn">
+            <button class="ovlyTaskBtn" onclick="deleteTask(${idx})">
                 <span id="ovlyTaskBtnImgDelete"></span>
                 <span>Delete</span>
             </button>
             <div class="verticalLine"></div>
-            <button class="ovlyTaskBtn">
+            <button class="ovlyTaskBtn" onclick="showOvlyCard(getOvlyEditTaskHTML(${idx}))">
                 <span id="ovlyTaskBtnImgEdit"></span>
                 <span>Edit</span>
             </button>
         </div>
         </div>
-        <button id="ovlyBtnClose" onclick="hideOvlyCard(),filterTasks()">
+        <button id="ovlyBtnClose" onclick="hideOverlayBoard(${idx})">
             <img src="../img/icons/board/close.svg" alt="">
         </button>
 
@@ -343,6 +352,12 @@ function getOvlyTaskHTML(idx){
 }
 
 
+/**
+ * This function generates the HTML code for the Priority part in the task overlay
+ * 
+ * @param {number} prio - Priority of the task, 0,1,2
+ * @returns {string} - HTML code as string
+ */
 function getPriorityHTML(prio){
     let prioName, prioImg;
     if (prio == 2) {
@@ -364,6 +379,12 @@ function getPriorityHTML(prio){
 }
 
 
+/**
+ * This function generates the HTML code for the assignedTo part in the task overlay
+ * 
+ * @param {Array} emailList - array with email adresses from the users
+ * @returns {string} - HTML code as string
+ */
 function getOvlyTaskAssignedToHTML(emailList){
     let HTML='';
     emailList.forEach(user => {
@@ -379,9 +400,15 @@ function getOvlyTaskAssignedToHTML(emailList){
 }
 
 
+/**
+ * This function generates the HTML code for the subtask part in the task overlay
+ * 
+ * @param {Array} subtaskList - array with the subtasks
+ * @returns {string} - HTML code as string
+ */
 function getOvlyTaskSubtaskHTML(subtaskList){
     let HTML = '';
-    subtaskList.forEach(task => {
+    subtaskList.forEach((task) => {
         let checked = (task.state == 1)? "checked":"";
         HTML += /*html*/`
             <div class="wrapperOvlyTaskSubtaskElement">
@@ -394,4 +421,149 @@ function getOvlyTaskSubtaskHTML(subtaskList){
 }
 
 
+function getOvlyEditTaskHTML(taskIdx){
+    let task = tasks[taskIdx];
+    let assignedToHTML = getAssignedToHTML(task.users);
+    let subtaskHTML = getOvlyEditTaskSubtaskHTML(task.subtasks);
+    let prioHTML = getEditTaskPrioHTML(task.prio);
+    selectedUsers = task.users;
+    return /*html*/`
+        <form id="wrapperOvlyCardEditTask" onsubmit="updateTask(${taskIdx});showOvlyCard(getOvlyTaskHTML(${taskIdx}));return false">
+            <div class="editTaskCardElement">
+                <label for="editTaskCardTitle">Title</label>
+                <input id="editTaskCardTitle"  type="text" placeholder="Enter a title" value="${task.title}">
+            </div>
+            <div class="editTaskCardElement">
+                <label for="editTaskCardDescription">Description</label>
+                <textarea id="editTaskCardDescription" placeholder="Enter a description">${task.description}</textarea>
+            </div>
+            <div class="editTaskCardElement">
+                <label for="editTaskCardDueDate">Due date</label>
+                <input id="editTaskCardDueDate" type="date" value="${task.deadline}">
+            </div>
+            <div class="editTaskCardElement">
+                <span for="editTaskCardPriority">Priority</span>
+                <div id="wrapperPrio">${prioHTML}</div>
+            </div>
+            <div class="editTaskCardElement" id="wrapperAssignedTo">
+                <span>Assigned to</span>
+                <div>
+                    <div class="" id="wrapperAssignedToHL">
+                        <input id="inputSearchAssignedTo" type="text" placeholder="Select contacts to assign" disabled onkeyup="generateMemberListHTML()">    
+                        <div class="wrapperDropDownArrow">
+                            <img class="" id="wrapperAssignedToHLImg" src="../img/icons/addTask/arrow_drop_down.svg" alt="" onclick="openDropdownMemberList(['wrapperMemberList'])"> 
+                        </div>
+                    </div>
+                    <div class="display-none" id="wrapperMemberList"></div>
+                </div>
+                <div id="wrapperAssignedToActual">${assignedToHTML}</div>
+            </div>
+            <div class="editTaskCardElement">
+                <span>Category</span>
+                <div>
+                    <div class="" id="wrapperCategoryHL">
+                        <input id="inputNewCategory" type="text" placeholder="Select task category" disabled value="${task.category}">
+                        <div class="wrapperDropDownArrow" id="wrapperDropDownArrowCategory">
+                            <img class="" id="wrapperCategoryHLImg" src="../img/icons/addTask/arrow_drop_down.svg" alt="" onclick="openDropdownCategoryList(['wrapperCategoryList'])"> 
+                        </div>
+                        <div id="categoryEditBtns" class="wrapperEditBtns display-none">
+                            <div class="wrapperEditBtn" onclick="setInputCategoryChooseSettings()">
+                                <img src="../img/icons/addTask/cross.svg" alt="discard">
+                            </div>
+                            <div class="verticalLine"></div>
+                            <div class="wrapperEditBtn" id="btnSaveCategoryChanges">
+                                <img src="../img/icons/addTask/check.svg" alt="check">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="wrapperCategoryColor" class="display-none">
+                        <input id="categoryColorYellow" type="radio" name="color" value="#FFC701">
+                        <label id="categoryColorYellowlabel" for="categoryColorYellow">
+                            <div class="colorDot" style="background-color: #FFC701;"></div>          
+                        </label>
+                        <input id="categoryColorOrange" type="radio" name="color" value="#FF7A00">
+                        <label id="categoryColorOrangelabel" for="categoryColorOrange">
+                            <div class="colorDot" style="background-color: #FF7A00;"></div>
+                        </label>
+                        <input id="categoryColorPink" type="radio" name="color" value="#FF71FF">
+                        <label id="categoryColorPinklabel" for="categoryColorPink">
+                            <div class="colorDot" style="background-color: #FF71FF;"></div>
+                        </label>
+                        <input id="categoryColorBlue" type="radio" name="color" value="#0038FF">
+                        <label id="categoryColorBluelabel" for="categoryColorBlue">
+                            <div class="colorDot" style="background-color: #0038FF;"></div>
+                        </label>
+                        <input id="categoryColorLightblue" type="radio" name="color" value="#1FD7C1">
+                        <label id="categoryColorLightbluelabel" for="categoryColorLightblue">
+                            <div class="colorDot" style="background-color: #1FD7C1;"></div>
+                        </label>
+                    </div>
+                    <div class="display-none" id="wrapperCategoryList"></div>
+                </div>
+            </div>
+            <div class="editTaskCardElement" id="wrapperSubtask">
+                <div>
+                    <span>Subtasks</span>
+                </div>
+                <div>
+                    <div class="" id="wrapperSubtaskHL">
+                        <input id="inputNewSubtask" type="text" placeholder="Add new subtask" disabled>
+                        <div class="wrapperDropDownArrow" id="wrapperBtnAddSubtask" onclick="setInputNewSubtaskEditSettings()">
+                            <img class="" id="addSubtaskHLImg" src="../img/icons/addTask/add.svg" alt=""> 
+                        </div>
+                        <div id="subtaskEditBtn" class="wrapperEditBtns display-none">
+                            <div class="wrapperEditBtn" onclick="setInputNewSubtaskSettingsDefault()">
+                                <img src="../img/icons/addTask/cross.svg" alt="discard">
+                            </div>
+                            <div class="verticalLine"></div>
+                            <div class="wrapperEditBtn" id="btnSaveSubtask" onclick="addSubtask()">
+                                <img src="../img/icons/addTask/check.svg" alt="check">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="" id="wrapperSubtaskList">${subtaskHTML}</div>
+                </div>
+            </div>
+            <button id="ovlyEditTaskSubmitBtn" class="but-dark">
+                <span>Ok</span>
+                <img src="../img/icons/board/check.svg" alt="">
+            </button>
+        </form>
+        <button id="ovlyBtnClose" onclick="hideOvlyCard()">
+            <img src="../img/icons/board/close.svg" alt="">
+        </button>
+    `
+}
 
+
+function getOvlyEditTaskSubtaskHTML(subtaskList){
+    subTasks = [];
+    subtaskList.forEach((st,idx) => subTasks[idx] = st.description);
+    let HTML = '';
+    subTasks.forEach((st,idx) => {HTML +=getSubtaskElementHTML(idx)})
+    return HTML
+}
+
+
+function getEditTaskPrioHTML(prio){
+    let low = (prio == 0)? "checked":"";
+    let medium = (prio == 1)? "checked":"";
+    let urgent = (prio == 2)? "checked":"";
+    return /*html*/`
+        <input id="prioUrgent" type="radio" name="prio" value=2 ${urgent}>
+        <label id="prioUrgentlabel" for="prioUrgent">
+            <span>Urgent</span>
+            <div class="prioImg" id="prioImgUrgent"></div>
+        </label>
+        <input id="prioMedium" type="radio" name="prio" value=1 ${medium}>
+        <label id="prioMediumlabel" for="prioMedium">
+            <span>Medium</span>
+            <div class="prioImg" id="prioImgMedium"></div>
+        </label>
+        <input id="prioLow" type="radio" name="prio" value=0 ${low}>
+        <label id="prioLowlabel" for="prioLow">
+            <span>Low</span>
+            <div class="prioImg" id="prioImgLow"></div>
+        </label>
+    `
+}

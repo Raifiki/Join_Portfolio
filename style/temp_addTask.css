@@ -416,7 +416,10 @@ textarea{
 }
 
 
-
+#inputNewCategory,
+#inputNewSubtask{
+    padding-right: 100px;
+}
 
 #wrapperSubtaskList{
     height: 120px;
@@ -443,10 +446,10 @@ textarea{
     height: 35px;
     width: 100%;
     padding-left: 40px;
+    padding-right: 100px;
     cursor: pointer;
     margin: 2px 0;
     border-radius: 5px;
-    padding: 0 40px;
 }
 
 .subtaskIptElement:disabled{

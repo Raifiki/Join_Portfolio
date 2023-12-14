@@ -452,3 +452,56 @@ function getTaskIDFromHTMLcardID(elementID){
 
 
 /* Overlay related functions */
+/**
+ * This function hide the overlay
+ * 
+ * @param {number} taskIdx - index of the task in the task array
+ */
+async function hideOverlayBoard(taskIdx){
+    hideOvlyCard();
+    saveSubtaskState(taskIdx);
+    filterTasks();
+    await setItem('tasks',tasks);
+}
+
+
+/**
+ * This function deletes a task in the task array
+ * 
+ * @param {number} taskIdx - index of the task in the task array
+ */
+async function deleteTask(taskIdx){
+    tasks.splice(taskIdx,1);
+    tasks.forEach((task,idx) => task.id = idx);
+    filterTasks();
+    hideOvlyCard();
+    await setItem('tasks',tasks);
+}
+
+
+/**
+ * This function saves the subtask states
+ * 
+ * @param {number} taskIdx - index of the task in the task array
+ */
+function saveSubtaskState(taskIdx){
+    let subtaskCheckboxes = document.querySelectorAll('#wrapperOvlyTaskSubtaskList input');
+    subtaskCheckboxes.forEach((checkbox,idx) => {
+        let state = (checkbox.checked)?1:0;
+        tasks[taskIdx].subtasks[idx].state = state;
+    });
+}
+
+
+function updateTask(taskIdx){
+    let title = document.getElementById('editTaskCardTitle').value;
+    let description = document.getElementById('editTaskCardDescription').value;
+    let users = selectedUsers;
+    let deadline = document.getElementById('editTaskCardDueDate').value;
+    let prio = getPrio();
+    let category = getCategory();
+    let subtasks = getSubtasks();
+    let classification = tasks[taskIdx].classification;
+    let id = tasks[taskIdx].id;
+    tasks[taskIdx] = {title,description,users,deadline,prio,category,subtasks,classification,id};
+}

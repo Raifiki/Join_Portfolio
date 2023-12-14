@@ -577,6 +577,7 @@ async function addNewTaskToTasklist(){
       await setItem('tasks',tasks); 
       showPopup();
       (activeTab == 'tabaddtask')?openBoardPage():closeAddTaskOvly();
+      clearFormAddTask();
   };
 }
 
@@ -589,6 +590,9 @@ function openBoardPage(){
 }
 
 
+/**
+ * This function close the addTask overlay at the board page
+ */
 function closeAddTaskOvly(){
   setTimeout(function(){
     renderBoard(tasks);

@@ -269,7 +269,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: white;
+    background-color: var(--bg-color);
     border-radius: 30px;
     padding: 64px 74px;
 }
@@ -313,7 +313,7 @@
 
 #wrapperOvlyTaskUserList{
     overflow: auto;
-    max-height: 220px;
+    max-height: 180px;
     scrollbar-width: thin;
 }
 
@@ -329,8 +329,9 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    width: 42px;
-    height: 42px;
+    width: 32px;
+    height: 32px;
+    font-size: var(--fntsizebase);
 }
 
 #wrapperOvlyTaskSubtaskList{
@@ -392,4 +393,27 @@
 
 #ovlyTaskBtnImgEdit{
     mask-image: url(../img/icons/board/edit.svg);
+}
+
+
+#wrapperOvlyCardEditTask{
+    font-size: var(--fntsize20);
+}
+
+#wrapperOvlyCardEditTask{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.editTaskCardElement{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 440px;
+}
+
+#ovlyEditTaskSubmitBtn{
+    align-self: flex-end;
+    gap: 8px;
 }

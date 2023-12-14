@@ -43,17 +43,7 @@ function calcSummaryNumbers(){
  * @returns {string} - state of the task as string, [ToDo, InProgress, AwaitingFeedback, Done]
  */
 function getTaskState(task){
-    let state = task.condit;
-    switch (state) {
-        case 0:
-            return 'ToDo';
-        case 1:
-            return 'InProgress';
-        case 2:
-            return 'AwaitFeedback';
-        case 3:
-            return 'Done';
-    }
+    return task.classification;
 }
 
 
