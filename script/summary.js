@@ -9,6 +9,7 @@ async function initSummary(tabID){
     await init(tabID);
     await setGreedingDetials();
     setSummaryDetails();
+    showGreeding();
 }
 
 
@@ -125,4 +126,21 @@ function getGreedingText(){
  */
 function forwardToBoardPage(){
     window.location.href = 'board.html'+'?user='+ USER;
+}
+
+
+// responsive design
+/**
+ * This function show the animation of the geeding for responsive design
+ */
+function showGreeding(){
+    if (window.screen.width <= 1350) (REDIR == 'LogIn')?animateGreeding():hideElement(['greeting']);
+}
+
+
+/**
+ * This function animates the greeding on the summary page
+ */
+function animateGreeding(){
+    setTimeout(function() {document.getElementById('greeting').style.display = 'none'} ,2000)
 }

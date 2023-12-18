@@ -3,6 +3,7 @@ const STORAGE_TOKEN = 'EH5N6IL0LSYQ4GHFSIBEVC7HDAT7OZ5RUXQSYQ9H';
 const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 const URL_PARAMS = new URLSearchParams(window.location.search);
 const USER = URL_PARAMS.get('user');
+const REDIR = URL_PARAMS.get('redir');
 
 let activeTab;
 let contactListSorted = [];
