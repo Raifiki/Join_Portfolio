@@ -7,9 +7,6 @@ main{
     display: flex;
     align-items: center;
     min-height: unset;
-    animation-name: bgOpacity;
-    animation-duration: 1s;
-    animation-timing-function: ease-out;
     width: 100%;
     flex-grow: unset;
 }
@@ -20,9 +17,6 @@ header {
     justify-content: end;
     padding: 60px 60px 120px 60px;
     height: 50px;
-    animation-name: bgOpacity;
-    animation-duration: 1s;
-    animation-timing-function: ease-out;
 }
 
 header div {
@@ -30,15 +24,32 @@ header div {
     gap: 32px;
 }
 
-.logo {
+#wrapperLogo{
+    animation-name: bgColor;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
     position: absolute;
+    top: 0;
+    left: 0;
+    height: 180px;
+    width: 160px;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+#logo {
     animation-name: zoomOut;
     animation-duration: 1s;
-    animation-timing-function: ease-out;
-    height: 120px;
-    left: 60px;
+    animation-timing-function: ease-in-out;
+    position: relative;
     top: 60px;
-    z-index: 2;
+    left: 60px;
+    background-image: url(../img/icons/login/logo_black.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 50%;
+    height: 120px;
+    width: 98px;
 }
 
 /*===================================== common login =====================================*/
@@ -237,31 +248,32 @@ footer a:hover{
 @keyframes zoomOut {
 
     0% {
-        height: 50vh;
-        width: 50vw;
-        left: 25vw;
-        top: 25vh;
-    }
-
-    50% {
-        height: 50vh;
-        width: 50vw;
-        left: 25vw;
-        top: 25vh;
+        height: 360px;
+        width: 300px;
+        top: calc(50% - 180px);
+        left: calc(50% - 150px);
     }
 
     100% {
         height: 120px;
         width: 98px;
-        left: 60px;
         top: 60px;
+        left: 60px;
     }
 }
 
-@keyframes bgOpacity {
-    0% {opacity: 0;}
-    50% {opacity: 0;}
-    100% {opacity: 1;}
+@keyframes bgColor {
+    0% {
+        background-color: white;
+        height: 100vh;
+        width: 100vw;
+    }
+
+    100% {
+        background-color: transparent;
+        height: 100vh;
+        width: 100vw;;
+    }
 }
 
 @keyframes showInformation {
@@ -300,7 +312,7 @@ footer a:hover{
         padding: unset;
     }
 
-    .logo{
+    #logo{
         left: 30px;
         top: 30px;
     }
@@ -326,6 +338,34 @@ footer a:hover{
     footer{
         padding: 0 0 30px 0;
         order: 3;
+    }
+
+    @keyframes zoomOut {
+
+        0% {
+            top: calc(50% - 60px);
+            left: calc(50% - 48px);
+            background-image: url(../img/icons/login/logo_white.svg);
+        }
+    
+        100% {
+            top: 30px;
+            left: 30px;
+        }
+    }
+    
+    @keyframes bgColor {
+        0% {
+            background-color: var(--primcolor);
+            height: 100vh;
+            width: 100vw;
+        }
+
+        100% {
+            background-color: transparent;
+            height: 100vh;
+            width: 100vw;;
+        }
     }
 
 }
