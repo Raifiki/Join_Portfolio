@@ -106,9 +106,15 @@
     .menulink:hover span{
         display: flex;
     }
+
+    #tabimpressum, 
+    #tabPrivacyPolicy {
+    padding: 8px 15px;
+}
 }
 
 @media (max-width: 1024px){
+
     #menulogo{
         display: none;
     }
@@ -140,7 +146,7 @@
         border-radius: unset;
         font-size: var(--fntsize12);
     }
-    #tabimpressum{
+    #wrapperPolicy{
         display: none;
     }
 }

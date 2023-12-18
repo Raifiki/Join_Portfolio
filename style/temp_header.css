@@ -1,4 +1,4 @@
-#headline {
+#header-headline {
     font-size: var(--fntsize21);
 }
 
@@ -80,13 +80,10 @@
 
 /*------------------ set responsive design ------------------*/
 @media (max-width: 1024px){
-    #headline{
+    #header-headline{
         display: none;
     }
     #headerlogo{
         display: block;
-    }
-    #ahelp{
-        display: none;
     }
 }
