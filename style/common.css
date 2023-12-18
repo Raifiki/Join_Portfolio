@@ -65,6 +65,7 @@ input {
     height: 50px;
     width: 422px;
     padding: 13px 21px;
+    padding-right: 50px;
     background-repeat: no-repeat;
     background-position: calc(100% - 21px);
     border: 1px solid #D1D1D1;
@@ -256,4 +257,15 @@ main {
     10% {bottom: 200px;}
     90% {bottom: 200px;}
     100%{bottom: -200px;}
+}
+
+
+/*===================================== Responsive design =====================================*/
+@media (max-width: 550px){
+    html{
+        font-size: 14px;
+    }
+    input{
+        width: 100%;
+    }
 }

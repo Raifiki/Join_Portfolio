@@ -4,7 +4,14 @@ body{
 }
 
 main{
+    display: flex;
+    align-items: center;
     min-height: unset;
+    animation-name: bgOpacity;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+    width: 100%;
+    flex-grow: unset;
 }
 
 /*===================================== header =====================================*/
@@ -34,13 +41,6 @@ header div {
     z-index: 2;
 }
 
-main {
-    animation-name: bgOpacity;
-    animation-duration: 1s;
-    animation-timing-function: ease-out;
-    width: 100%;
-}
-
 /*===================================== common login =====================================*/
 a {
     color: var(--acccolor);
@@ -68,7 +68,6 @@ a {
     flex-direction: column;
     align-items: center;
     background-color: white;
-    margin-inline: auto;
     margin-top: 52px;
     filter: var(--drop-shadow);
     padding: 48px 115px 48px 115px;
@@ -207,6 +206,7 @@ form span {
     transition: opacity 200ms linear;
 }
 
+
 /*===================================== footer =====================================*/
 footer{
     display: flex;
@@ -268,4 +268,64 @@ footer a:hover{
     0% {bottom: -200px;}
     20% {bottom: calc(50% - 37px);}
     100% {bottom: calc(50% - 37px);}
+}
+
+
+/*===================================== Responsive design =====================================*/
+
+
+@media (max-width: 1155px){
+    #loginCard{
+        padding: 48px 50px 48px 50px;
+        margin-inline: 20px;
+    }
+    .arrow-back {
+        top: 15px;
+        left: 15px;
+    }
+}
+
+@media (max-width: 550px){
+    body{
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+    }
+
+    header{
+        order: 2;
+        padding: unset;
+    }
+
+    .logo{
+        left: 30px;
+        top: 30px;
+    }
+
+    #loginCard{
+        padding: 45px 32px 15px 32px;
+        margin-inline: 20px;
+        box-sizing: border-box;
+        width: 90%;
+        margin-top: 180px;
+    }
+
+    .but-area {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    #signUp{
+        gap: 15px;
+    }
+
+    footer{
+        padding: 0 0 30px 0;
+        order: 3;
+    }
+
 }
