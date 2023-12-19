@@ -19,7 +19,7 @@
             </div>
             <div class="wrapperInputElement" id="wrapperAssignedTo">
                 <span>Assigned to</span>
-                <div>
+                <div id="wrapperAssignedToSelection">
                     <div class="" id="wrapperAssignedToHL">
                         <input id="inputSearchAssignedTo" type="text" placeholder="Select contacts to assign" disabled onkeyup="generateMemberListHTML()">    
                         <div class="wrapperDropDownArrow">
@@ -65,7 +65,7 @@
                     <span>Category</span>
                     <span class="requiredStar">*</span>
                 </div>
-                <div>
+                <div id="wrapperCategorySelection">
                     <div class="" id="wrapperCategoryHL">
                         <input id="inputNewCategory" type="text" placeholder="Select task category" disabled>
                         <div class="wrapperDropDownArrow" id="wrapperDropDownArrowCategory">
@@ -137,7 +137,7 @@
             <span>This field is required</span>
         </div>
         <div id="wrapperFormBtn">
-            <button id="test" class="but-light fromBtn" type="button" onclick="clearFormAddTask()">
+            <button id="formClearBtn" class="but-light fromBtn" type="button" onclick="clearFormAddTask()">
                 <span>Clear</span>
                 <div id="formBtnClearImg"></div>
             </button>

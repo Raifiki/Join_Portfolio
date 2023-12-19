@@ -19,7 +19,11 @@ form{
     justify-content: space-between;
     gap: 20px;
     margin-bottom: 60px;
-    height: 480px;
+    /* height: 480px; */
+    overflow: scroll;
+        scrollbar-width: none;
+        margin-bottom: 20px;
+        max-height: calc(100vh - 400px);
 }
 
 .requiredStar{
@@ -61,6 +65,11 @@ textarea{
     display: flex;
     flex-direction: column;
     gap: 24px;
+}
+
+#wrapperAssignedToSelection,
+#wrapperCategorySelection{
+    position: relative;
 }
 
 #wrapperAssignedToHL,
@@ -133,7 +142,7 @@ textarea{
     background-color: #FFFFFF;
     padding: 0px 21px 8px 21px;
     box-sizing: border-box;
-    width: 440px;
+    width: 100%;
     z-index: 2;
 }
 
@@ -183,11 +192,15 @@ textarea{
     gap: 24px;
 }
 
+#taskDueDate{
+    padding-right: 21px;
+}
 
 #wrapperPrio {
     display: flex;
     gap: 16px;
     justify-content: space-between;
+    padding: 2px;
 }
 
 #wrapperPrio label {
@@ -523,4 +536,63 @@ textarea{
 #test:hover  #formBtnClearImg{
     background-color: var(--acccolor);
     transition: all var(--transtime) ease-in;
+}
+
+
+/*------------------ set responsive design ------------------*/
+@media (max-width: 1350px){
+    #content{
+        padding: 30px;
+    }
+
+    #formContent{
+        gap: 20px;
+    }
+
+    #formRightSide,
+    #formLeftSide{
+        flex-grow: 1;
+    }
+
+    .wrapperInputElement{
+        width: unset;
+    }
+}
+
+@media (max-width: 840px){
+    form{
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    #formContent{
+        /* flex-grow: 1; */
+        flex-direction: column;
+        overflow: scroll;
+        scrollbar-width: none;
+        margin-bottom: 20px;
+        max-height: calc(100vh - 90px - 90px - 260px);
+        height: unset;
+    }
+
+    #formClearBtn{
+        display: none;
+    }
+
+}
+
+@media (max-width: 840px){
+    #wrapperPrio{
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    #wrapperPrio label{
+        width: 100%;
+    }
+
+    #wrapperSubtaskList{
+        height: 50px;
+        overflow: unset;
+    }
 }
