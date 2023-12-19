@@ -19,7 +19,7 @@ form{
     justify-content: space-between;
     gap: 20px;
     margin-bottom: 60px;
-    /* height: 480px; */
+    height: 480px;
     overflow: scroll;
         scrollbar-width: none;
         margin-bottom: 20px;
@@ -566,7 +566,6 @@ textarea{
         flex-direction: column;
     }
     #formContent{
-        /* flex-grow: 1; */
         flex-direction: column;
         overflow: scroll;
         scrollbar-width: none;
@@ -592,7 +591,8 @@ textarea{
     }
 
     #wrapperSubtaskList{
-        height: 50px;
+        height: unset;
+        min-height: 50px;
         overflow: unset;
     }
 }

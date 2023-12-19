@@ -458,7 +458,7 @@ function getOvlyEditTaskHTML(taskIdx){
                 </div>
                 <div id="wrapperAssignedToActual">${assignedToHTML}</div>
             </div>
-            <div class="editTaskCardElement">
+            <div id="wrapperCategory" class="editTaskCardElement">
                 <span>Category</span>
                 <div>
                     <div class="" id="wrapperCategoryHL">

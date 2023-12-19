@@ -24,8 +24,8 @@
     <link rel="stylesheet" href="../style/temp_impressum.css">
     <link rel="stylesheet" href="../style/temp_privacypolicy.css">
     <link rel="stylesheet" href="../style/temp_help.css">
-    <link rel="stylesheet" href="../style/board.css">
     <link rel="stylesheet" href="../style/temp_addTask.css">
+    <link rel="stylesheet" href="../style/board.css">
 
 
     <!-- include script -->
@@ -44,7 +44,12 @@
         <div id="header" w3-include-html="../templates/header.html"></div>
          <div id="content">
             <div id="wrapperBoardHeader">
-                <h1>Board</h1>
+                <div id="wrapperBoardHL">
+                    <h1>Board</h1>
+                    <button id="btnAddTaskRes" class="but-dark" onclick="showOvlyCard(ovlyAddTaskHTML),taskClassification = 'ToDo'">
+                        <img src="../img/icons/board/add.svg" alt="add">
+                    </button>
+                </div>
                 <div id="wrapperBoardBtnGroup">
                     <div id="wrapperBoardSearchIpt">
                         <input id="searchInput" type="text" placeholder="Find task" onkeyup="filterTasks()">

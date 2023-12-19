@@ -14,6 +14,18 @@
     align-items: center;
 }
 
+#wrapperBoardHL{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#btnAddTaskRes{
+    display: none;
+    width: 40px;
+    height: 40px;
+}
+
 #wrapperBoardBtnGroup{
     display: flex;
     justify-content: center;
@@ -272,6 +284,8 @@
     background-color: var(--bg-color);
     border-radius: 30px;
     padding: 64px 74px;
+    margin: 0px 10px;
+    max-height: 80vh;
 }
 
 #wrapperOvlyCardTask{
@@ -281,10 +295,12 @@
     gap: 24px;
     max-width: 525px;
     font-size: var(--fntsize20);
+    overflow: auto;
+    scrollbar-width: none;
 }
 
 #ovlyTaskTitle{
-    font-size: var(--fntsize61);
+    font-size: var(--fntsize47);
     font-weight: bold;
 }
 
@@ -395,15 +411,13 @@
     mask-image: url(../img/icons/board/edit.svg);
 }
 
-
 #wrapperOvlyCardEditTask{
     font-size: var(--fntsize20);
-}
-
-#wrapperOvlyCardEditTask{
     display: flex;
     flex-direction: column;
     gap: 24px;
+    overflow: auto;
+    scrollbar-width: none;
 }
 
 .editTaskCardElement{
@@ -413,7 +427,110 @@
     width: 440px;
 }
 
+#wrapperAssignedTo,
+#wrapperCategory{
+    position: relative;
+}
+
+#editTaskCardDueDate{
+    padding-right: 21px;
+}
+
 #ovlyEditTaskSubmitBtn{
     align-self: flex-end;
     gap: 8px;
+}
+
+/*------------------ set responsive design ------------------*/
+@media (max-width: 1050px){
+    #content{
+        height: calc(100vh - 180px);
+    }
+
+    #wrapperBoardHeader{
+        flex-direction: column;
+    }
+
+    #wrapperBoardHL{
+        width: 100%;
+    }
+
+    #btnAddTaskRes{
+        display: flex;
+    }
+
+    #wrapperBoardBtnGroup{
+        margin-top: 20px;
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+    #btnAddTask{
+        display: none;
+    }
+
+    #searchInput{
+        width: 100% !important;
+    }
+
+
+    #wrapperBoardTaskContent{
+        flex-direction: column;
+        overflow: auto;
+        scrollbar-width: none;
+    }
+
+    .boardTaskColoumn{
+        height: unset;
+        width: 100%;
+    }
+
+    .boardTaskColoumnWrapperTasks{
+        flex-direction: row;
+        min-height: unset;
+        align-items: unset;
+
+    }
+
+    .cardTask{
+        width: 200px;
+        flex-shrink: 0;
+    }
+
+    .cardDummyDragOver{
+        width: 200px;
+    }
+
+
+
+}
+
+@media (max-width: 840px){
+    #ovlyCard{
+        padding: 20px 30px;
+    }
+    #ovlyBtnClose{
+        right: 16px;
+        top: 16px;
+    }
+}
+
+@media (max-width: 550px){
+    #content{
+        padding: 30px 30px;
+    }
+
+    #ovlyCard{
+        padding: 20px 30px;
+    }
+    #ovlyBtnClose{
+        right: 16px;
+        top: 16px;
+    }
+    #ovlyTaskTitle{
+        font-size: var(--fntsize27);
+    }
+    .editTaskCardElement{
+        width: unset;
+    }
 }
