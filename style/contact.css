@@ -142,7 +142,13 @@
     width: 32px;
     height: 32px;
     cursor: pointer;
-    padding: 6px;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+#btnContactDetailsreturn:hover{
+    background-color: #D1D1D1;
+    transition: all var(--transtime) ease-in-out;
 }
 
 /*----------------  CSS contact card ----------------*/
@@ -269,23 +275,19 @@
     box-sizing: border-box;
     position: absolute;
     right: 30px;
-    bottom: 30px;
-}
-
-#btnEditRes img{
-  width: 6px;
-  height: 23px;
+    bottom: 120px;
 }
 
 
 #wrapperBtnResContactDetails{
     position: absolute;
     right: -150px;
-    bottom: 20px;
+    bottom: 120px;
     padding: 10px;
     border-radius: 20px 20px 0px 20px;
     background-color: #FFFFFF;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    transition: all var(--transtime) ease-in-out;
 }
 
 #wrapperBtnResContactDetails.showBtnRes{
@@ -303,8 +305,15 @@
     gap: 8px;
     width: 96px;
     cursor: pointer;
+    border-radius: 10px;
 }
 
+
+.btnResContactDetails:hover{
+    background-color: #D1D1D1;
+    color: var(--acccolor);
+    transition: all var(--transtime) ease-in-out;
+}
 
 
 /*----------------  CSS Overlay ----------------*/
@@ -480,13 +489,85 @@
 
  }
 
+ @media (max-width: 1050px){
+        /* overlay */
+        #ovlyCard{
+            flex-direction: column;
+        }
+    
+        #ovlyCardHeader {
+            padding: 46px 24px;
+            border-top-right-radius: 30px;
+            border-bottom-left-radius: unset;
+            height: 312px;
+        }
+        
+        #ovlyCardHeader img{
+            display: none;
+        }
+        
+        #ovlyCardHL {
+            font-size: var(--fntsize47);
+        }
+        
+        #ovlyCardST{
+            font-size: var(--fntsize20);
+        }
+    
+        #wrapperCardDetails{
+            flex-direction: column;
+            gap: 30px;
+            padding: 60px 24px;
+            border-top-right-radius: 0;
+            border-bottom-left-radius: 30px;
+        }
+    
+        #ovlUserIC{
+            position: absolute;
+            top: 267px;
+            z-index: 2;
+            width: 90px;
+            height: 90px;
+            font-size: var(--fntsize27);
+        }
+    
+        #ovlyCardForm{
+            gap: 15px;
+        }
+    
+    
+        #ovlywrapperBtn {
+            position: static;
+            justify-content: center;
+        }
+    
+        #ovlyBtnSecondary{
+            display: none !important;
+        }
+    
+    
+        #ovlyBtnClose{
+            right: 24px;
+            top: 24px;
+            background-color: #FFFFFF;
+        }
+    
+        @keyframes showInformation {
+            0% {bottom: -200px;}
+            10% {bottom: 70px;}
+            90% {bottom: 70px;}
+            100%{bottom: -200px;}
+        }
+ }
+
+
+
  @media (max-width: 840px){
     #wrapperContactlist{
         width: 100%;
         padding: 0;
     }
     
-
     #contactlist{
         display: flex;
         flex-direction: column;
@@ -500,8 +581,8 @@
     }
 
     #btnnewcontact{
-        height: fit-content;
-        width: unset;
+        height: 65px;
+        width: 65px;
         padding: 20px;
         border-radius: 46px;
     }
@@ -520,8 +601,7 @@
         padding: 30px 16px;
     }
 
-    #btndeleteContact,
-    #btneditContact{
+    #wrapperBtnGroup{
         display: none;
     }
 
@@ -567,80 +647,20 @@
         display: block;
     }
 
-    /* overlay */
-    #ovlyCardHeader {
-        padding: 46px 24px;
-        border-top-right-radius: 30px;
-        border-bottom-left-radius: unset;
-        height: 312px;
-    }
-    
-    #ovlyCardHeader img{
-        display: none;
-    }
-    
-    #ovlyCardHL {
-        font-size: var(--fntsize47);
-    }
-    
-    #ovlyCardST{
-        font-size: var(--fntsize20);
-    }
-
-    #wrapperCardDetails{
-        flex-direction: column;
-        gap: 30px;
-        padding: 60px 24px;
-        border-top-right-radius: 0;
-        border-bottom-left-radius: 30px;
-    }
-
-    #ovlUserIC{
-        position: absolute;
-        top: 267px;
-        z-index: 2;
-        width: 90px;
-        height: 90px;
-        font-size: var(--fntsize27);
-    }
-
-    #ovlyCardForm{
-        gap: 15px;
-    }
-
-
-    #ovlywrapperBtn {
-        position: static;
-    }
-
-    #ovlyBtnSecondary{
-        display: none !important;
-    }
-
-
-    #ovlyBtnClose{
-        right: 24px;
-        top: 24px;
-        background-color: #FFFFFF;
-    }
-
-    @keyframes showInformation {
-        0% {bottom: -200px;}
-        10% {bottom: 70px;}
-        90% {bottom: 70px;}
-        100%{bottom: -200px;}
-    }
-
  }
 
  @media (max-width: 500px){
     html{
         font-size: 14px;
     }
+
+    #wrapperNewContactBtn{
+        top: calc(100vh - 90px - 90px - 30px - 65px + 10px);
+    }
     #btnnewcontact{
+        width: 55px;
+        height: 55px;
         padding: 12px;
-        right: 20px;
-        bottom: 20px;
     }
 
     .Contactlistelement{
@@ -656,14 +676,8 @@
     #btnEditRes {
         width: 55px;
         height: 55px;
-        right: 20px;
-        bottom: 20px;
     }
     
-    #btnEditRes img{
-      width: 5px;
-      height: 21px;
-    }
     /* overlay */
     #ovlyCardHeader {
         height: 220px;

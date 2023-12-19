@@ -220,6 +220,18 @@ async function addContactToList(contact){
 }
 
 
+// functions for responsive design
+
+function showBtnResContactDetails(event){
+    event?stopHideElement(event):'';
+    document.getElementById('wrapperBtnResContactDetails').classList.add('showBtnRes');
+}
+
+function hideBtnResContactDetails(){
+    document.getElementById('wrapperBtnResContactDetails').classList.remove('showBtnRes');
+}
+
+
 // help functions
 /**
  * This Function generates a random hex color value
