@@ -134,7 +134,7 @@ function forwardToBoardPage(){
  * This function show the animation of the geeding for responsive design
  */
 function showGreeding(){
-    if (window.screen.width <= 1350) (REDIR == 'LogIn')?animateGreeding():hideElement(['greeting']);
+    if (window.innerWidth <= 1350) (REDIR == 'LogIn')?animateGreeding():hideElement(['greeting']);
 }
 
 

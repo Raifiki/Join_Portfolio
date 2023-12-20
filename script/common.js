@@ -128,7 +128,7 @@ function setTabLink(userID){
     if (userID) {
         document.getElementById('tabsummary').setAttribute('href',`../pages/summary.html?user=${userID}`);
         document.getElementById('tabboard').setAttribute('href',`../pages/board.html?user=${userID}`);
-        document.getElementById('tabaddtask').setAttribute('href',`../pages/addtask.html?user=${userID}`);
+        document.getElementById('tabaddtask').setAttribute('href',`../pages/addTask.html?user=${userID}`);
         document.getElementById('tabcontacts').setAttribute('href',`../pages/contacts.html?user=${userID}`);
     }
 }
