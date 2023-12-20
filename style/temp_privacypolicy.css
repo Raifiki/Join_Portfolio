@@ -23,3 +23,11 @@
     cursor: pointer;
     padding: 6px;
 }
+
+
+/*===================================== Responsive design =====================================*/
+@media (max-width: 1050px){
+    #contentPrivacyPolicy{
+        padding: 30px;
+    }
+}

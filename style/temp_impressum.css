@@ -44,3 +44,20 @@ h2 {
 p{
     margin: 0;
 }
+
+/*===================================== Responsive design =====================================*/
+@media (max-width: 1050px){
+    #contentImpressum{
+        padding: 30px;
+    }
+}
+
+@media (max-width: 550px){
+    #wrapperHL h1{
+        font-size: var(--fntsize47);
+    }
+
+    #contentImpressum h2{
+        font-size: var(--fntsize21);
+    }
+}
