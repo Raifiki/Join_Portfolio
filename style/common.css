@@ -146,6 +146,7 @@ nav {
     width: 232px;
     height: 100vh;
     padding: 66px 0px;
+    flex-shrink: 0;
 }
 
 main {

@@ -5,6 +5,7 @@ const STORAGE_URL = 'https://remote-storage.developerakademie.org/item';
 const URL_PARAMS = new URLSearchParams(window.location.search);
 const USER = URL_PARAMS.get('user');
 const REDIR = URL_PARAMS.get('redir');
+const DIR = URL_PARAMS.get('dir');
 
 let activeTab;
 let contactListSorted = [];
