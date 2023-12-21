@@ -1,5 +1,3 @@
-// summary page related functions
-
 /**
  * This function initialize the summary page
  * 

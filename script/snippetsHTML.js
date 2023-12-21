@@ -19,7 +19,7 @@ function getLogInCardHTML(email) {
                 </div>
                 <div class="but-area">
                     <button class="but-dark" onclick="">Log in</button>
-                    <button class="but-light" onclick="">Guest Log in</button>
+                    <button class="but-light" type="button" onclick="window.location.href = 'pages/summary.html'+'?redir=LogIn';" >Guest Log in</button>
                 </div>
             </form>
     `
@@ -48,7 +48,7 @@ function getSignUpCardHTML() {
             <input type="checkbox" name="acceptPolicy" id="checkPolicy" required>
                 <label for="checkPolicy">
                     <span>I accept the</span>
-                    <a href="">Privacy policy</a> 
+                    <a href="./pages/impressumLogin.html?user=0&redir=LogIn&dir=privacypolicy" target="_blank">Privacy policy</a> 
                 </label>
             </div>
             <button class="but-dark" type="submit">Sign up</button>          
@@ -421,6 +421,12 @@ function getOvlyTaskSubtaskHTML(subtaskList){
 }
 
 
+/**
+ * This function generates the EditTask overlay
+ * 
+ * @param {number} taskIdx - index of the task in the tasks array
+ * @returns {string} - HTML code as string
+ */
 function getOvlyEditTaskHTML(taskIdx){
     let task = tasks[taskIdx];
     let assignedToHTML = getAssignedToHTML(task.users);
@@ -536,6 +542,12 @@ function getOvlyEditTaskHTML(taskIdx){
 }
 
 
+/**
+ * This function generates the subtask section in the edit task overlay
+ * 
+ * @param {Array} subtaskList - array with all subtasks
+ * @returns {string} - HTML code as string
+ */
 function getOvlyEditTaskSubtaskHTML(subtaskList){
     subTasks = [];
     subtaskList.forEach((st,idx) => subTasks[idx] = st.description);
@@ -545,6 +557,12 @@ function getOvlyEditTaskSubtaskHTML(subtaskList){
 }
 
 
+/**
+ * This function generates the prio section in the edit task overlay
+ * 
+ * @param {number} prio - priority of the task, 0,1,2
+ * @returns {string} - HTML code as string
+ */
 function getEditTaskPrioHTML(prio){
     let low = (prio == 0)? "checked":"";
     let medium = (prio == 1)? "checked":"";

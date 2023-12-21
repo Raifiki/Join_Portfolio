@@ -1,5 +1,3 @@
-// contact page related functions
-
 /**
  * This function initialize the contacts page
  * 
@@ -168,7 +166,7 @@ async function saveContact(idx){
  */
 async function deleteContact(idx){
     contactListSorted.splice(idx,1);
-    //await setItem('contacts',contactListSorted);
+    await setItem('contacts',contactListSorted);
     hideOvlyCard();
     renderContactList();
     hideContactDetails();

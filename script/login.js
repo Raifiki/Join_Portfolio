@@ -94,7 +94,6 @@ async function checkSignUpData(form){
             showErrIptMsg('msgEmail','email adresse already exist - registration not possible');
             styleInputWrong('email');
         } else{
-            console.log('user added - email muss noch gesendet werden!!!!');
             await addUser(name,email,pwd);
             await showPopup('You Signed Up successfully');
             form.submit();
