@@ -189,7 +189,7 @@ function getTaskHTML(task){
     let usersHTML = getTaskUsersHTML(task);
     let prio = setTaskPrioOnCard(task);
     return /*html*/`
-        <div id="task${task.id}" class="cardTask" draggable="true" ondragstart="setDragData(event,this)" ondragend="setDragEndStyyle(this)" onclick="showOvlyCard(getOvlyTaskHTML(${task.id}))">
+        <div id="task${task.id}" class="cardTask" draggable="true" ondragstart="setDragData(event,this)" ondragend="setDragEndStyyle(this)" onclick="showOvlyCard(getOvlyTaskHTML(${task.id}))" ontouchstart="startDragTouch(event,${task.id})" ontouchmove="moveCardTouch(event,${task.id})" ontouchend="dropDragTouch(event,${task.id})">
             <div class="task-category" style="background-color: ${category.color}">${category.name}</div>
             <div class="wrapperTaskText">
                 <div class="task-title">${task.title}</div>
@@ -236,7 +236,7 @@ function getSubtaskHTML(task){
 function classifyTasks(tasks){
     let ToDo = tasks.filter(t => t.classification == 'ToDo');
     let InProgress = tasks.filter(t => t.classification == 'InProgress');
-    let AwaitingFeedback = tasks.filter(t => t.classification == 'AwaitFeedback');
+    let AwaitingFeedback = tasks.filter(t => t.classification == 'AwaitingFeedback');
     let Done = tasks.filter(t => t.classification == 'Done');
     return {ToDo,InProgress,AwaitingFeedback,Done};
 }
@@ -436,7 +436,7 @@ async function dropHandler(event,classification){
 async function setTaskClassification(taskID,newClassification){
     let idx = tasks.findIndex(task => task.id == taskID);
     tasks[idx].classification = newClassification;
-    await setItem('tasks',tasks);
+    //await setItem('tasks',tasks);
 }
 
 
@@ -493,6 +493,11 @@ function saveSubtaskState(taskIdx){
 }
 
 
+/**
+ * This function updates the task in the tasks array with the input on the page
+ * 
+ * @param {number} taskIdx - index of the task in the task array
+ */
 function updateTask(taskIdx){
     let title = document.getElementById('editTaskCardTitle').value;
     let description = document.getElementById('editTaskCardDescription').value;
@@ -504,4 +509,41 @@ function updateTask(taskIdx){
     let classification = tasks[taskIdx].classification;
     let id = tasks[taskIdx].id;
     tasks[taskIdx] = {title,description,users,deadline,prio,category,subtasks,classification,id};
+}
+
+
+
+function startDragTouch(event,taskID){
+    console.log('drag element')
+    let card = document.getElementById('task'+taskID);
+    card.style.height = card.clientHeight+'px';
+    card.style.width = card.clientWidth+'px';
+    card.style.position = 'fixed';
+    card.style.transform = 'rotateZ(5deg)'; 
+}
+
+function moveCardTouch(event,taskID){
+    console.log('moving element')
+    let [touchPosX, touchPosY] = [event.changedTouches[0].clientX,event.changedTouches[0].clientY];
+    let card = document.getElementById('task'+taskID);
+    card.style.left = (touchPosX - card.clientWidth/2) + 'px';
+    card.style.top = (touchPosY - card.clientHeight/2) + 'px';
+}
+
+async function dropDragTouch(event,taskID){
+    let classification = dragOverElementTouch(event);
+    await setTaskClassification(taskID,classification);
+    filterTasks();
+    document.getElementById('task'+taskID).scrollIntoView({ block: "end" });
+    console.log('dropped')
+}
+
+
+function dragOverElementTouch(event){
+    let allCards = Array.from(document.getElementsByClassName('cardTask'));
+    allCards.forEach(c => {c.style.zIndex = '-10';} );
+    let classification = document.elementFromPoint(event.changedTouches[0].clientX,event.changedTouches[0].clientY);
+    allCards.forEach(c => {c.style.zIndex = '1';} );
+    classification = classification.id.split('boardClassification')[1];
+    return classification
 }
