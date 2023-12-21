@@ -5,6 +5,8 @@
     padding: 150px 100px;
     box-sizing: border-box;
     gap: 30px;
+    overflow: auto;
+    scrollbar-width: none;
 }
 
 #headline{

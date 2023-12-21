@@ -115,6 +115,8 @@ let dummyTasks = [
 ]
 // delete at the end ------------------------------------------- end
 
+let longTouchEventdetected;
+
 /**
  * This function initialize the board page
  * 
@@ -189,7 +191,7 @@ function getTaskHTML(task){
     let usersHTML = getTaskUsersHTML(task);
     let prio = setTaskPrioOnCard(task);
     return /*html*/`
-        <div id="task${task.id}" class="cardTask" draggable="true" ondragstart="setDragData(event,this)" ondragend="setDragEndStyyle(this)" onclick="showOvlyCard(getOvlyTaskHTML(${task.id}))" ontouchstart="startDragTouch(event,${task.id})" ontouchmove="moveCardTouch(event,${task.id})" ontouchend="dropDragTouch(event,${task.id})">
+        <div id="task${task.id}" class="cardTask" draggable="true" ondragstart="setDragData(event,this)" ondragend="setDragEndStyyle(this)" onclick="showOvlyCard(getOvlyTaskHTML(${task.id}))" ontouchstart="startDragTouch(${task.id})" ontouchmove="moveCardTouch(event,${task.id})" ontouchend="dropDragTouch(event,${task.id})">
             <div class="task-category" style="background-color: ${category.color}">${category.name}</div>
             <div class="wrapperTaskText">
                 <div class="task-title">${task.title}</div>
@@ -512,38 +514,147 @@ function updateTask(taskIdx){
 }
 
 
-
-function startDragTouch(event,taskID){
-    console.log('drag element')
-    let card = document.getElementById('task'+taskID);
-    card.style.height = card.clientHeight+'px';
-    card.style.width = card.clientWidth+'px';
-    card.style.position = 'fixed';
-    card.style.transform = 'rotateZ(5deg)'; 
+/**
+ * This function detects a touch start event for drag a task card
+ *
+ * @param {number} taskID - task ID
+ */
+function startDragTouch(taskID){
+    longTouchEventdetected = setTimeout(() => {
+        let card = document.getElementById('task'+taskID);
+        card.style.height = card.clientHeight+'px';
+        card.style.width = card.clientWidth+'px';
+        card.style.position = 'fixed';
+        card.style.transform = 'rotateZ(5deg)'; 
+    }, 300);
 }
 
+
+/**
+ * This function handles the touch move behavior
+ * 
+ * @param {event} event - DOM event at touch move
+ * @param {number} taskID - task ID
+ */
 function moveCardTouch(event,taskID){
-    console.log('moving element')
-    let [touchPosX, touchPosY] = [event.changedTouches[0].clientX,event.changedTouches[0].clientY];
+    let classification = getClassificationTouch(event);
+    if (isDraggedElementOverOtherClassification(classification,taskID)) showDummyCardTouch(classification);
+    updateCardPosition(event,taskID);
+}
+
+
+/**
+ * This function handles the drop event of the task card
+ * 
+ * @param {event} event - DOM event at touch move
+ * @param {number} taskID - task ID 
+ */
+async function dropDragTouch(event,taskID){
+    if (longTouchEventdetected)clearTimeout(longTouchEventdetected);
+    let classification = getClassificationTouch(event);
+    if (isDraggedElementOverOtherClassification(classification,taskID)) await setTaskClassification(taskID,classification);
+    filterTasks();
+    document.getElementById('task'+taskID).scrollIntoView({ block: "end" });
+}
+
+
+/**
+ * This function gets the touch position at a touch event
+ * 
+ * @param {event} event - DOM event at touch move
+ * @returns {array} - array with x and y position
+ */
+function getTouchPosition(event){
+    return [event.changedTouches[0].clientX,event.changedTouches[0].clientY];
+}
+
+
+/**
+ * This function updates the card position relative to the window
+ * 
+ * @param {event} event - DOM event at touch move
+ * @param {number} taskID - task ID 
+ */
+function updateCardPosition(event,taskID){
+    let [touchPosX, touchPosY] = getTouchPosition(event);
     let card = document.getElementById('task'+taskID);
     card.style.left = (touchPosX - card.clientWidth/2) + 'px';
     card.style.top = (touchPosY - card.clientHeight/2) + 'px';
-}
-
-async function dropDragTouch(event,taskID){
-    let classification = dragOverElementTouch(event);
-    await setTaskClassification(taskID,classification);
-    filterTasks();
-    document.getElementById('task'+taskID).scrollIntoView({ block: "end" });
-    console.log('dropped')
+    card.style.zIndex = '2'; 
 }
 
 
-function dragOverElementTouch(event){
-    let allCards = Array.from(document.getElementsByClassName('cardTask'));
+/**
+ * This function gets the classification name under the dragged element
+ * 
+ * @param {event} event - DOM event at touch move
+ * @returns {string} - name of the classification - ['ToDo','InProgress','AwaitingFeedback','Done']
+ */
+function getClassificationTouch(event){
+    let allCards = getAllHTMLElementsInClassificationColmns();
     allCards.forEach(c => {c.style.zIndex = '-10';} );
-    let classification = document.elementFromPoint(event.changedTouches[0].clientX,event.changedTouches[0].clientY);
+    let classification = getClassificationHTMLElement(event);
     allCards.forEach(c => {c.style.zIndex = '1';} );
     classification = classification.id.split('boardClassification')[1];
     return classification
+}
+
+
+/**
+ * This function gets all HTML Elements in all classification columns
+ * 
+ * @returns {array} - array with HTML elements
+ */
+function getAllHTMLElementsInClassificationColmns(){
+    let allCards = Array.from(document.getElementsByClassName('cardTask'));
+    let dummyCards = Array.from(document.getElementsByClassName('cardDummyDragOver'));
+    let noTaskPlacholderCards = Array.from(document.getElementsByClassName('cardNoTasks'));
+    return noTaskPlacholderCards.concat(dummyCards,allCards);
+}
+
+
+/**
+ * This function gets the classification HTML elment
+ * 
+ * @param {event} event - DOM event at touch
+ * @returns {HTMLElement} - HTML element of the classification under the dragged card
+ */
+function getClassificationHTMLElement(event){
+    let [touchPosX, touchPosY] = getTouchPosition(event);
+    return document.elementFromPoint(touchPosX,touchPosY);
+}
+
+
+/**
+ * This function checks if the dragged element is over a new classification
+ * 
+ * @param {string} classification - actual classification of the task
+ * @param {number} taskID - task ID 
+ * @returns {boolean} - true: over new classification, false: over no classifcation or actual classification
+ */
+function isDraggedElementOverOtherClassification(classification,taskID){
+    let classifications = ['ToDo','InProgress','AwaitingFeedback','Done'];
+    let task = tasks.find(task => task.id == taskID);
+    return classifications.includes(classification) && task.classification != classification
+}
+
+
+/**
+ * This function hide all dummy cards
+ */
+function hideAllDummyCards(){
+    let dummyTasks = Array.from(document.getElementsByClassName('cardDummyDragOver'));
+    dummyTasks.forEach(dT => dT.style.display = 'none');
+}
+
+
+/**
+ * This function shows the dummy card in the hovered classification
+ * 
+ * @param {string} classification name of the classification - ['ToDo','InProgress','AwaitingFeedback','Done']
+ */
+function showDummyCardTouch(classification){
+    hideAllDummyCards();
+    let element = document.getElementById('boardClassification'+classification);
+    showDummyCard(element);
 }
