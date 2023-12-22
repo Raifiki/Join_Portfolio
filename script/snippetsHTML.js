@@ -36,13 +36,16 @@ function getSignUpCardHTML() {
         <img class="arrow-back" src="./img/icons/login/arrow_left_lightblue.svg" alt="back" onclick="renderLoginCard(getLogInCardHTML()); showElement(['signUp'])">
         <h1>Sign up</h1>
         <div id="underline"></div>
-        <form onsubmit="checkSignUpData(this); return false" action="https://leonard-weiss.developerakademie.net/Projekte/M12_JoinPortfolio/php/send_mail_addUser.php" method="POST">
+        <!-- <form onsubmit="checkSignUpData(this); return false" action="https://@leonard-weiss.developerakademie.net/Projekte/M12_JoinPortfolio/php/send_mail_addUser.php" method="POST">  für php send mail-->
+        <form onsubmit="checkSignUpData(event); return false">
             <input type="name" id="name" name="Name" placeholder="Name Lastname" pattern="[A-ZÄÖÜ][a-zäöüß]{1,} [A-ZÄÖÜ][a-zäöüß]{1,}" title="Name Lastname" required>
             <span id="msgName"></span>
             <input type="email" id="email" name="Email" placeholder="Email" required>
             <span id="msgEmail"></span>
             <input type="password" id="pwd" name="Password" placeholder="Password" minlength="8" onclick="togglePwdVisbile(event)" required>
             <input type="password" id="pwdCon" name="Password" placeholder="Confirm Password" minlength="8" required>
+            <input name="subject" value="Welcom to Join - You Signed Up Successfully" type="hidden">
+            <input name="message" type="hidden">
             <span id="msgPwd"></span>
             <div id="privacyPolicy">
             <input type="checkbox" name="acceptPolicy" id="checkPolicy" required>
@@ -68,9 +71,12 @@ function getForgotPwdCardHTML() {
         <h1>I forgot my password</h1>
         <div id="underline"></div>
         <p>Don't worry! We will send you an email with the istructions to reset your password.</p>
-        <form onsubmit="sendEmailForgotPwd(this); return false"  action="https://leonard-weiss.developerakademie.net/Projekte/M12_JoinPortfolio/php/send_mail_change_pwd.php" method="POST"> 
+        <!-- <form onsubmit="sendEmailForgotPwd(this); return false"   action="https://@leonard-weiss.developerakademie.net/Projekte/M12_JoinPortfolio/php/send_mail_change_pwd.php" method="POST">   für php send mail-->
+        <form onsubmit="checkFormDataForgotPwd(event); return false"> 
             <input type="email" id="email" name="Email" placeholder="Email" required>
             <span id="msgMail"></span>
+            <input name="subject" value="Reset Your Password for Join" type="hidden">
+            <input name="message" type="hidden">
             <button class="but-dark">Send me the email</button>
         </form>
 `;

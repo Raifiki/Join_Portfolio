@@ -90,19 +90,43 @@ function styleInputWrong(inputHtmlId){
 async function checkSignUpData(form){
     if (isPwdMatching()) {
         let[name,email,pwd] = getSignUpData();
-        if (await isUserRegisterd(email)) {
+        if (await isUserRegisterd(email) && false) {
             showErrIptMsg('msgEmail','email adresse already exist - registration not possible');
             styleInputWrong('email');
         } else{
-            await addUser(name,email,pwd);
+            //await addUser(name,email,pwd);
             await showPopup('You Signed Up successfully');
-            form.submit();
+            //form.submit(); für php send mail
+            await sendMailSignUp(form);
         }
     } else{
         showErrIptMsg('msgPwd','Password confirmation is wrong!');
         styleInputWrong('pwdCon');
         styleInputWrong('pwd');
     }
+}
+
+
+/**
+ * This function send an email to change the user password
+ * 
+ * @param {event} event - DOM event form submit
+ */
+async function sendMailSignUp(event){﻿
+    event.preventDefault();
+    const data = new FormData(event.target);
+    data.set('message',"Welcome to Join! We are delighted to have you as a new member of our community.\n\n Your account has been successfully created and is now ready to use. You can log in and start using our Kanban tool right away.\n\n Thank you once again for placing your trust in Join. We are confident that you will find our tool to be a valuable asset to your productivity.\n\n Best regards,\n Your Join Team")
+    fetch("https://formspree.io/f/xgegwpqp", {
+        method: "POST",
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(() => {
+        window.location.href = "../index.html";
+    }).catch((error) => {
+        console.log(error);
+    });
 }
 
 
@@ -276,15 +300,38 @@ async function loadLoginDatafromLS(){
  * 
  * @param {HTMLform} form - form from which the function is triggered
  */
-async function sendEmailForgotPwd(form){
+async function checkFormDataForgotPwd(form){
     let email =  document.getElementById('email').value;
     if (await isUserRegisterd(email)) {
         await showPopup('An E-Mail has been sent to you');
-        form.submit();
+        //form.submit(); für php send mail
+        await sendMailForgotPwd(form);
     } else {
         showErrIptMsg('msgMail','Email not exist!');
         styleInputWrong('email');
     }
+}
+
+/**
+ * This function send an email to change the user password
+ * 
+ * @param {event} event - DOM event form submit
+ */
+async function sendMailForgotPwd(event){﻿
+    event.preventDefault();
+    const data = new FormData(event.target);
+    data.set('message',`Click on the following link to change your password! 'https://leonard-weiss.developerakademie.net/Projekte/M12_JoinPortfolio/pages/SetPassword.html?email=${data.get('Email')}'`)
+    fetch("https://formspree.io/f/xgegwpqp", {
+        method: "POST",
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(() => {
+        window.location.href = "../index.html";
+    }).catch((error) => {
+        console.log(error);
+    });
 }
 
 
