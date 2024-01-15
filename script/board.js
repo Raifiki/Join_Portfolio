@@ -1,4 +1,5 @@
 let longTouchEventdetected;
+let draggedElement; // needed for chrome browser
 
 /**
  * This function initialize the board page
@@ -189,7 +190,7 @@ function getInitialDataOfUsers(task){
     let userData=[];
     task.users.forEach(email => {
         let user = contactListSorted.find(contact => contact.email == email);
-        userData.push({initials: user.initials,color: user.color});
+        userData.push({initials: user.initials,color: user.color});        
     });
     return userData;
 }
@@ -232,6 +233,7 @@ function filterTasks(){
  */
 function setDragData(event,card){
     event.dataTransfer.setData("text",event.target.id);
+    draggedElement = event.target.id; // needed for chrome browser
     card.style.transform = 'rotateZ(5deg)'; 
 }
 
@@ -292,6 +294,7 @@ function hideDummyCard(classification){
  */
 function isDraggedElementPartOfClassification(event,classification){
     let dragElementHTMLID = event.dataTransfer.getData("text");
+    if(!dragElementHTMLID) dragElementHTMLID = draggedElement; // needed for chrome Browser
     return Boolean(Array.from(classification.children).find(element => element.id == dragElementHTMLID));
 }
 
@@ -305,6 +308,7 @@ function isDraggedElementPartOfClassification(event,classification){
 async function dropHandler(event,classification){
     event.preventDefault();
     let dragElementHTMLID = event.dataTransfer.getData("text");
+    if(!dragElementHTMLID) dragElementHTMLID = draggedElement; // needed for chrome Browser
     let taskID = getTaskIDFromHTMLcardID(dragElementHTMLID);
     await setTaskClassification(taskID,classification);
     filterTasks();

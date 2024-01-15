@@ -133,10 +133,14 @@
     padding-top: 8px;
     min-height: 500px;
     flex-grow: 1;
-    overflow: auto;
+    overflow-y: auto;
     scrollbar-width: none;
+    overflow-x: none;
 }
 
+.boardTaskColoumnWrapperTasks::-webkit-scrollbar{
+    display: none;
+}
 
 /* task */
 .cardTask{
@@ -299,6 +303,12 @@
     scrollbar-width: none;
 }
 
+
+#wrapperOvlyCardTask::-webkit-scrollbar{
+    display: none;
+}
+
+
 #ovlyTaskTitle{
     font-size: var(--fntsize47);
     font-weight: bold;
@@ -420,6 +430,10 @@
     scrollbar-width: none;
 }
 
+#wrapperOvlyCardEditTask::-webkit-scrollbar{
+    display: none;
+}
+
 .editTaskCardElement{
     display: flex;
     flex-direction: column;
@@ -478,6 +492,10 @@
         flex-direction: column;
         overflow: auto;
         scrollbar-width: none;
+    }
+
+    #wrapperBoardTaskContent::-webkit-scrollbar{
+        display: none;
     }
 
     .boardTaskColoumn{

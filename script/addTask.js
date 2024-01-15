@@ -22,9 +22,9 @@ function openDropdownMemberList(ID){
     showElement(ID, '');
     document.getElementById('wrapperAssignedToHL').classList.add('styleOpen');
     document.getElementById('wrapperAssignedToHLImg').classList.add('styleOpen');
-    document.getElementById('inputSearchAssignedTo').disabled = false;
     document.getElementById('inputSearchAssignedTo').setAttribute('placeholder','Search');
     document.getElementById('wrapperAssignedToHLImg').setAttribute('onclick','closeDropdownMemberList(["wrapperMemberList"])');
+    document.getElementById('wrapperAssignedToHL').removeAttribute('onclick');
     generateMemberListHTML();
   }
   
@@ -35,13 +35,13 @@ function openDropdownMemberList(ID){
  * @param {string} ID - ID of the hidden elment
    */
   function closeDropdownMemberList(ID) {
+    console.log('clicked')
     hideElement(ID,'');
     document.getElementById('wrapperAssignedToHL').classList.remove('styleOpen');
     document.getElementById('wrapperAssignedToHLImg').classList.remove('styleOpen');
-    document.getElementById('inputSearchAssignedTo').disabled = true;
     document.getElementById('inputSearchAssignedTo').value='';
     document.getElementById('inputSearchAssignedTo').setAttribute('placeholder','Select contacts to assign');
-    document.getElementById('wrapperAssignedToHLImg').setAttribute('onclick','openDropdownMemberList(["wrapperMemberList"])');
+    setTimeout(()=>{document.getElementById('wrapperAssignedToHL').setAttribute('onclick','openDropdownMemberList(["wrapperMemberList"])');},100);
     getSelectedMembers();
     document.getElementById('wrapperAssignedToActual').innerHTML = getAssignedToHTML(selectedUsers);
   }
@@ -125,6 +125,7 @@ function openDropdownCategoryList(ID){
     document.getElementById('wrapperCategoryHL').classList.add('styleOpen');
     document.getElementById('wrapperCategoryHLImg').classList.add('styleOpen');
     document.getElementById('wrapperCategoryHLImg').setAttribute('onclick','closeDropdownCategoryList(["wrapperCategoryList"])');
+    document.getElementById('wrapperCategoryHL').removeAttribute('onclick');
     generateCategoryListHTML();
   }
   
@@ -138,7 +139,7 @@ function closeDropdownCategoryList(ID) {
   hideElement(ID,'');
   document.getElementById('wrapperCategoryHL').classList.remove('styleOpen');
   document.getElementById('wrapperCategoryHLImg').classList.remove('styleOpen');
-  document.getElementById('wrapperCategoryHLImg').setAttribute('onclick','openDropdownCategoryList(["wrapperCategoryList"])');
+  setTimeout(()=>{document.getElementById('wrapperCategoryHL').setAttribute('onclick','openDropdownCategoryList(["wrapperCategoryList"])')},100);
 }
 
 
@@ -364,9 +365,10 @@ function setInputNewSubtaskSettingsDefault(){
   let iptHTMLelement = document.getElementById('inputNewSubtask');
   iptHTMLelement.value = '';
   iptHTMLelement.setAttribute('placeholder','Add new subtask')
-  iptHTMLelement.disabled = true;
-  hideElement(['subtaskEditBtn']);
-  showElement(['wrapperBtnAddSubtask']);
+  setTimeout(()=>{
+    hideElement(['subtaskEditBtn']);
+    showElement(['wrapperBtnAddSubtask']);
+  },100);
 }
 
 

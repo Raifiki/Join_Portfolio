@@ -6,6 +6,18 @@
     scrollbar-width: thin;
 }
 
+#contentImpressum::-webkit-scrollbar {
+    width: 9px;
+}
+#contentImpressum::-webkit-scrollbar-track {
+    background: transparent;
+}
+#contentImpressum::-webkit-scrollbar-thumb {
+    background-color: rgba(155, 155, 155, 0.5);
+    border-radius: 20px;
+    border: transparent;
+}
+
 #wrapperHL {
     display: flex;
     justify-content: space-between;

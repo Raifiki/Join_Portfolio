@@ -20,10 +20,10 @@
             <div class="wrapperInputElement" id="wrapperAssignedTo">
                 <span>Assigned to</span>
                 <div id="wrapperAssignedToSelection">
-                    <div class="" id="wrapperAssignedToHL">
-                        <input id="inputSearchAssignedTo" type="text" placeholder="Select contacts to assign" disabled onkeyup="generateMemberListHTML()">    
+                    <div class="" id="wrapperAssignedToHL" onclick="openDropdownMemberList(['wrapperMemberList'])">
+                        <input id="inputSearchAssignedTo" type="text" placeholder="Select contacts to assign" onkeyup="generateMemberListHTML()" >    
                         <div class="wrapperDropDownArrow">
-                            <img class="" id="wrapperAssignedToHLImg" src="../img/icons/addTask/arrow_drop_down.svg" alt="" onclick="openDropdownMemberList(['wrapperMemberList'])"> 
+                            <img class="" id="wrapperAssignedToHLImg" src="../img/icons/addTask/arrow_drop_down.svg" alt=""> 
                         </div>
                     </div>
                     <div class="display-none" id="wrapperMemberList"></div>
@@ -66,10 +66,10 @@
                     <span class="requiredStar">*</span>
                 </div>
                 <div id="wrapperCategorySelection">
-                    <div class="" id="wrapperCategoryHL">
-                        <input id="inputNewCategory" type="text" placeholder="Select task category" disabled>
+                    <div class="" id="wrapperCategoryHL" onclick="openDropdownCategoryList(['wrapperCategoryList'])">
+                        <input id="inputNewCategory" type="text" placeholder="Select task category">
                         <div class="wrapperDropDownArrow" id="wrapperDropDownArrowCategory">
-                            <img class="" id="wrapperCategoryHLImg" src="../img/icons/addTask/arrow_drop_down.svg" alt="" onclick="openDropdownCategoryList(['wrapperCategoryList'])"> 
+                            <img class="" id="wrapperCategoryHLImg" src="../img/icons/addTask/arrow_drop_down.svg" alt="" > 
                         </div>
                         <div id="categoryEditBtns" class="wrapperEditBtns display-none">
                             <div class="wrapperEditBtn" onclick="setInputCategoryChooseSettings()">
@@ -111,9 +111,9 @@
                     <span>Subtasks</span>
                 </div>
                 <div>
-                    <div class="" id="wrapperSubtaskHL">
-                        <input id="inputNewSubtask" type="text" placeholder="Add new subtask" disabled>
-                        <div class="wrapperDropDownArrow" id="wrapperBtnAddSubtask" onclick="setInputNewSubtaskEditSettings()">
+                    <div class="" id="wrapperSubtaskHL" onclick="setInputNewSubtaskEditSettings()">
+                        <input id="inputNewSubtask" type="text" placeholder="Add new subtask">
+                        <div class="wrapperDropDownArrow" id="wrapperBtnAddSubtask">
                             <img class="" id="addSubtaskHLImg" src="../img/icons/addTask/add.svg" alt=""> 
                         </div>
                         <div id="subtaskEditBtn" class="wrapperEditBtns display-none">

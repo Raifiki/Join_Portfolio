@@ -90,14 +90,15 @@ function styleInputWrong(inputHtmlId){
 async function checkSignUpData(form){
     if (isPwdMatching()) {
         let[name,email,pwd] = getSignUpData();
-        if (await isUserRegisterd(email) && false) {
+        if (await isUserRegisterd(email)) {
             showErrIptMsg('msgEmail','email adresse already exist - registration not possible');
             styleInputWrong('email');
         } else{
-            //await addUser(name,email,pwd);
+            await addUser(name,email,pwd);
             await showPopup('You Signed Up successfully');
             //form.submit(); für php send mail
-            await sendMailSignUp(form);
+            //await sendMailSignUp(form); for send mail with formspree
+            window.location.href = "./index.html";
         }
     } else{
         showErrIptMsg('msgPwd','Password confirmation is wrong!');
@@ -108,7 +109,7 @@ async function checkSignUpData(form){
 
 
 /**
- * This function send an email to change the user password
+ * This function send an email to inform the user about sign up (function not finished)
  * 
  * @param {event} event - DOM event form submit
  */
@@ -123,7 +124,7 @@ async function sendMailSignUp(event){﻿
             'Accept': 'application/json'
         }
     }).then(() => {
-        window.location.href = "../index.html";
+        window.location.href = "./index.html";
     }).catch((error) => {
         console.log(error);
     });
@@ -305,7 +306,8 @@ async function checkFormDataForgotPwd(form){
     if (await isUserRegisterd(email)) {
         await showPopup('An E-Mail has been sent to you');
         //form.submit(); für php send mail
-        await sendMailForgotPwd(form);
+        //await sendMailForgotPwd(form); for send mail with formspree
+        window.location.href = "./index.html";
     } else {
         showErrIptMsg('msgMail','Email not exist!');
         styleInputWrong('email');
@@ -328,7 +330,7 @@ async function sendMailForgotPwd(event){﻿
             'Accept': 'application/json'
         }
     }).then(() => {
-        window.location.href = "../index.html";
+        window.location.href = "./index.html";
     }).catch((error) => {
         console.log(error);
     });
