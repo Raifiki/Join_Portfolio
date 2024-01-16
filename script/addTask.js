@@ -18,7 +18,9 @@ async function initAddTask(tabID){
  * 
  * @param {string} ID - ID of the hidden elment
  */
-function openDropdownMemberList(ID){
+function openDropdownMemberList(ID,event){
+  setDefaultFormSettings();
+    event.stopPropagation();
     showElement(ID, '');
     document.getElementById('wrapperAssignedToHL').classList.add('styleOpen');
     document.getElementById('wrapperAssignedToHLImg').classList.add('styleOpen');
@@ -35,13 +37,12 @@ function openDropdownMemberList(ID){
  * @param {string} ID - ID of the hidden elment
    */
   function closeDropdownMemberList(ID) {
-    console.log('clicked')
     hideElement(ID,'');
     document.getElementById('wrapperAssignedToHL').classList.remove('styleOpen');
     document.getElementById('wrapperAssignedToHLImg').classList.remove('styleOpen');
     document.getElementById('inputSearchAssignedTo').value='';
     document.getElementById('inputSearchAssignedTo').setAttribute('placeholder','Select contacts to assign');
-    setTimeout(()=>{document.getElementById('wrapperAssignedToHL').setAttribute('onclick','openDropdownMemberList(["wrapperMemberList"])');},100);
+    setTimeout(()=>{document.getElementById('wrapperAssignedToHL').setAttribute('onclick','openDropdownMemberList(["wrapperMemberList"],event)');},0);
     getSelectedMembers();
     document.getElementById('wrapperAssignedToActual').innerHTML = getAssignedToHTML(selectedUsers);
   }
@@ -73,7 +74,7 @@ function openDropdownMemberList(ID){
 function getMemberHTML(contact,i){
     let checked = (selectedUsers.includes(contact.email))?'checked':'';
     return /*html*/`
-        <div class="wrapperMemberListElement">
+        <div class="wrapperMemberListElement" onclick="event.stopPropagation()">
             <label for="member${i}">
                 <div class="memberInitials" id="memberInitials${i}">${contact['initials']}</div>
                 ${contact['name']}
@@ -120,7 +121,9 @@ function getSelectedMembers(){
  * 
  * @param {string} ID - ID of the hidden elment
  */
-function openDropdownCategoryList(ID){
+function openDropdownCategoryList(ID,event){
+    setDefaultFormSettings()
+    event.stopPropagation();
     showElement(ID, '');
     document.getElementById('wrapperCategoryHL').classList.add('styleOpen');
     document.getElementById('wrapperCategoryHLImg').classList.add('styleOpen');
@@ -139,7 +142,7 @@ function closeDropdownCategoryList(ID) {
   hideElement(ID,'');
   document.getElementById('wrapperCategoryHL').classList.remove('styleOpen');
   document.getElementById('wrapperCategoryHLImg').classList.remove('styleOpen');
-  setTimeout(()=>{document.getElementById('wrapperCategoryHL').setAttribute('onclick','openDropdownCategoryList(["wrapperCategoryList"])')},100);
+  setTimeout(()=>{document.getElementById('wrapperCategoryHL').setAttribute('onclick','openDropdownCategoryList(["wrapperCategoryList"],event)')},100);
 }
 
 
@@ -349,9 +352,11 @@ function getCheckedCategoryColor(){
 /**
  * This funtion sets the new subtask input HTML element settings to edit
  */
-function setInputNewSubtaskEditSettings(){
+function setInputNewSubtaskEditSettings(event){
+  closeDropdownCategoryList(["wrapperCategoryList"]);
+  closeDropdownMemberList(["wrapperMemberList"]);
+  event.stopPropagation();
   let iptHTMLelement = document.getElementById('inputNewSubtask');
-  iptHTMLelement.disabled = false;
   iptHTMLelement.focus();
   hideElement(['wrapperBtnAddSubtask']);
   showElement(['subtaskEditBtn']);
@@ -368,7 +373,7 @@ function setInputNewSubtaskSettingsDefault(){
   setTimeout(()=>{
     hideElement(['subtaskEditBtn']);
     showElement(['wrapperBtnAddSubtask']);
-  },100);
+  },0);
 }
 
 
@@ -600,4 +605,11 @@ function closeAddTaskOvly(){
     renderBoard(tasks);
     hideOvlyCard();
   },3000);
+}
+
+
+function setDefaultFormSettings(){
+  closeDropdownCategoryList(["wrapperCategoryList"]);
+  closeDropdownMemberList(["wrapperMemberList"]);
+  setInputNewSubtaskSettingsDefault();
 }

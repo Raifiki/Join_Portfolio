@@ -1,7 +1,7 @@
 <div id="headlineAddTask">
     Add Task
 </div>
-<form action="" onsubmit="addNewTaskToTasklist();return false">
+<form action="" onsubmit="addNewTaskToTasklist();return false" onclick="setDefaultFormSettings()">
     <div id="formContent">
         <div id="formLeftSide">
             <div class="wrapperInputElement">
@@ -20,7 +20,7 @@
             <div class="wrapperInputElement" id="wrapperAssignedTo">
                 <span>Assigned to</span>
                 <div id="wrapperAssignedToSelection">
-                    <div class="" id="wrapperAssignedToHL" onclick="openDropdownMemberList(['wrapperMemberList'])">
+                    <div class="" id="wrapperAssignedToHL" onclick="openDropdownMemberList(['wrapperMemberList'],event)">
                         <input id="inputSearchAssignedTo" type="text" placeholder="Select contacts to assign" onkeyup="generateMemberListHTML()" >    
                         <div class="wrapperDropDownArrow">
                             <img class="" id="wrapperAssignedToHLImg" src="../img/icons/addTask/arrow_drop_down.svg" alt=""> 
@@ -66,7 +66,7 @@
                     <span class="requiredStar">*</span>
                 </div>
                 <div id="wrapperCategorySelection">
-                    <div class="" id="wrapperCategoryHL" onclick="openDropdownCategoryList(['wrapperCategoryList'])">
+                    <div class="" id="wrapperCategoryHL" onclick="openDropdownCategoryList(['wrapperCategoryList'],event)">
                         <input id="inputNewCategory" type="text" placeholder="Select task category">
                         <div class="wrapperDropDownArrow" id="wrapperDropDownArrowCategory">
                             <img class="" id="wrapperCategoryHLImg" src="../img/icons/addTask/arrow_drop_down.svg" alt="" > 
@@ -111,7 +111,7 @@
                     <span>Subtasks</span>
                 </div>
                 <div>
-                    <div class="" id="wrapperSubtaskHL" onclick="setInputNewSubtaskEditSettings()">
+                    <div class="" id="wrapperSubtaskHL" onclick="setInputNewSubtaskEditSettings(event)">
                         <input id="inputNewSubtask" type="text" placeholder="Add new subtask">
                         <div class="wrapperDropDownArrow" id="wrapperBtnAddSubtask">
                             <img class="" id="addSubtaskHLImg" src="../img/icons/addTask/add.svg" alt=""> 
