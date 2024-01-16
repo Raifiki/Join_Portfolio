@@ -25,6 +25,7 @@ function openDropdownMemberList(ID,event){
     document.getElementById('wrapperAssignedToHL').classList.add('styleOpen');
     document.getElementById('wrapperAssignedToHLImg').classList.add('styleOpen');
     document.getElementById('inputSearchAssignedTo').setAttribute('placeholder','Search');
+    document.getElementById('inputSearchAssignedTo').setAttribute('onclick','event.stopPropagation()');
     document.getElementById('wrapperAssignedToHLImg').setAttribute('onclick','closeDropdownMemberList(["wrapperMemberList"])');
     document.getElementById('wrapperAssignedToHL').removeAttribute('onclick');
     generateMemberListHTML();
@@ -42,7 +43,8 @@ function openDropdownMemberList(ID,event){
     document.getElementById('wrapperAssignedToHLImg').classList.remove('styleOpen');
     document.getElementById('inputSearchAssignedTo').value='';
     document.getElementById('inputSearchAssignedTo').setAttribute('placeholder','Select contacts to assign');
-    setTimeout(()=>{document.getElementById('wrapperAssignedToHL').setAttribute('onclick','openDropdownMemberList(["wrapperMemberList"],event)');},0);
+    document.getElementById('inputSearchAssignedTo').removeAttribute('onclick');
+    document.getElementById('wrapperAssignedToHL').setAttribute('onclick','openDropdownMemberList(["wrapperMemberList"],event)');
     getSelectedMembers();
     document.getElementById('wrapperAssignedToActual').innerHTML = getAssignedToHTML(selectedUsers);
   }
@@ -142,7 +144,7 @@ function closeDropdownCategoryList(ID) {
   hideElement(ID,'');
   document.getElementById('wrapperCategoryHL').classList.remove('styleOpen');
   document.getElementById('wrapperCategoryHLImg').classList.remove('styleOpen');
-  setTimeout(()=>{document.getElementById('wrapperCategoryHL').setAttribute('onclick','openDropdownCategoryList(["wrapperCategoryList"],event)')},100);
+  document.getElementById('wrapperCategoryHL').setAttribute('onclick','openDropdownCategoryList(["wrapperCategoryList"],event)');
 }
 
 
@@ -233,7 +235,6 @@ async function deleteCategory(name,event){
  */
 function setInputCategoryEditSettings(name){
   let inputElement = document.getElementById('inputNewCategory');
-  inputElement.disabled = false;
   inputElement.value = name;
   inputElement.focus();
   hideElement(['wrapperDropDownArrowCategory']);
@@ -249,7 +250,6 @@ function setInputCategoryEditSettings(name){
 function setInputCategoryChooseSettings(){
   let inputElement = document.getElementById('inputNewCategory');
   inputElement.setAttribute('placeholder','Select task category');
-  inputElement.disabled = true;
   inputElement.value = '';
   showElement(['wrapperDropDownArrowCategory']);
   hideElement(['categoryEditBtns','wrapperCategoryColor']);
@@ -608,6 +608,9 @@ function closeAddTaskOvly(){
 }
 
 
+/**
+ * This function sets the default settings of the form (hide all dropdowns, add subtask default setttins)
+ */
 function setDefaultFormSettings(){
   closeDropdownCategoryList(["wrapperCategoryList"]);
   closeDropdownMemberList(["wrapperMemberList"]);

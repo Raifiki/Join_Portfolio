@@ -440,7 +440,7 @@ function getOvlyEditTaskHTML(taskIdx){
     let prioHTML = getEditTaskPrioHTML(task.prio);
     selectedUsers = task.users;
     return /*html*/`
-        <form id="wrapperOvlyCardEditTask" onsubmit="updateTask(${taskIdx});showOvlyCard(getOvlyTaskHTML(${taskIdx}));return false">
+        <form id="wrapperOvlyCardEditTask" onsubmit="updateTask(${taskIdx});showOvlyCard(getOvlyTaskHTML(${taskIdx}));return false" onclick="setDefaultFormSettings()">
             <div class="editTaskCardElement">
                 <label for="editTaskCardTitle">Title</label>
                 <input id="editTaskCardTitle"  type="text" placeholder="Enter a title" value="${task.title}">
@@ -460,10 +460,10 @@ function getOvlyEditTaskHTML(taskIdx){
             <div class="editTaskCardElement" id="wrapperAssignedTo">
                 <span>Assigned to</span>
                 <div>
-                    <div class="" id="wrapperAssignedToHL">
-                        <input id="inputSearchAssignedTo" type="text" placeholder="Select contacts to assign" disabled onkeyup="generateMemberListHTML()">    
+                    <div class="" id="wrapperAssignedToHL" onclick="openDropdownMemberList(['wrapperMemberList'],event)">
+                        <input id="inputSearchAssignedTo" type="text" placeholder="Select contacts to assign" onkeyup="generateMemberListHTML()">    
                         <div class="wrapperDropDownArrow">
-                            <img class="" id="wrapperAssignedToHLImg" src="../img/icons/addTask/arrow_drop_down.svg" alt="" onclick="openDropdownMemberList(['wrapperMemberList'])"> 
+                            <img class="" id="wrapperAssignedToHLImg" src="../img/icons/addTask/arrow_drop_down.svg" alt=""> 
                         </div>
                     </div>
                     <div class="display-none" id="wrapperMemberList"></div>
@@ -473,10 +473,10 @@ function getOvlyEditTaskHTML(taskIdx){
             <div id="wrapperCategory" class="editTaskCardElement">
                 <span>Category</span>
                 <div>
-                    <div class="" id="wrapperCategoryHL">
-                        <input id="inputNewCategory" type="text" placeholder="Select task category" disabled value="${task.category}">
+                    <div class="" id="wrapperCategoryHL" onclick="openDropdownCategoryList(['wrapperCategoryList'],event)">
+                        <input id="inputNewCategory" type="text" placeholder="Select task category" value="${task.category}">
                         <div class="wrapperDropDownArrow" id="wrapperDropDownArrowCategory">
-                            <img class="" id="wrapperCategoryHLImg" src="../img/icons/addTask/arrow_drop_down.svg" alt="" onclick="openDropdownCategoryList(['wrapperCategoryList'])"> 
+                            <img class="" id="wrapperCategoryHLImg" src="../img/icons/addTask/arrow_drop_down.svg" alt=""> 
                         </div>
                         <div id="categoryEditBtns" class="wrapperEditBtns display-none">
                             <div class="wrapperEditBtn" onclick="setInputCategoryChooseSettings()">
@@ -518,9 +518,9 @@ function getOvlyEditTaskHTML(taskIdx){
                     <span>Subtasks</span>
                 </div>
                 <div>
-                    <div class="" id="wrapperSubtaskHL">
-                        <input id="inputNewSubtask" type="text" placeholder="Add new subtask" disabled>
-                        <div class="wrapperDropDownArrow" id="wrapperBtnAddSubtask" onclick="setInputNewSubtaskEditSettings()">
+                    <div class="" id="wrapperSubtaskHL" onclick="setInputNewSubtaskEditSettings(event)">
+                        <input id="inputNewSubtask" type="text" placeholder="Add new subtask">
+                        <div class="wrapperDropDownArrow" id="wrapperBtnAddSubtask">
                             <img class="" id="addSubtaskHLImg" src="../img/icons/addTask/add.svg" alt=""> 
                         </div>
                         <div id="subtaskEditBtn" class="wrapperEditBtns display-none">
