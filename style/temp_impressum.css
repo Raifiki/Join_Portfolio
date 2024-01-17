@@ -6,6 +6,11 @@
     scrollbar-width: thin;
 }
 
+#contentImpressum a,
+#contentImpressum h2{
+    word-wrap: break-word;
+}
+
 #contentImpressum::-webkit-scrollbar {
     width: 9px;
 }

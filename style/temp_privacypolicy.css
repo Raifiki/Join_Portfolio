@@ -6,6 +6,10 @@
     scrollbar-width: thin;
 }
 
+#contentPrivacyPolicy a{
+    word-wrap: break-word;
+}
+
 #contentPrivacyPolicy::-webkit-scrollbar {
     width: 5px;
 }

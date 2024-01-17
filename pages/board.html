@@ -46,7 +46,7 @@
             <div id="wrapperBoardHeader">
                 <div id="wrapperBoardHL">
                     <h1>Board</h1>
-                    <button id="btnAddTaskRes" class="but-dark" onclick="showOvlyCard(ovlyAddTaskHTML),taskClassification = 'ToDo'">
+                    <button id="btnAddTaskRes" class="but-dark" onclick="showOvlyCard(ovlyAddTaskHTML),taskClassification = 'ToDo',setMinDateInDatePicker()">
                         <img src="../img/icons/board/add.svg" alt="add">
                     </button>
                 </div>
@@ -58,7 +58,7 @@
                             <img src="../img/icons/board/search.svg" alt="" onclick="filterTasks()">
                         </div>
                     </div>
-                    <button id="btnAddTask" class="but-dark" onclick="showOvlyCard(ovlyAddTaskHTML),taskClassification = 'ToDo'">
+                    <button id="btnAddTask" class="but-dark" onclick="showOvlyCard(ovlyAddTaskHTML),taskClassification = 'ToDo',setMinDateInDatePicker()">
                         <span>Add task</span>
                         <img src="../img/icons/board/add.svg" alt="add">
                     </button>
@@ -68,21 +68,21 @@
                 <div class="boardTaskColoumn">
                     <div class="boardTaskColoumnWrapperHL">
                         <span class="boardTaskColoumnHLText">To do</span>
-                        <div class="boardTaskColoumnHLImg" onclick="showOvlyCard(ovlyAddTaskHTML),taskClassification = 'ToDo'"></div>
+                        <div class="boardTaskColoumnHLImg" onclick="showOvlyCard(ovlyAddTaskHTML),taskClassification = 'ToDo',setMinDateInDatePicker()"></div>
                     </div>
                     <div id="boardClassificationToDo" class="boardTaskColoumnWrapperTasks" ondrop="dropHandler(event,'ToDo')" ondragover="dragOverHandler(event,this)" ondragleave="hideDummyCard(this)"></div>
                 </div>
                 <div class="boardTaskColoumn">
                     <div class="boardTaskColoumnWrapperHL">
                         <span class="boardTaskColoumnHLText">In progress</span>
-                        <div class="boardTaskColoumnHLImg" onclick="showOvlyCard(ovlyAddTaskHTML),taskClassification = 'InProgress'"></div>
+                        <div class="boardTaskColoumnHLImg" onclick="showOvlyCard(ovlyAddTaskHTML),taskClassification = 'InProgress',setMinDateInDatePicker()"></div>
                     </div>
                     <div id="boardClassificationInProgress" class="boardTaskColoumnWrapperTasks" ondrop="dropHandler(event,'InProgress')" ondragover="dragOverHandler(event,this)" ondragleave="hideDummyCard(this)"></div>
                 </div>
                 <div class="boardTaskColoumn">
                     <div class="boardTaskColoumnWrapperHL">
                         <span class="boardTaskColoumnHLText">Await feedback</span>
-                        <div class="boardTaskColoumnHLImg" onclick="showOvlyCard(ovlyAddTaskHTML),taskClassification = 'AwaitingFeedback'"></div>
+                        <div class="boardTaskColoumnHLImg" onclick="showOvlyCard(ovlyAddTaskHTML),taskClassification = 'AwaitingFeedback',setMinDateInDatePicker()"></div>
                     </div>
                     <div id="boardClassificationAwaitingFeedback" class="boardTaskColoumnWrapperTasks" ondrop="dropHandler(event,'AwaitingFeedback')" ondragover="dragOverHandler(event,this)" ondragleave="hideDummyCard(this)"></div>
                 </div>

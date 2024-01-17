@@ -10,6 +10,7 @@ let taskClassification = 'ToDo';
  */
 async function initAddTask(tabID){
     await init(tabID);
+    setMinDateInDatePicker();
 }
 
 
@@ -115,6 +116,15 @@ function getSelectedMembers(){
     let search = document.getElementById('inputSearchAssignedTo').value.toLowerCase();
     let filteredList = contactListSorted.filter(c => c.name.toLowerCase().includes(search))
     return filteredList;
+  }
+
+
+  /**
+   * This function sets the minimum date in the datepicker to today
+   */
+  function setMinDateInDatePicker(){
+    let today = new Date().toISOString().substring(0,10);
+    document.getElementById('taskDueDate').setAttribute('min',today)
   }
 
 
@@ -370,10 +380,8 @@ function setInputNewSubtaskSettingsDefault(){
   let iptHTMLelement = document.getElementById('inputNewSubtask');
   iptHTMLelement.value = '';
   iptHTMLelement.setAttribute('placeholder','Add new subtask')
-  setTimeout(()=>{
-    hideElement(['subtaskEditBtn']);
-    showElement(['wrapperBtnAddSubtask']);
-  },0);
+  hideElement(['subtaskEditBtn']);
+  showElement(['wrapperBtnAddSubtask']);
 }
 
 

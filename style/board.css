@@ -343,6 +343,19 @@
     scrollbar-width: thin;
 }
 
+#wrapperOvlyTaskUserList::-webkit-scrollbar {
+    width: 5px;
+}
+#wrapperOvlyTaskUserList::-webkit-scrollbar-track{
+    background: transparent;
+}
+#wrapperOvlyTaskUserList::-webkit-scrollbar-thumb {
+    background-color: rgba(155, 155, 155, 0.5);
+    border-radius: 20px;
+    border: transparent;
+}
+
+
 .wrapperOvlyTaskUser{
     display: flex;
     align-items: center;
