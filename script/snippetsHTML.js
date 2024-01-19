@@ -435,6 +435,7 @@ function getOvlyTaskSubtaskHTML(subtaskList){
  */
 function getOvlyEditTaskHTML(taskIdx){
     let task = tasks[taskIdx];
+    let today = new Date().toISOString().substring(0,10);
     let assignedToHTML = getAssignedToHTML(task.users);
     let subtaskHTML = getOvlyEditTaskSubtaskHTML(task.subtasks);
     let prioHTML = getEditTaskPrioHTML(task.prio);
@@ -451,7 +452,7 @@ function getOvlyEditTaskHTML(taskIdx){
             </div>
             <div class="editTaskCardElement">
                 <label for="editTaskCardDueDate">Due date</label>
-                <input id="editTaskCardDueDate" type="date" value="${task.deadline}">
+                <input id="editTaskCardDueDate" type="date" value="${task.deadline}" min="${today}">
             </div>
             <div class="editTaskCardElement">
                 <span for="editTaskCardPriority">Priority</span>

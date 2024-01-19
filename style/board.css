@@ -166,6 +166,13 @@
     border: 1px #A8A8A8 dashed;
 }
 
+.cardHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
 .task-category{
     display: flex;
     align-items: center;
@@ -174,6 +181,22 @@
     border-radius: 8px;
     width: fit-content;
     color: white;
+}
+
+.cardHeaderCtrl{
+    display: none;
+    gap: 5px;
+}
+
+.cardHeaederCtrlBtn {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    transform: rotate(90deg);
+}
+
+.cardHeaederCtrlBtn:hover {
+    background-color: #D1D1D1;
 }
 
 .wrapperTaskText{
@@ -532,7 +555,9 @@
         width: 200px;
     }
 
-
+    .cardHeaderCtrl{
+        display: flex;
+    }
 
 }
 
