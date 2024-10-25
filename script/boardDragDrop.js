@@ -53,8 +53,11 @@ function showDummyCard(classification){
  * 
  * @param {HTMLElement} classification - HTMLelement from the classification
  */
-function hideDummyCard(classification){
-    classification.lastElementChild.style.display = 'none';
+function hideDummyCard(classification, event){
+    if (event.relatedTarget != null) {       
+        if (event.relatedTarget.id=='wrapperBoardTaskContent') classification.lastElementChild.style.display = 'none';
+     }
+    
 }
 
 
