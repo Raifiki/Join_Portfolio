@@ -40,9 +40,9 @@ switch ($_SERVER['REQUEST_METHOD']) {
         header("Access-Control-Allow-Origin: *");
 
         $subject = "Reset Your Password";
-        $headers = "From:  noreply@developerakademie.com";
+        $headers = "From:  admin@leonard-weiss.com";
 
-        $message = "Click on the link below to change your password! \n https://leonard-weiss.developerakademie.net/Projekte/M12_JoinPortfolio/pages/SetPassword.html?email=".$_POST['Email'];
+        $message = "Click on the link below to change your password! \n https://join.leonard-weiss.com/pages/SetPassword.html?email=".$_POST['Email'];
         // mail($recipient, $subject, $_POST['message'], $headers);
 
         mail($recipient, $subject, $message, $headers);

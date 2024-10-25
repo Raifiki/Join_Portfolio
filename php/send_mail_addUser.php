@@ -44,7 +44,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $headers = array(
             "MIME-Version" => "1.0",
             "Content-type" => "text/plain; charset=UTF-8",
-            "From" => "noreply@developerakademie.com",
+            "From" => "admin@leonard-weiss.com",
         );
         $text = $_POST['message']  ."\n\n" . "eMail Adresse: " . $_POST['email'];
         $text = "Dear ".$_POST['Name'].", \n\n 

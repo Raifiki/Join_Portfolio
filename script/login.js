@@ -87,7 +87,7 @@ function styleInputWrong(inputHtmlId){
 /**
  * This function checks if the input data to sign in are valid
  */
-async function checkSignUpData(form){
+async function checkSignUpData(event){
     if (isPwdMatching()) {
         let[name,email,pwd] = getSignUpData();
         if (await isUserRegisterd(email)) {
@@ -95,10 +95,8 @@ async function checkSignUpData(form){
             styleInputWrong('email');
         } else{
             await addUser(name,email,pwd);
-            await showPopup('You Signed Up successfully');
-            //form.submit(); für php send mail
-            //await sendMailSignUp(form); for send mail with formspree
-            window.location.href = "./index.html";
+            sendMailSignUp(event)
+                .then(() => showPopup('You Signed Up successfully').then(() => {window.location.href = "./index.html"}));
         }
     } else{
         showErrIptMsg('msgPwd','Password confirmation is wrong!');
@@ -109,27 +107,18 @@ async function checkSignUpData(form){
 
 
 /**
- * This function send an email to inform the user about sign up (function not finished)
+ * This function send an email to inform the user about sign up
  * 
  * @param {event} event - DOM event form submit
  */
-async function sendMailSignUp(event){﻿
+async function sendMailSignUp(event) {
     event.preventDefault();
     const data = new FormData(event.target);
-    data.set('message',"Welcome to Join! We are delighted to have you as a new member of our community.\n\n Your account has been successfully created and is now ready to use. You can log in and start using our Kanban tool right away.\n\n Thank you once again for placing your trust in Join. We are confident that you will find our tool to be a valuable asset to your productivity.\n\n Best regards,\n Your Join Team")
-    fetch("https://formspree.io/f/xgegwpqp", {
+    return fetch('https://join.leonard-weiss.com/php/send_mail_addUser.php',{
         method: "POST",
-        body: data,
-        headers: {
-            'Accept': 'application/json'
-        }
-    }).then(() => {
-        window.location.href = "./index.html";
-    }).catch((error) => {
-        console.log(error);
-    });
+        body: data
+    })
 }
-
 
 /**
  * This function updates the password if all conditions (pwd matching + user is registered) are correct
@@ -143,7 +132,7 @@ async function changePassword(){
             await replacePwd(email);
         }
         await showPopup(popuptext);
-        window.location.replace('https://leonard-weiss.developerakademie.net/Projekte/M12_JoinPortfolio/index.html');
+        window.location.replace('https://join.leonard-weiss.com/index.html');
     } else{
         showErrIptMsg('msgPwd','Password confirmation is wrong!');
         styleInputWrong('pwdCon');
@@ -301,13 +290,12 @@ async function loadLoginDatafromLS(){
  * 
  * @param {HTMLform} form - form from which the function is triggered
  */
-async function checkFormDataForgotPwd(form){
+async function checkFormDataForgotPwd(event){
     let email =  document.getElementById('email').value;
     if (await isUserRegisterd(email)) {
-        await showPopup('An E-Mail has been sent to you');
-        //form.submit(); für php send mail
-        //await sendMailForgotPwd(form); for send mail with formspree
-        window.location.href = "./index.html";
+        sendMailForgotPwd(event)
+            .then(() => showPopup('An E-Mail has been sent to you').then(() => {window.location.href = "./index.html"}))
+            .catch((error) => console.log(error));
     } else {
         showErrIptMsg('msgMail','Email not exist!');
         styleInputWrong('email');
@@ -319,21 +307,13 @@ async function checkFormDataForgotPwd(form){
  * 
  * @param {event} event - DOM event form submit
  */
-async function sendMailForgotPwd(event){﻿
+async function sendMailForgotPwd(event) {
     event.preventDefault();
     const data = new FormData(event.target);
-    data.set('message',`Click on the following link to change your password! 'https://leonard-weiss.developerakademie.net/Projekte/M12_JoinPortfolio/pages/SetPassword.html?email=${data.get('Email')}'`)
-    fetch("https://formspree.io/f/xgegwpqp", {
+    return fetch('https://join.leonard-weiss.com/php/send_mail_change_pwd.php',{
         method: "POST",
-        body: data,
-        headers: {
-            'Accept': 'application/json'
-        }
-    }).then(() => {
-        window.location.href = "./index.html";
-    }).catch((error) => {
-        console.log(error);
-    });
+        body: data
+    })
 }
 
 
